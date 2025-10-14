@@ -1,0 +1,2236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Edición especial histórica sobre movimientos sociales en México: crónicas, imágenes y reflexiones de 1958-1968.">
+    <meta name="theme-color" content="#1a1a1a">
+    <title>La Crónica Inquieta - Movimientos Sociales en México</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Libre+Baskerville:wght@400;700&family=Crimson+Text:wght@400;600;700&family=Old+Standard+TT:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f5dc radial-gradient(circle, rgba(0,0,0,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            font-family: 'Crimson Text', serif;
+            color: #222;
+            line-height: 1.8;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 10px;
+            background: #fff;
+            color: #1a1a1a;
+            padding: 8px 12px;
+            z-index: 1000;
+            border: 2px solid #1a1a1a;
+            border-radius: 4px;
+            transition: top 0.2s ease;
+        }
+
+        .skip-link:focus {
+            top: 10px;
+        }
+
+        .newspaper-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-right: 300px; /* Espacio para la columna lateral */
+            background: #fff8e1 url('https://www.transparenttextures.com/patterns/paper.png') repeat;
+            /* Sombra más realista y sutil, no exagerada */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.10), 0 10px 20px rgba(0,0,0,0.10);
+            border: 2px solid #1a1a1a;
+            filter: contrast(1.02) brightness(1.01);
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            border-bottom: 3px solid #1a1a1a;
+            background: linear-gradient(to bottom, #fff, #fff8e1);
+            position: relative;
+        }
+
+        .subtitle {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            color: #1a1a1a;
+            margin: 20px 0;
+            text-shadow: 2px 2px 0 rgba(200,200,200,0.3);
+        }
+
+        .ornament {
+            width: 100px;
+            height: 3px;
+            background: #1a1a1a;
+            margin: 15px auto;
+        }
+
+        .tagline {
+            font-style: italic;
+            color: #888;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .date-info {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #ccc;
+            font-size: 0.75rem;
+            color: #555;
+        }
+
+        .news-ticker {
+            background: #a91d21;
+            color: white;
+            padding: 5px 0;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .ticker-content {
+            white-space: nowrap;
+            animation: scrollTicker 30s linear infinite;
+            font-size: 0.9rem;
+        }
+
+        @keyframes scrollTicker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .date-info span {
+            flex: 1 1 auto;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        main {
+            padding: 30px 20px;
+            /* Asegurar que el área principal muestre la textura del papel de forma pareja */
+            background: transparent;
+        }
+
+        .article-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 60px; /* Aumentado para dar más aire entre secciones */
+        }
+
+        .article {
+            background: white;
+            border: 1px solid #ddd;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .article:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .article-year {
+            background: #a91d21;
+            color: white;
+            padding: 6px 16px;
+            font-size: 1rem;
+            font-weight: bold;
+            display: inline-block;
+            letter-spacing: 2px;
+            animation: stampIn 0.8s ease-out;
+        }
+
+        @keyframes stampIn {
+            0% { opacity: 0; transform: scale(0.5) rotate(-10deg); }
+            100% { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+
+        .article-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+                /* Grayscale + sutil sepia para aspecto envejecido; no cambios de transform que rompan el look */
+                filter: grayscale(70%) sepia(14%) contrast(1.02);
+            transition: filter 0.5s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .article:hover .article-image {
+            filter: grayscale(0%) contrast(1);
+            transform: scale(1.05);
+        }
+
+        .article-content {
+            padding: 25px 20px;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            /* Sepia sutil para envejecer la foto; sin transformaciones en hover */
+                filter: grayscale(70%) sepia(14%) contrast(1.02);
+            transition: filter 0.25s ease;
+            cursor: pointer;
+        }
+
+        .article-figure {
+            margin: 0;
+            position: relative;
+            display: block;
+            width: 100%;
+        }
+
+        .article-caption {
+            margin: 0;
+            font-family: 'Crimson Text', serif;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.95);
+            text-align: center;
+            line-height: 1.4;
+            pointer-events: none; /* permitir clic en la imagen debajo para el modal */
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 10px 12px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.65) 100%);
+            backdrop-filter: blur(2px);
+            z-index: 3;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+            box-sizing: border-box;
+        }
+
+        /* Evitar que el contenido adyacente (columna de texto) cubra la figura */
+        .article-figure {
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .article-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Mejor encuadre de las imágenes al recortar: centramos hacia la parte superior */
+        .featured-article .article-image {
+            object-position: center top;
+        }
+
+        /* Caption específico para el artículo de médicos: texto oscuro sobre fondo claro
+           se fuerza color distinto para máxima legibilidad en esa imagen */
+        .caption-medicos {
+            color: rgba(10,10,10,0.9) !important;
+            background: linear-gradient(180deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.6) 100%);
+            text-shadow: none;
+            pointer-events: none;
+        }
+
+        .article:hover .article-image {
+            filter: grayscale(0%) sepia(8%) contrast(1.05);
+        }
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .article-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #a91d21;
+            transition: width 0.3s ease;
+        }
+
+        .article-title:hover::after {
+            width: 100%;
+        }
+
+        .article-subtitle {
+            font-size: 1rem;
+            color: #333;
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            border-left: 4px solid #a91d21;
+            padding-left: 15px;
+        }
+
+        .article-text {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: #444;
+            text-align: justify;
+        }
+
+        .article-text p {
+            margin-bottom: 15px;
+        }
+
+        .article-text strong {
+            color: #1a1a1a;
+        }
+
+        .article-text p:first-child::first-letter {
+            font-size: 3em;
+            float: left;
+            margin-right: 0.1em;
+            line-height: 0.8;
+            font-family: 'Old Standard TT', serif;
+        }
+
+        footer {
+            /* Mostrar la textura del contenedor para un fondo parejo y vintage */
+            background: transparent;
+            box-shadow: none;
+            border-top: 1px solid rgba(169,29,33,0.06);
+            padding: 40px 20px;
+        }
+
+        footer h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.3rem;
+            text-align: center;
+            color: #a91d21;
+            margin: 32px 0 18px 0;
+            letter-spacing: 1px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .footer-content {
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+            }
+            .ads-section {
+                max-width: 100%;
+                margin: 30px auto 0 auto;
+                flex-direction: column;
+                gap: 20px;
+            }
+            .ad-box {
+                width: 100%;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .newspaper-container {
+                max-width: 100vw;
+                border-width: 1px;
+                box-shadow: none;
+            }
+            header {
+                padding: 20px 5px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            main {
+                padding: 10px 5px;
+            }
+            .article-title {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.8rem;
+                font-weight: 900;
+                color: #a91d21;
+            }
+            .article-content {
+                padding: 10px 5px;
+            }
+            .article-title {
+                font-size: 1.2rem;
+                content: "◆";
+                color: #a91d21;
+                font-size: 0.9rem;
+                padding-left: 8px;
+            }
+            .activity-section {
+                padding: 10px 5px;
+            }
+            .match-activity {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                padding: 10px 5px;
+            }
+            .ads-section {
+                max-width: 100%;
+                margin: 20px auto 0 auto;
+                gap: 10px;
+            }
+            .ad-box {
+                padding: 15px 8px;
+                font-size: 0.85rem;
+            }
+            footer {
+                padding: 20px 5px;
+            }
+            .footer-bottom {
+                margin-top: 20px;
+                padding-top: 15px;
+            }
+        }
+        }
+
+        /* Hacemos la actividad plana: eliminamos la caja visual vermiculada */
+        .activity-section {
+            background: transparent; /* vive sobre el papel del periódico */
+            box-shadow: none;
+            border-radius: 0;
+            padding: 0 0 20px 0;
+            max-width: 100%;
+            margin: 0 0 16px 0;
+            border: none;
+        }
+
+        .activity-section h3 {
+            color: #a91d21;
+            text-align: center;
+            font-size: 1.7rem;
+            margin-bottom: 18px;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+
+        .activity-section > p {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 22px auto;
+            color: #555;
+            font-size: 1.13rem;
+            font-family: 'Crimson Text', serif;
+        }
+
+        .activity-wrap {
+            position: relative;
+            background: transparent; /* sin cajas internas */
+            border-radius: 0;
+            box-shadow: none;
+            padding: 0;
+            max-width: 100%;
+            margin: 0 auto;
+            border: none;
+        }
+
+        .match-activity {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 24px;
+            align-items: start;
+            padding: 12px 0;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .match-column {
+            background: transparent;
+            padding: 10px;
+        }
+
+        .match-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .match-item {
+            background: transparent;
+            border: 1px dashed #555;
+            padding: 12px 16px;
+            border-radius: 0; /* sin redondeo */
+            cursor: pointer;
+            user-select: none;
+            font-weight: 600;
+            color: #1a1a1a;
+            transition: background 0.08s ease;
+            font-size: 1rem;
+            box-shadow: none;
+            text-align: left;
+        }
+
+        .match-item.selected {
+            background: #eaeaea; /* sutil gris */
+            border-style: solid;
+            border-color: #555;
+            transform: none; /* no escalado */
+            box-shadow: none;
+        }
+
+        .match-item.matched {
+            opacity: 1;
+            background: transparent;
+            font-weight: 700; /* marcar correcto en negritas */
+            text-decoration: underline;
+            border: 1px dashed #555;
+        }
+
+        .match-target {
+            background: transparent;
+            border: 1px dashed #555;
+            padding: 12px 16px;
+            border-radius: 0;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
+            color: #1a1a1a;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: none;
+        }
+
+        .match-target.correct {
+            border-style: dashed;
+            border-color: #555;
+            background: transparent;
+            color: #1a1a1a;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        .match-target.incorrect {
+            border-color: #e35b5b;
+            background: transparent;
+            color: #a91d21;
+        }
+
+        .match-controls {
+            margin-top: 22px;
+            display: flex;
+            gap: 18px;
+            justify-content: center;
+        }
+
+        .btn {
+            background: transparent;
+            color: #1a1a1a;
+            padding: 8px 16px;
+            border-radius: 0;
+            border: 1px solid #555;
+            cursor: pointer;
+            font-weight: 700;
+            font-family: 'Crimson Text', serif;
+            font-size: 0.95rem;
+            transition: background 0.08s ease;
+            box-shadow: none;
+        }
+
+        .btn:hover {
+            background: #eaeaea;
+        }
+
+        .btn.secondary {
+            background: transparent;
+            color: #1a1a1a;
+            border: 1px solid #555;
+            box-shadow: none;
+        }
+
+        .btn.secondary:hover {
+            background: #eaeaea;
+        }
+
+        .match-svg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .crossword-section {
+            background: #fff;
+            box-shadow: 0 2px 12px rgba(212,165,116,0.08);
+            border-radius: 14px;
+            padding: 24px 18px;
+            max-width: 950px;
+            margin: 30px auto 0 auto;
+        }
+
+        .crossword-grid-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            background: #fff8e1 url('https://www.transparenttextures.com/patterns/paper.png') repeat;
+            padding: 20px 15px;
+            border: 2px solid #a91d21;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(169,29,33,0.10);
+            margin-top: 20px;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .crossword-grid {
+            display: grid;
+            grid-template-columns: repeat(11, 35px);
+            grid-template-rows: repeat(8, 35px);
+            gap: 2px;
+            background: #f5ecd7;
+            border: 2px solid #a91d21;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(169,29,33,0.12) inset;
+            padding: 12px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        .cw-cell {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            font-size: 1.2em;
+            font-family: 'Crimson Text', serif;
+            background: #fffbe6;
+            border: 2px solid #a91d21;
+            border-radius: 4px;
+            color: #3a2a12;
+            box-shadow: 0 1px 2px rgba(169,29,33,0.10) inset;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            padding: 0;
+            text-transform: uppercase;
+        }
+
+        .cw-cell:focus {
+            border-color: #a91d21;
+            box-shadow: 0 0 8px rgba(169,29,33,0.4);
+            outline: none;
+        }
+
+        .crossword-grid-pos {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .cw-black {
+            width: 100%;
+            height: 100%;
+            background: #2a2a2a;
+            border: 1px solid #1a1a1a;
+        }
+
+        .cw-number {
+            position: absolute;
+            font-size: 0.65em;
+            color: #a91d21;
+            left: 2px;
+            top: 0px;
+            font-weight: bold;
+            background: transparent;
+            z-index: 2;
+            pointer-events: none;
+            line-height: 1;
+        }
+
+        .crossword-clues-new {
+            min-width: 200px;
+            max-width: 100%;
+            color: #3a2a12;
+            font-size: 0.95em;
+            font-family: 'Crimson Text', serif;
+            background: #f5ecd7;
+            border-radius: 8px;
+            padding: 18px 16px;
+            border: 2px solid #a91d21;
+            box-shadow: 0 2px 8px rgba(169,29,33,0.10) inset;
+            box-sizing: border-box;
+        }
+
+        .crossword-clues-new .clue-title {
+            color: #a91d21;
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .crossword-clues-new .clue-title:first-child {
+            margin-top: 0;
+        }
+
+        .crossword-clues-new p {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        .ads-section {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            max-width: 400px;
+            margin: 30px auto 0 auto;
+        }
+
+        .ad-box {
+            background: #f7f7f7;
+            padding: 20px 18px;
+            text-align: center;
+            border: 1px solid #a91d21;
+            border-radius: 0;
+            transition: none;
+            box-shadow: none;
+        }
+
+        .ad-box:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .ad-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #a91d21;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .ad-box p {
+            color: #444;
+            font-size: 1rem;
+            line-height: 1.7;
+            font-family: 'Crimson Text', serif;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            /* Aumentamos el padding-top para dejar espacio debajo de la línea divisoria
+               y así colocar los créditos sin superponer la cita central */
+            padding-top: 72px;
+            border-top: 1px solid #a91d21;
+            position: relative; /* para posicionar el bloque de créditos en relación al footer */
+            min-height: 140px;
+            padding-bottom: 30px; /* espacio extra para que los créditos no toquen el borde inferior */
+        }
+
+        .footer-bottom p {
+            /* Queremos un aspecto pálido/translúcido coherente con la estética del papel */
+            color: rgba(26,26,26,0.45); /* gris muy pálido */
+            font-size: 0.95rem;
+            margin: 10px 0;
+            font-weight: 400;
+            opacity: 0.85; /* ligera traslucidez */
+            mix-blend-mode: normal;
+        }
+
+        /* Cita del footer con aspecto pálido pero legible */
+        .footer-quote {
+            color: rgba(169,29,33,0.38); /* rojo pálido */
+            margin-bottom: 15px;
+            font-style: italic;
+            font-weight: 400;
+            opacity: 0.85;
+            mix-blend-mode: normal;
+        }
+
+        /* Hacer pálido también el bloque de créditos para que combine con la cita */
+        .credit-block,
+        .credit-block * {
+            color: rgba(26,26,26,0.45) !important;
+            opacity: 0.85 !important;
+        }
+
+        .credit-block .team-list {
+            line-height: 1.45;
+            /* Reducimos el tamaño de letra para que la lista quepa sin generar scroll */
+            font-size: 0.88rem;
+        }
+
+        /* Posicionar el bloque de créditos en la esquina inferior izquierda del footer */
+        .credit-block {
+            position: absolute;
+            left: 40px;
+            top: 10px; /* posicionar justo debajo de la línea divisoria */
+            bottom: 16px; /* aseguramos límite inferior dentro del footer */
+            max-width: 360px;
+            text-align: left;
+            background: transparent;
+            padding: 6px 0;
+            box-sizing: border-box;
+            /* Eliminamos max-height/overflow para evitar scroll interno; reducimos tamaño de letra arriba */
+        }
+
+        /* Responsive: en pantallas pequeñas colocarlo debajo (estructura en columna) */
+        @media (max-width: 700px) {
+            .credit-block {
+                position: static;
+                max-width: 100%;
+                margin: 12px auto 0 auto;
+                text-align: left;
+            }
+            .footer-bottom {
+                padding-bottom: 18px;
+                /* reducir el padding superior en móviles para ahorrar espacio */
+                padding-top: 28px;
+            }
+            /* En móviles el caption vuelve a mostrarse debajo para no tapar la imagen */
+            .article-caption {
+                position: static;
+                background: transparent;
+                color: rgba(26,26,26,0.6);
+                padding: 8px 0 0 0;
+            }
+        }
+            margin-top: 18px;
+            border-top: 1px dashed rgba(26,26,26,0.06);
+            padding-top: 14px;
+            /* Forzar color sólido y opacidad plena para igualar la densidad visual */
+            color: #1a1a1a;
+            opacity: 1;
+            mix-blend-mode: normal;
+            font-size: 0.92rem;
+            text-align: center;
+            line-height: 1.5;
+            font-family: 'Crimson Text', 'Libre Baskerville', serif;
+        }
+
+        .credit-block .team-list {
+            display: inline-block;
+            text-align: left;
+            margin-top: 8px;
+            /* Asegurar formato uniforme con el resto del documento */
+            color: #1a1a1a;
+            font-size: 1rem;
+            line-height: 1.6;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            font-family: 'Crimson Text', serif;
+            margin-left: 6px;
+        }
+
+        /* Hacer que cada línea de datos use el mismo estilo (color/tamaño) */
+        /* Forzar que título y líneas del bloque luzcan exactamente igual */
+        /* Forzar estilo uniforme en todo el bloque de créditos: misma familia y peso
+           Queremos evitar variaciones (Playfair/Playfair bold) y mantener una densidad visual pareja. */
+        .credit-block,
+        .credit-block * {
+            font-family: 'Crimson Text', 'Libre Baskerville', serif !important;
+            font-weight: 400 !important;
+            color: #1a1a1a !important;
+            opacity: 1 !important;
+            mix-blend-mode: normal !important;
+        }
+
+        /* Ajustes adicionales de espaciado para las líneas de la lista de equipo */
+        .credit-block .team-list {
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        .footer-quote {
+            color: #a91d21;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .special-edition-stamp {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #a91d21;
+            color: white;
+            padding: 10px 20px;
+            transform: rotate(-10deg);
+            font-weight: bold;
+            border: 2px solid #fff;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .stain {
+            position: absolute;
+            top: 50px;
+            left: 100px;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, rgba(139,69,19,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 80%;
+            max-height: 80%;
+            margin-top: 50px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes drawLine {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .article {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                padding: 40px 20px;
+            }
+
+            header {
+                padding: 50px 40px;
+            }
+
+            h1 {
+                font-size: 4rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .date-info {
+                font-size: 0.9rem;
+            }
+
+            main {
+                padding: 50px 40px;
+            }
+
+            .article-grid {
+                gap: 50px;
+            }
+
+            .article-image {
+                height: 350px;
+            }
+
+            .article-content {
+                padding: 35px 30px;
+            }
+
+            .article-title {
+                font-size: 2.5rem;
+            }
+
+            .article-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .article-text {
+                font-size: 1rem;
+            }
+
+            footer {
+                padding: 50px 40px;
+            }
+
+            footer h2 {
+                font-size: 2.5rem;
+            }
+
+            .crossword-grid {
+                grid-template-columns: repeat(11, 40px);
+                grid-template-rows: repeat(8, 40px);
+                gap: 3px;
+                padding: 18px;
+            }
+
+            .crossword-clues-new {
+                max-width: 280px;
+                font-size: 1em;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .crossword-grid-container {
+                flex-direction: row;
+                align-items: flex-start;
+                justify-content: center;
+                gap: 40px;
+            }
+
+            .crossword-clues-new {
+                min-width: 260px;
+                max-width: 320px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            h1 {
+                font-size: 6rem;
+            }
+
+            .featured-article {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0;
+            }
+
+            .featured-article .article-image {
+                height: 100%;
+                min-height: 450px;
+            }
+
+            /* Evitar que la imagen llene toda la columna y oculte el figcaption
+               Forzamos un max-height y permitimos que el caption quede visible debajo */
+            /* Hacer que la figura llene la columna; la imagen cubrirá esa altura
+               Esto evita huecos en blanco cuando la columna de texto es más alta */
+            .featured-article .article-figure {
+                display: block;
+                height: 100%;
+            }
+
+            .featured-article .article-figure .article-image {
+                width: 100%;
+                height: 100%;
+                max-height: none;
+                object-fit: cover;
+                display: block;
+            }
+
+            .article-caption {
+                color: rgba(26,26,26,0.65);
+            }
+
+            .featured-article.reverse {
+                direction: rtl;
+            }
+
+            .featured-article.reverse > * {
+                direction: ltr;
+            }
+
+            .article-title {
+                font-size: 3rem;
+            }
+
+            .crossword-grid {
+                grid-template-columns: repeat(11, 45px);
+                grid-template-rows: repeat(8, 45px);
+            }
+
+            .footer-content {
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                gap: 40px;
+                align-items: start;
+            }
+
+            .ads-section {
+                margin-top: 0;
+            }
+        }
+        /* ==================== ESTILOS PARA NUEVAS SECCIONES ==================== */
+
+        /* Etiquetas de género */
+        .genre-tag {
+            background: #a91d21;
+            color: white;
+            padding: 6px 16px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        /* REPORTAJE */
+        .reportage-special {
+            background: #fff8e1;
+            padding: 40px 30px;
+            border: 2px solid #1a1a1a;
+        }
+
+        .lead-paragraph {
+            font-size: 1.15rem;
+            font-weight: 600;
+            line-height: 1.9;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(169,29,33,0.05);
+            border-left: 4px solid #a91d21;
+        }
+
+        .timeline-section {
+            margin: 40px 0;
+        }
+
+        .timeline-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #a91d21;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .timeline-item {
+            margin: 25px 0;
+            padding: 20px;
+            border-left: 3px solid #a91d21;
+            background: white;
+        }
+
+        .timeline-year {
+            display: inline-block;
+            background: #1a1a1a;
+            color: white;
+            padding: 4px 12px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .pattern-analysis {
+            margin: 40px 0;
+            padding: 25px;
+            background: white;
+            border: 1px solid #ddd;
+        }
+
+        .pattern-analysis h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #a91d21;
+            margin-bottom: 20px;
+        }
+
+        .data-box {
+            background: #1a1a1a;
+            color: white;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .data-box h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .data-box ul {
+            list-style: none;
+            line-height: 1.9;
+        }
+
+        /* ENTREVISTA */
+        .interview-feature {
+            background: white;
+            padding: 40px 30px;
+            border: 2px solid #a91d21;
+        }
+
+        .interview-intro {
+            font-style: italic;
+            font-size: 1.05rem;
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(169,29,33,0.05);
+            border-left: 4px solid #a91d21;
+        }
+
+        .interview-content {
+            margin: 30px 0;
+        }
+
+        .question {
+            margin: 25px 0 10px 0;
+        }
+
+        .q-label {
+            font-weight: bold;
+            color: #a91d21;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .question p {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #1a1a1a;
+        }
+
+        .answer {
+            margin: 10px 0 25px 30px;
+            padding-left: 20px;
+            border-left: 2px solid #ddd;
+        }
+
+        .a-label {
+            font-weight: bold;
+            color: #1a1a1a;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .answer p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .interview-note {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f5f5f5;
+            border-top: 2px solid #a91d21;
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        /* COLUMNA LATERAL */
+        .column-opinion {
+            /* Positioned in the white space to the right of the centered .newspaper-container.
+               Position will be calculated with JS so it does not overlay the newspaper.
+            */
+            position: absolute;
+            width: 280px;
+            background: #fff8e1;
+            padding: 30px 20px;
+            border-left: 6px solid #a91d21;
+            overflow: visible; /* no internal scrollbar, column will match newspaper height */
+            z-index: 10;
+            box-shadow: -4px 0 12px rgba(0,0,0,0.15);
+        }
+
+        .column-opinion .genre-tag {
+            position: sticky;
+            top: 0;
+            background: #a91d21;
+            z-index: 10;
+            margin: -30px -20px 20px -20px;
+            padding: 8px 20px;
+        }
+
+        .columnist-name {
+            font-style: italic;
+            font-size: 0.95rem;
+            color: #666;
+            margin: 10px 0 20px 0;
+        }
+
+        .column-content {
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .column-content p {
+            margin-bottom: 15px;
+            text-align: justify;
+            font-size: 0.9rem;
+        }
+
+        .column-opinion .article-title {
+            font-size: 1.8rem;
+        }
+
+        .drop-cap::first-letter {
+            font-size: 3.5em;
+            margin: 0.05em 0.08em 0 0;
+        }
+
+        .column-closing {
+            margin-top: 30px;
+            text-align: right;
+            font-size: 1.1rem;
+            color: #a91d21;
+            padding-top: 20px;
+            border-top: 2px solid #a91d21;
+        }
+
+        /* ANÁLISIS */
+        .analysis-piece {
+            background: white;
+            padding: 40px 35px;
+            border: 1px solid #ddd;
+        }
+
+        .lead-analysis {
+            font-size: 1.15rem;
+            font-weight: 600;
+            line-height: 1.9;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(169,29,33,0.03);
+            border-left: 4px solid #a91d21;
+        }
+
+        .analysis-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            color: #a91d21;
+            margin: 35px 0 20px 0;
+        }
+
+        .analysis-content p {
+            font-size: 1rem;
+            line-height: 1.85;
+            margin-bottom: 18px;
+            text-align: justify;
+        }
+
+        .analysis-sidebar {
+            background: #f5f5f5;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #a91d21;
+        }
+
+        .analysis-sidebar h4 {
+            font-family: 'Playfair Display', serif;
+            color: #a91d21;
+            margin-bottom: 15px;
+        }
+
+        .analysis-sidebar ol {
+            line-height: 1.9;
+            padding-left: 20px;
+        }
+
+        .analysis-conclusion {
+            margin-top: 40px;
+            padding: 25px;
+            background: #1a1a1a;
+            color: white;
+            border-radius: 8px;
+        }
+
+        .analysis-conclusion p {
+            margin: 0;
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        /* Responsive para nuevas secciones */
+        @media (max-width: 768px) {
+            .reportage-special,
+            .interview-feature,
+            .column-opinion,
+            .analysis-piece {
+                padding: 20px 15px;
+            }
+            
+            .answer {
+                margin-left: 10px;
+                padding-left: 15px;
+            }
+            
+            .timeline-item {
+                padding: 15px;
+            }
+            /* En móviles la columna lateral vuelve al flujo normal (artículo) */
+            .column-opinion {
+                position: static !important;
+                width: 100% !important;
+                height: auto !important;
+                border-left: 6px solid #a91d21;
+                border-right: 6px solid #a91d21;
+                box-shadow: none !important;
+                overflow: visible !important;
+            }
+
+            .newspaper-container {
+                margin-right: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Saltar al contenido</a>
+    
+    <div class="newspaper-container">
+        <header>
+            <p class="subtitle">Edición Especial Histórica</p>
+            <h1>LA CRÓNICA INQUIETA</h1>
+            <div class="special-edition-stamp">EDICIÓN ESPECIAL</div>
+            <div class="ornament"></div>
+            <p class="tagline">El Pulso de una Nación en Transformación</p>
+            <div class="date-info">
+                <span>Año X, Número 365</span>
+                <span>Ciudad de México</span>
+                <span>Otoño de 1968</span>
+                <span>Precio: $2.50 MXN</span>
+                <span>Ejemplares: 50,000</span>
+            </div>
+            <div class="stain"></div>
+            <div class="news-ticker">
+                <div class="ticker-content">NOTICIAS BREVE: Movimiento estudiantil crece en todo el país... | Gobierno responde con represión... | Olimpiadas de 1968 en riesgo... | Vallejo paraliza ferrocarriles... | Maestros exigen democracia sindical...</div>
+            </div>
+        </header>
+
+        <main id="main-content">
+            <div class="article-grid">
+                <!-- Movimiento Estudiantil 1968 -->
+                <article class="article featured-article">
+                    <figure class="article-figure">
+                        <img loading="lazy" src="https://files.catbox.moe/5n3q6l.jpg" alt="Manifestación estudiantil" class="article-image">
+                        <figcaption class="article-caption">Manifestación estudiantil de 1968: clamor por libertad y diálogo.</figcaption>
+                    </figure>
+                    <div class="article-content">
+                        <span class="article-year">1968</span>
+                        <h2 class="article-title">¡BASTA YA!</h2>
+                        <p class="article-subtitle">
+                            La juventud mexicana exige libertad y diálogo; el gobierno responde con autoritarismo
+                        </p>
+                        <div class="article-text">
+                            <p><strong>CIUDAD DE MÉXICO.—</strong> Las calles de la capital son un clamor. Miles de estudiantes de la UNAM y el Instituto Politécnico Nacional, unidos en un frente común sin precedentes, marchan exigiendo el cese a la represión policial y la apertura de un diálogo público.</p>
+                            
+                            <p>Su pliego petitorio de seis puntos —que incluye la disolución del cuerpo de granaderos, la derogación del artículo 145, la liberación de presos políticos y la indemnización a las víctimas— ha puesto en jaque al gobierno de Díaz Ordaz a semanas de las Olimpiadas.</p>
+                            
+                            <p>El grito "¡Únete, pueblo!" resuena en cada rincón, transformando una riña entre preparatorias en el movimiento social más importante de la historia reciente.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Movimiento Magisterial 1958 -->
+                <article class="article featured-article reverse">
+                    <figure class="article-figure">
+                        <img loading="lazy" src="https://files.catbox.moe/clz542.jpg" alt="Protesta de maestros" class="article-image">
+                        <figcaption class="article-caption">Movimiento magisterial de 1958: demanda de democracia sindical.</figcaption>
+                    </figure>
+                    <div class="article-content">
+                        <span class="article-year">1958</span>
+                        <h2 class="article-title">El Pizarrón se Rebela</h2>
+                        <p class="article-subtitle">
+                            Maestros exigen democracia sindical y salarios dignos
+                        </p>
+                        <div class="article-text">
+                            <p><strong>CIUDAD DE MÉXICO.—</strong> Liderados por Othón Salazar, miles de maestros de la Sección IX del SNTE han tomado el Zócalo capitalino. Hartos de la imposición y los bajos salarios, exigen un aumento salarial del 30% y el derecho a elegir a sus propios líderes.</p>
+                            
+                            <p>El gobierno minimiza sus demandas, pero la fuerza del magisterio en las calles demuestra una fractura profunda en el corporativismo sindical oficial que ha controlado al movimiento obrero mexicano.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Movimiento Ferrocarrilero 1959 -->
+                <article class="article featured-article">
+                    <figure class="article-figure">
+                        <img loading="lazy" src="https://files.catbox.moe/0nqtn6.jpg" alt="Ferrocarril" class="article-image">
+                        <figcaption class="article-caption">Huelga ferrocarrilera de 1959: paros y bloqueos en rutas clave.</figcaption>
+                    </figure>
+                    <div class="article-content">
+                        <span class="article-year">1959</span>
+                        <h2 class="article-title">Vías de Lucha</h2>
+                        <p class="article-subtitle">
+                            Demetrio Vallejo paraliza el país en un desafío histórico
+                        </p>
+                        <div class="article-text">
+                            <p><strong>NACIONAL.—</strong> El país se encuentra paralizado. El Sindicato de Trabajadores Ferrocarrileros, bajo el liderazgo de Demetrio Vallejo, ha iniciado paros escalonados que hoy culminan en huelga nacional.</p>
+                            
+                            <p>Exigen el cumplimiento de contratos laborales y la autonomía de su sindicato. La respuesta del presidente López Mateos ha sido brutal: encarcelamiento masivo de líderes y ocupación militar de instalaciones.</p>
+                            
+                            <p>El "milagro mexicano" se detiene sobre los rieles del descontento obrero.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Movimiento Médico 1964 -->
+                <article class="article featured-article reverse">
+                    <figure class="article-figure">
+                        <img loading="lazy" src="https://files.catbox.moe/x94fw4.jpg" alt="Personal médico" class="article-image">
+                        <figcaption class="article-caption caption-medicos">Protesta de médicos residentes (1964): condiciones y jornadas extenuantes.</figcaption>
+                    </figure>
+                    <div class="article-content">
+                        <span class="article-year">1964</span>
+                        <h2 class="article-title">Batas Blancas Alzan la Voz</h2>
+                        <p class="article-subtitle">
+                            Médicos residentes denuncian condiciones precarias
+                        </p>
+                        <div class="article-text">
+                            <p><strong>CIUDAD DE MÉXICO.—</strong> Quienes cuidan la salud de la nación hoy protestan por la suya. Médicos residentes e internos del Hospital 20 de Noviembre iniciaron un paro por la falta de pago de aguinaldos.</p>
+                            
+                            <p>La protesta ha escalado sumando a miles de doctores que denuncian jornadas de hasta 36 horas continuas, falta de insumos y salarios miserables. La Asociación Mexicana de Médicos Residentes e Internos se ha formado en medio de la lucha.</p>
+                            
+                            <p>La inconformidad ha llegado hasta los sectores profesionales de élite del país.</p>
+                        </div>
+                    </div>
+                </article>
+                <!-- NUEVAS SECCIONES AÑADIDAS: reportaje, entrevista, columna, análisis -->
+
+                <article class="article reportage-special">
+    <div class="genre-tag">📸 GRAN REPORTAJE</div>
+    <h2 class="article-title">Diez Años que Sacudieron México</h2>
+    <p class="article-subtitle">
+        Crónica visual de una década de resistencia: 1958-1968
+    </p>
+    <div class="reportage-content">
+        <p class="lead-paragraph">
+            Del riel a las aulas, de los hospitales a las plazas públicas. Una década completa de luchas sociales que revelan las fracturas profundas del "milagro mexicano". Este reportaje recorre los momentos clave de cuatro movimientos que desafiaron al poder y transformaron la conciencia nacional.
+        </p>
+
+        <div class="timeline-section">
+            <h3>Cronología de la Resistencia</h3>
+            
+            <div class="timeline-item">
+                <span class="timeline-year">1958</span>
+                <p><strong>Abril-Agosto:</strong> El magisterio se levanta. Maestros de la Sección IX del SNTE, liderados por Othón Salazar, toman el Zócalo exigiendo 30% de aumento salarial y democracia sindical. Las marchas crecen hasta reunir a 100,000 manifestantes.</p>
+            </div>
+
+            <div class="timeline-item">
+                <span class="timeline-year">1959</span>
+                <p><strong>Febrero-Marzo:</strong> Huelga nacional ferrocarrilera. Demetrio Vallejo paraliza el país. El gobierno responde con el Ejército: más de 10,000 ferrocarrileros despedidos, cientos detenidos. Vallejo es encarcelado y permanecerá 11 años en prisión.</p>
+            </div>
+
+            <div class="timeline-item">
+                <span class="timeline-year">1964-1965</span>
+                <p><strong>Noviembre-Septiembre:</strong> Médicos residentes e internos exigen condiciones laborales dignas. Jornadas de 36 horas continuas, falta de pago de aguinaldos. La protesta crece hasta incluir a 40,000 médicos. Represión y despidos masivos.</p>
+            </div>
+
+            <div class="timeline-item">
+                <span class="timeline-year">1968</span>
+                <p><strong>Julio-Octubre:</strong> Movimiento estudiantil. De una riña callejera a la mayor movilización social de la historia moderna de México. El pliego de seis puntos. Las marchas de más de 300,000 personas. La respuesta: tanques en CU y la masacre del 2 de octubre.</p>
+            </div>
+        </div>
+
+        <div class="pattern-analysis">
+            <h3>El Patrón de la Represión</h3>
+            <p>
+                Cuatro movimientos diferentes comparten el mismo desenlace: la violencia estatal. El gobierno de López Mateos y luego el de Díaz Ordaz responden con la misma fórmula autoritaria: negación del diálogo, campaña mediática de desprestigio, infiltración, y finalmente, la fuerza bruta.
+            </p>
+            <p>
+                El corporativismo sindical —columna vertebral del sistema político mexicano— se fractura ante la exigencia de autonomía. Los trabajadores, los profesionistas, los estudiantes, todos reclaman lo mismo: democracia, libertad, justicia.
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h4>Datos del Movimiento Estudiantil 1968</h4>
+            <ul>
+                <li>• Más de 50 escuelas en paro</li>
+                <li>• 15 manifestaciones masivas</li>
+                <li>• La del 27 de agosto: 400,000 asistentes</li>
+                <li>• 6 demandas del CNH</li>
+                <li>• 18 de septiembre: ocupación militar de CU</li>
+                <li>• 2 de octubre: matanza en Tlatelolco</li>
+                <li>• Cifra oficial: 30 muertos (cuestionada por testimonios)</li>
+            </ul>
+        </div>
+    </div>
+</article>
+
+<article class="article interview-feature">
+    <div class="genre-tag">🎤 ENTREVISTA EXCLUSIVA</div>
+    <h2 class="article-title">"Solo Volveremos cuando Vallejo lo Ordene"</h2>
+    <p class="article-subtitle">
+        Conversación con un ferrocarrilero de la Sección 15
+    </p>
+    
+    <div class="interview-intro">
+        <p>
+            En medio de la huelga que paraliza al país, logramos conversar con uno de los miles de trabajadores que defienden su derecho a elegir libremente a sus líderes sindicales. Por razones de seguridad, omitimos su nombre.
+        </p>
+    </div>
+
+    <div class="interview-content">
+        <div class="question">
+            <span class="q-label">Pregunta:</span>
+            <p>¿Por qué están en huelga?</p>
+        </div>
+        <div class="answer">
+            <span class="a-label">Respuesta:</span>
+            <p>"Mire usted, nosotros no pedimos nada que no sea justo. Queremos que se respete nuestro contrato, que se cumplan los acuerdos. Y sobre todo, queremos elegir a nuestros propios líderes, no que nos los impongan desde arriba. Vallejo fue elegido democráticamente, y el gobierno no lo puede aceptar."</p>
+        </div>
+
+        <div class="question">
+            <span class="q-label">P:</span>
+            <p>Los medios dicen que son un movimiento comunista, que quieren desestabilizar al país...</p>
+        </div>
+        <div class="answer">
+            <span class="a-label">R:</span>
+            <p>"Eso es lo que dicen siempre. Comunistas, agitadores, revoltosos. Nosotros solo somos trabajadores que queremos condiciones dignas. ¿Es comunista pedir que te paguen lo justo? ¿Es comunista querer elegir a tu representante? Durante los mítines, todos declaramos lo mismo: solo volveremos a nuestras labores hasta que nuestro líder, Demetrio Vallejo, nos lo ordene personalmente."</p>
+        </div>
+
+        <div class="question">
+            <span class="q-label">P:</span>
+            <p>¿Qué ha significado este movimiento para ustedes?</p>
+        </div>
+        <div class="answer">
+            <span class="a-label">R:</span>
+            <p>"Ha significado darnos cuenta de nuestra fuerza. Cuando paramos, el país se para. Los trenes no se mueven y nada funciona. Pero también nos damos cuenta del precio: ya van cientos de compañeros despedidos, arrestados. El Ejército ocupa nuestras instalaciones. Pero no nos vamos a rajar. Esto ya no se trata solo de salarios, se trata de dignidad."</p>
+        </div>
+
+        <div class="question">
+            <span class="q-label">P:</span>
+            <p>¿Qué esperan del gobierno?</p>
+        </div>
+        <div class="answer">
+            <span class="a-label">R:</span>
+            <p>"Que nos respeten. Que entiendan que los trabajadores no somos ganado que se puede arrear. Pero ya vemos que el gobierno de López Mateos solo entiende un lenguaje: el de la fuerza. Nos responden con bayonetas y cárcel. Pero la historia juzgará quién tenía razón."</p>
+        </div>
+    </div>
+
+    <div class="interview-note">
+        <p><em>Esta entrevista fue realizada en febrero de 1959, días antes de la represión masiva que resultó en más de 10,000 despidos y el encarcelamiento de los líderes sindicales. Demetrio Vallejo permanecería 11 años en prisión.</em></p>
+    </div>
+</article>
+
+<article class="article column-opinion">
+    <div class="genre-tag">✍️ COLUMNA</div>
+    <h2 class="article-title">El Autoritarismo y Sus Máscaras</h2>
+    <p class="columnist-name">Por: Una Periodista Comprometida</p>
+    
+    <div class="column-content">
+        <p class="drop-cap">
+            Dicen que México vive su "milagro económico". Que somos el orgullo de América Latina. Que nuestro sistema político es estable, moderno, democrático. Pero las balas que silenciaron a los estudiantes en Tlatelolco, los tanques que ocuparon Ciudad Universitaria, las celdas que guardan a Demetrio Vallejo desde hace casi una década, cuentan otra historia.
+        </p>
+
+        <p>
+            El gobierno de Díaz Ordaz, como antes el de López Mateos, ha respondido a cada demanda legítima con la misma receta autoritaria: primero, la negación; después, la difamación en los medios oficiales (comunistas, agitadores, enemigos de México); finalmente, la represión brutal.
+        </p>
+
+        <p>
+            Los maestros que pedían democracia sindical fueron reprimidos. Los ferrocarrileros que exigían autonomía fueron encarcelados. Los médicos que demandaban condiciones dignas fueron despedidos. Y ahora, los estudiantes que clamaban por libertad y diálogo fueron masacrados.
+        </p>
+
+        <p>
+            ¿Qué clase de democracia es esta, que no tolera la disidencia? ¿Qué clase de progreso es este, que se construye sobre la represión? El "milagro mexicano" tiene un precio oculto: el silencio forzado, la cárcel para quien piensa diferente, la muerte para quien se atreve a protestar.
+        </p>
+
+        <p>
+            Las autoridades hablan de orden, de estabilidad, de progreso. Pero nosotros preguntamos: ¿orden para quién? ¿Estabilidad de qué? ¿Progreso a costa de qué?
+        </p>
+
+        <p>
+            La sangre derramada en Tlatelolco no se borrará con comunicados oficiales ni cifras maquilladas. Los testimonios están ahí, las voces de los sobrevivientes, las fotografías que el gobierno no pudo censurar. La historia no se escribe solo desde Palacio Nacional. También se escribe desde las plazas, desde las cárceles, desde los hospitales donde se atiende a los heridos que "oficialmente" no existen.
+        </p>
+
+        <p>
+            México tiene dos caras: la del discurso oficial y la de la realidad vivida. Una habla de desarrollo y modernidad; la otra, de represión y miedo. Y entre ambas, crece una grieta que ningún tanque podrá cerrar: la conciencia de que otro México es posible, un México donde la voz del pueblo sea escuchada sin necesidad de gritos, sin necesidad de sangre.
+        </p>
+
+        <p class="column-closing">
+            <em>La historia, al final, la escriben los que luchan. No los que disparan.</em>
+        </p>
+    </div>
+
+    <!-- Segunda columna para cubrir espacio en blanco -->
+    <div class="column-content" aria-label="Segunda columna">
+        <hr style="border:0; border-top:2px solid rgba(169,29,33,0.08); margin:18px 0;">
+        <h2 class="article-title">La Prensa Cómplice</h2>
+        <p class="columnist-name">Por: Un Cronista del Silencio</p>
+
+        <p class="drop-cap">
+            Mientras las calles ardían, los titulares mentían. La gran mayoría de periódicos mexicanos, atados al gobierno por el cordón umbilical de la publicidad oficial y el "embute" (sobornos directos a periodistas), reprodujeron fielmente la versión gubernamental.
+        </p>
+
+        <p>
+            "Agitadores comunistas", "grupos de choque extranjeros", "complot internacional": esas fueron las etiquetas con que la prensa vendida bautizó a los estudiantes. Excélsior, El Universal, Novedades... todos marcharon al mismo son.
+        </p>
+
+        <p>
+            Hubo excepciones, por supuesto. Algunos reporteros arriesgaron su carrera para contar la verdad. Pero fueron voces aisladas en un coro de silencio cómplice. La censura no siempre fue explícita; más efectiva resultó la autocensura de directores y editores que sabían dónde estaba la línea que no debían cruzar.
+        </p>
+
+        <p>
+            El 2 de octubre, cuando la Plaza de las Tres Culturas se tiñó de sangre, la prensa habló de "enfrentamiento entre grupos". Las cifras oficiales —treinta muertos— fueron reproducidas sin cuestionamiento. Los testimonios de sobrevivientes, ignorados. Las fotografías de cadáveres, censuradas.
+        </p>
+
+        <p>
+            Fue la prensa extranjera —los corresponsales que ya estaban en México para cubrir las Olimpiadas— quien contó lo que realmente sucedió. The Guardian, Le Monde, The Washington Post: ellos sí hablaron de masacre.
+        </p>
+
+        <p>
+            Esta complicidad tiene un costo histórico. El periodismo mexicano perdió credibilidad ante toda una generación. Los jóvenes aprendieron que no podían confiar en lo que leían en los diarios "serios". Buscaron información en volantes, en publicaciones clandestinas, en el boca a boca.
+        </p>
+
+        <p>
+            Hoy, años después, algunos de esos mismos periodistas que callaron se dicen arrepentidos. Otros defienden su silencio como "profesionalismo" o "prudencia". Pero la historia no olvida. Y las páginas en blanco que dejaron en 1968 son su monumento de vergüenza.
+        </p>
+
+        <p class="column-closing">
+            <em>La verdad siempre encuentra su camino, aunque sea entre líneas.</em>
+        </p>
+    </div>
+</article>
+
+<article class="article analysis-piece">
+    <div class="genre-tag">📊 ANÁLISIS</div>
+    <h2 class="article-title">Cuando el Milagro se Detiene</h2>
+    <p class="article-subtitle">
+        Anatomía del corporativismo en crisis
+    </p>
+    
+    <div class="analysis-content">
+        <p class="lead-analysis">
+            El llamado "milagro mexicano" —ese período de crecimiento económico sostenido que nos vendieron como el camino al primer mundo— se ha revelado como lo que siempre fue: un espejismo construido sobre la represión sistemática del descontento social.
+        </p>
+
+        <h3>El Pacto Corporativista</h3>
+        <p>
+            Desde la consolidación del régimen posrevolucionario, el Estado mexicano construyó un sistema de control basado en el corporativismo sindical: los trabajadores organizados en sindicatos "oficiales", subordinados al partido en el poder, a cambio de ciertas prestaciones y la promesa de estabilidad. El PRI no solo gobernaba; absorbía, cooptaba, neutralizaba cualquier expresión de autonomía obrera.
+        </p>
+
+        <h3>Las Grietas del Sistema</h3>
+        <p>
+            Los movimientos de 1958 a 1968 representan la fractura de ese pacto. Los ferrocarrileros de Vallejo, los maestros de Salazar, los médicos residentes, los estudiantes del CNH: todos comparten el mismo reclamo fundamental: autonomía. El derecho a organizarse libremente, a elegir a sus propios líderes, a negociar sin intermediarios impuestos desde arriba.
+        </p>
+
+        <div class="analysis-sidebar">
+            <h4>Patrón Común de Represión</h4>
+            <ol>
+                <li><strong>Fase 1:</strong> Movilización y demandas legítimas</li>
+                <li><strong>Fase 2:</strong> Negación gubernamental y campañas de desprestigio</li>
+                <li><strong>Fase 3:</strong> Infiltración y provocación</li>
+                <li><strong>Fase 4:</strong> Represión violenta</li>
+                <li><strong>Fase 5:</strong> Criminalización de líderes</li>
+            </ol>
+        </div>
+
+        <h3>El Desarrollo Desigual</h3>
+        <p>
+            Mientras las estadísticas macroeconómicas hablaban de crecimiento del 6% anual, la realidad de millones de mexicanos era otra: salarios insuficientes, jornadas extenuantes, nula democracia laboral. El "desarrollo estabilizador" estabilizaba, sí, pero solo para las élites. Para los trabajadores significaba contención salarial, represión sindical, control político.
+        </p>
+
+        <h3>1968: El Punto de No Retorno</h3>
+        <p>
+            El movimiento estudiantil de 1968 no surgió de la nada. Fue la culminación de una década de resistencias. Los estudiantes aprendieron de los ferrocarrileros, de los maestros, de los médicos. Entendieron que el enemigo no era solo un líder sindical charro o un rector autoritario: era todo un sistema que no toleraba la disidencia.
+        </p>
+
+        <p>
+            La masacre de Tlatelolco selló el fin de cualquier ilusión sobre el carácter "democrático" del régimen. El gobierno demostró que estaba dispuesto a todo —incluso a masacrar a sus propios jóvenes— para mantener el control. Las Olimpiadas de 1968 se celebraron sobre cadáveres. El "milagro mexicano" se reveló como lo que siempre fue: una dictadura perfecta.
+        </p>
+
+        <h3>El Legado</h3>
+        <p>
+            Estos movimientos perdieron sus batallas inmediatas: Vallejo pasó 11 años en prisión, los estudiantes fueron dispersados, los maestros doblegados. Pero ganaron algo más profundo: evidenciaron las contradicciones del sistema, politizaron a toda una generación, sembraron las semillas de luchas futuras.
+        </p>
+
+        <p>
+            El México que emerge de 1968 ya no es el mismo. La conciencia social se ha transformado. La legitimidad del régimen se ha agrietado irremediablemente. Y aunque el precio ha sido altísimo —cárceles llenas, exilios, muertos— algo ha cambiado para siempre: el miedo ya no es absoluto.
+        </p>
+
+        <div class="analysis-conclusion">
+            <p>
+                <strong>Conclusión:</strong> Los movimientos sociales de 1958 a 1968 no fueron episodios aislados, sino manifestaciones de una crisis estructural del modelo corporativista mexicano. Su represión reveló la naturaleza autoritaria del régimen y marcó el inicio de un largo proceso de democratización que tomaría décadas.
+            </p>
+        </div>
+    </div>
+</article>
+            </div>
+        </main>
+
+        <footer>
+            <h2>Sección de Ocio</h2>
+            
+            <div class="footer-content">
+                <div class="activity-section">
+                    <p>Relaciona cada inicio con su desarrollo y su cierre. Haz clic en un bloque de la columna izquierda y luego en el correspondiente de la derecha. También puedes usar "Mostrar respuestas" para ver las soluciones.</p>
+                    <div id="game-stats" style="text-align: center; margin-bottom: 20px; font-size: 1.1rem; color: #a91d21;">
+                        <span>Tiempo: <span id="timer">0</span>s</span> | <span>Intentos: <span id="attempts">0</span></span>
+                    </div>
+                    
+                    <div class="activity-wrap">
+                        <svg class="match-svg" aria-hidden="true"></svg>
+                        <div class="match-activity">
+                            <div class="match-column" id="column-left">
+                                <ul class="match-list" id="left-list"></ul>
+                            </div>
+                            <div class="match-column" id="column-right">
+                                <ul class="match-list" id="right-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="match-controls">
+                        <button class="btn" id="resetBtn">Reiniciar</button>
+                        <button class="btn secondary" id="showBtn">Mostrar respuestas</button>
+                    </div>
+                </div>
+
+                <div class="ads-section">
+                    <div class="ad-box">
+                        <h3>¡A Estrenar!</h3>
+                        <p><strong>TELEVISORES A COLOR</strong></p>
+                        <p style="margin-top: 12px;">Vea el futuro en su sala. Una revolución para el hogar moderno.</p>
+                        <p style="margin-top: 8px; color: #a91d21; font-weight: bold;">¡Mensualidades sin intereses!</p>
+                    </div>
+
+                    <div class="ad-box">
+                        <h3>Refresca el Momento</h3>
+                        <p><strong>Pepsi-Cola</strong></p>
+                        <p style="margin-top: 12px;">El sabor de la nueva generación. Perfecta para sus momentos especiales.</p>
+                    </div>
+
+                    <div class="ad-box">
+                        <h3>Cultura y Educación</h3>
+                        <p><strong>Enciclopedia Británica</strong></p>
+                        <p style="margin-top: 12px;">24 tomos de sabiduría universal. La inversión más inteligente para su familia.</p>
+                    </div>
+                </div>
+                </div>
+
+            <div class="footer-bottom">
+                <p class="footer-quote">"La historia la escriben los que luchan"</p>
+                <p>© 1968 La Crónica Inquieta - Todos los derechos reservados</p>
+                <p>Una publicación independiente al servicio de la verdad</p>
+                <div class="credit-block" aria-label="Datos del docente y equipo">
+                    <div>Datos del docente y grupo</div>
+                    <div class="team-list">
+                        <div>Docente: Juan Antonio Aldaco Aldaco</div>
+                        <div>Materia: Estructura Socioeconómica de México</div>
+                        <div>Grupo: Físico-Matemático</div>
+                        <div style="margin-top:8px;">Equipo:</div>
+                        <div>Guerrero Segoviando Jaime Fernando</div>
+                        <div>Pérez López Juan Pablo</div>
+                        <div>Regalado Razo Luis Angel</div>
+                        <div>Rubalcava Ledesma Ian Eduardo</div>
+                        <div>Sandoval Guevara Rodrigo</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImg" alt="Imagen ampliada">
+    </div>
+
+    <script>
+        // Modal para imágenes
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImg');
+        const images = document.querySelectorAll('.article-image');
+
+        images.forEach(img => {
+            img.onclick = function() {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+                modalImg.alt = this.alt;
+            }
+        });
+
+        const closeBtn = document.getElementsByClassName('close')[0];
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Navegación del crucigrama
+        document.querySelectorAll('.cw-cell').forEach(input => {
+            input.addEventListener('input', function(e) {
+                this.value = this.value.toUpperCase();
+                
+                if (this.value.length === 1) {
+                    if (this.dataset.horizontal) {
+                        const nextHPos = parseInt(this.dataset.hpos) + 1;
+                        const nextCell = document.querySelector(`.cw-cell[data-horizontal="${this.dataset.horizontal}"][data-hpos="${nextHPos}"]`);
+                        if (nextCell) nextCell.focus();
+                    } else if (this.dataset.vertical) {
+                        const nextVPos = parseInt(this.dataset.vpos) + 1;
+                        const nextCell = document.querySelector(`.cw-cell[data-vertical="${this.dataset.vertical}"][data-vpos="${nextVPos}"]`);
+                        if (nextCell) nextCell.focus();
+                    }
+                }
+            });
+
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace' && this.value === '') {
+                    if (this.dataset.horizontal) {
+                        const prevHPos = parseInt(this.dataset.hpos) - 1;
+                        const prevCell = document.querySelector(`.cw-cell[data-horizontal="${this.dataset.horizontal}"][data-hpos="${prevHPos}"]`);
+                        if (prevCell) prevCell.focus();
+                    } else if (this.dataset.vertical) {
+                        const prevVPos = parseInt(this.dataset.vpos) - 1;
+                        const prevCell = document.querySelector(`.cw-cell[data-vertical="${this.dataset.vertical}"][data-vpos="${prevVPos}"]`);
+                        if (prevCell) prevCell.focus();
+                    }
+                }
+                
+                if (e.key === 'ArrowRight' && this.dataset.horizontal) {
+                    e.preventDefault();
+                    const nextHPos = parseInt(this.dataset.hpos) + 1;
+                    const nextCell = document.querySelector(`.cw-cell[data-horizontal="${this.dataset.horizontal}"][data-hpos="${nextHPos}"]`);
+                    if (nextCell) nextCell.focus();
+                }
+                
+                if (e.key === 'ArrowLeft' && this.dataset.horizontal) {
+                    e.preventDefault();
+                    const prevHPos = parseInt(this.dataset.hpos) - 1;
+                    const prevCell = document.querySelector(`.cw-cell[data-horizontal="${this.dataset.horizontal}"][data-hpos="${prevHPos}"]`);
+                    if (prevCell) prevCell.focus();
+                }
+                
+                if (e.key === 'ArrowDown' && this.dataset.vertical) {
+                    e.preventDefault();
+                    const nextVPos = parseInt(this.dataset.vpos) + 1;
+                    const nextCell = document.querySelector(`.cw-cell[data-vertical="${this.dataset.vertical}"][data-vpos="${nextVPos}"]`);
+                    if (nextCell) nextCell.focus();
+                }
+                
+                if (e.key === 'ArrowUp' && this.dataset.vertical) {
+                    e.preventDefault();
+                    const prevVPos = parseInt(this.dataset.vpos) - 1;
+                    const prevCell = document.querySelector(`.cw-cell[data-vertical="${this.dataset.vertical}"][data-vpos="${prevVPos}"]`);
+                    if (prevCell) prevCell.focus();
+                }
+            });
+        });
+
+        // Actividad "Une los párrafos"
+        (() => {
+            const pairs = [
+                { id: 'p1', start: 'Inicio: Una nación despierta a la protesta estudiantil.', mid: 'Desarrollo: Las calles se llenan de consignas y marchas estudiantiles organizadas.', end: 'Cierre: Surge un llamado a unidad nacional y diálogo público.' },
+                { id: 'p2', start: 'Inicio: Los maestros anuncian movilizaciones por democracia sindical.', mid: 'Desarrollo: Ocupan plazas y exigen elecciones libres en su sindicato.', end: 'Cierre: Se pactan mesas de negociación con algunas concesiones.' },
+                { id: 'p3', start: 'Inicio: Los trabajadores ferroviarios inician paros escalonados.', mid: 'Desarrollo: Huelgas y bloqueos paralizan rutas clave del país.', end: 'Cierre: El conflicto desemboca en juicios y represión de líderes.' }
+            ];
+
+            const leftList = document.getElementById('left-list');
+            const rightList = document.getElementById('right-list');
+            const svg = document.querySelector('.match-svg');
+            const resetBtn = document.getElementById('resetBtn');
+            const showBtn = document.getElementById('showBtn');
+
+            let leftItems = [];
+            let rightItems = [];
+            let selections = { left: null, right: null };
+            let matches = {};
+            let startTime = Date.now();
+            let attempts = 0;
+            let timerInterval;
+
+            function updateTimer() {
+                document.getElementById('timer').textContent = Math.floor((Date.now() - startTime) / 1000);
+            }
+
+            function shuffle(a) {
+                return a.slice().sort(() => Math.random() - 0.5);
+            }
+
+            function build() {
+                leftItems = shuffle(pairs.map(p => ({ id: p.id, text: p.start })));
+                rightItems = shuffle(pairs.map(p => ({ id: p.id, text: p.mid + ' — ' + p.end })));
+
+                leftList.innerHTML = '';
+                rightList.innerHTML = '';
+
+                leftItems.forEach((it) => {
+                    const li = document.createElement('li');
+                    li.className = 'match-item';
+                    li.tabIndex = 0;
+                    li.dataset.id = it.id;
+                    li.dataset.side = 'left';
+                    li.innerText = it.text;
+                    leftList.appendChild(li);
+                });
+
+                rightItems.forEach((it) => {
+                    const li = document.createElement('li');
+                    li.className = 'match-target';
+                    li.tabIndex = 0;
+                    li.dataset.id = it.id;
+                    li.dataset.side = 'right';
+                    li.innerText = it.text;
+                    rightList.appendChild(li);
+                });
+
+                selections = { left: null, right: null };
+                matches = {};
+                clearSVG();
+                attachListeners();
+                startTime = Date.now();
+                attempts = 0;
+                document.getElementById('timer').textContent = '0';
+                document.getElementById('attempts').textContent = '0';
+                if (timerInterval) clearInterval(timerInterval);
+                timerInterval = setInterval(updateTimer, 1000);
+            }
+
+            function attachListeners() {
+                document.querySelectorAll('#left-list .match-item, #right-list .match-target').forEach(el => {
+                    el.onclick = () => handleSelect(el);
+                    el.onkeydown = (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            handleSelect(el);
+                        }
+                    };
+                });
+            }
+
+            function handleSelect(el) {
+                const side = el.dataset.side;
+                
+                if (side === 'left') {
+                    document.querySelectorAll('.match-item').forEach(x => x.classList.remove('selected'));
+                    el.classList.add('selected');
+                    selections.left = el;
+                } else {
+                    document.querySelectorAll('.match-target').forEach(x => x.classList.remove('selected'));
+                    el.classList.add('selected');
+                    selections.right = el;
+                }
+
+                if (selections.left && selections.right) {
+                    attempts++;
+                    document.getElementById('attempts').textContent = attempts;
+                    const lid = selections.left.dataset.id;
+                    const rid = selections.right.dataset.id;
+                    const leftEl = selections.left;
+                    const rightEl = selections.right;
+
+                    if (lid === rid) {
+                        matches[lid] = { left: leftEl, right: rightEl };
+                        leftEl.classList.add('matched');
+                        rightEl.classList.add('matched');
+                        rightEl.classList.add('correct');
+                        leftEl.classList.remove('selected');
+                        rightEl.classList.remove('selected');
+                        // Marcar texto como correcto (negrita y subrayado)
+                        leftEl.style.visibility = 'visible';
+                        leftEl.classList.add('matched');
+                        rightEl.classList.add('correct');
+                        leftEl.style.fontWeight = '700';
+                        leftEl.style.textDecoration = 'underline';
+                        rightEl.style.fontWeight = '700';
+                        rightEl.style.textDecoration = 'underline';
+                        drawLineBetween(leftEl, rightEl, '#000000', false); // línea negra
+                        // Check if all matched
+                        if (Object.keys(matches).length === pairs.length) {
+                            clearInterval(timerInterval);
+                            const time = Math.floor((Date.now() - startTime) / 1000);
+                            setTimeout(() => alert(`¡Completado en ${time} segundos con ${attempts} intentos!`), 500);
+                        }
+                    } else {
+                        rightEl.classList.add('incorrect');
+                        leftEl.classList.add('incorrect');
+                        leftEl.classList.add('shake');
+                        rightEl.classList.add('shake');
+                        // línea roja efímera
+                        drawLineBetween(leftEl, rightEl, '#e35b5b', false);
+                        setTimeout(() => {
+                            rightEl.classList.remove('incorrect');
+                            leftEl.classList.remove('incorrect');
+                            leftEl.classList.remove('shake');
+                            rightEl.classList.remove('shake');
+                            clearSVG();
+                        }, 700);
+                    }
+                    selections = { left: null, right: null };
+                }
+            }
+
+            function clearSVG() {
+                while (svg.firstChild) svg.removeChild(svg.firstChild);
+            }
+
+            function drawLineBetween(a, b, color, animate = false) {
+                const rectA = a.getBoundingClientRect();
+                const rectB = b.getBoundingClientRect();
+                const containerRect = svg.parentElement.getBoundingClientRect();
+                const x1 = rectA.right - containerRect.left;
+                const y1 = rectA.top + rectA.height / 2 - containerRect.top;
+                const x2 = rectB.left - containerRect.left;
+                const y2 = rectB.top + rectB.height / 2 - containerRect.top;
+
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', x1);
+                line.setAttribute('y1', y1);
+                line.setAttribute('x2', x2);
+                line.setAttribute('y2', y2);
+                line.setAttribute('stroke', color);
+                line.setAttribute('stroke-width', 3);
+                line.setAttribute('stroke-linecap', 'round');
+                svg.appendChild(line);
+                // Si el color es rojo (incorrecto), borrar la línea tras breve tiempo
+                if (color === '#e35b5b') {
+                    line.style.transition = 'opacity 0.5s ease';
+                    setTimeout(() => { line.style.opacity = '0'; }, 350);
+                    setTimeout(() => { try { svg.removeChild(line); } catch(e){} }, 900);
+                }
+            }
+
+            resetBtn.onclick = () => build();
+
+                showBtn.onclick = () => {
+                clearSVG();
+                document.querySelectorAll('.match-item').forEach(x => x.style.visibility = 'visible');
+                document.querySelectorAll('.match-target').forEach(x => x.classList.remove('incorrect'));
+                pairs.forEach(p => {
+                    const leftEl = document.querySelector(`#left-list .match-item[data-id="${p.id}"]`);
+                    const rightEl = document.querySelector(`#right-list .match-target[data-id="${p.id}"]`);
+                    if (leftEl && rightEl) {
+                        drawLineBetween(leftEl, rightEl, '#000000');
+                        rightEl.classList.add('correct');
+                    }
+                });
+            };
+
+                window.addEventListener('resize', () => {
+                clearSVG();
+                if (Object.keys(matches).length) {
+                    Object.values(matches).forEach(m => drawLineBetween(m.left, m.right, '#000000'));
+                }
+            });
+
+            build();
+        })();
+    </script>
+    <script>
+        // Alinear la columna lateral al espacio en blanco a la derecha del contenedor
+        // y ajustar su altura hasta donde termina el contenido principal (main)
+        (function alignColumnToWhitespace() {
+            const col = document.querySelector('.column-opinion');
+            const container = document.querySelector('.newspaper-container');
+            if (!col || !container) return;
+
+            function update() {
+                const rect = container.getBoundingClientRect();
+                const containerTopDoc = rect.top + window.scrollY;
+                const containerRightDoc = rect.right + window.scrollX;
+
+                // Calcular la parte inferior basada en el último bloque de contenido dentro de la columna
+                let bottomDoc = null;
+                const lastContents = col.querySelectorAll('.column-content');
+                if (lastContents && lastContents.length) {
+                    const last = lastContents[lastContents.length - 1];
+                    const lastRect = last.getBoundingClientRect();
+                    bottomDoc = lastRect.bottom + window.scrollY;
+                }
+
+                // Si no hay bloques específicos en la columna, usar el final del main o del contenedor
+                if (!bottomDoc) {
+                    const main = document.querySelector('main') || document.querySelector('#main-content');
+                    if (main) {
+                        const mainRect = main.getBoundingClientRect();
+                        bottomDoc = mainRect.bottom + window.scrollY;
+                    } else {
+                        bottomDoc = rect.bottom + window.scrollY;
+                    }
+                }
+
+                // Calcular altura desde la parte superior del contenedor hasta el final del contenido relevante
+                let height = Math.max(0, bottomDoc - containerTopDoc);
+                // Si por alguna razón resultara muy pequeña, dar un mínimo razonable
+                if (height < 40) height = Math.max(40, rect.height);
+
+                col.style.position = 'absolute';
+                col.style.left = (containerRightDoc + 10) + 'px'; // separación de 10px
+                col.style.top = containerTopDoc + 'px';
+                // calcular bottom en base al final del último bloque relevante
+                // Calcular altura directamente desde el último bloque dentro de la columna
+                const cs = window.getComputedStyle(col);
+                const padBot = parseFloat(cs.paddingBottom) || 0;
+                const borderBot = parseFloat(cs.borderBottomWidth) || 0;
+                let computedHeight = 0;
+                if (lastContents && lastContents.length) {
+                    const last = lastContents[lastContents.length - 1];
+                    const lastCS = window.getComputedStyle(last);
+                    const lastMarginBot = parseFloat(lastCS.marginBottom) || 0;
+                    // offsetTop es medido desde el padding edge del contenedor (.column-opinion)
+                    computedHeight = last.offsetTop + last.offsetHeight + lastMarginBot + padBot + borderBot;
+                } else {
+                    // fallback: usar altura basada en main/contenedor
+                    computedHeight = Math.max(0, bottomDoc - containerTopDoc - padBot - borderBot);
+                }
+                if (computedHeight < 40) computedHeight = Math.max(40, rect.height);
+                col.style.height = computedHeight + 'px';
+                // asegurar que no haya bottom establecido
+                col.style.bottom = '';
+                // ocultar overflow para que la columna no muestre su propio scrollbar
+                col.style.overflowY = 'hidden';
+            }
+
+            // Ejecutar en load (para esperar imágenes), resize y scroll
+            window.addEventListener('load', update);
+            window.addEventListener('resize', update);
+            window.addEventListener('scroll', update);
+            // Llamadas iniciales
+            update();
+            setTimeout(update, 350);
+        })();
+    </script>
+</body>
+</html>
