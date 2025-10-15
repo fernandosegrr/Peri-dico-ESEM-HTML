@@ -47,7 +47,7 @@
         .newspaper-container {
             max-width: 1200px;
             margin: 0 auto;
-            margin-right: 300px; /* Espacio para la columna lateral */
+            margin-right: 0;
             background: #fff8e1 url('https://www.transparenttextures.com/patterns/paper.png') repeat;
             /* Sombra más realista y sutil, no exagerada */
             box-shadow: 0 4px 6px rgba(0,0,0,0.10), 0 10px 20px rgba(0,0,0,0.10);
@@ -786,15 +786,15 @@
         }
 
         /* Posicionar el bloque de créditos en la esquina inferior izquierda del footer */
-        .credit-block {
-            position: absolute;
-            left: 40px;
-            top: 10px; /* posicionar justo debajo de la línea divisoria */
-            bottom: 16px; /* aseguramos límite inferior dentro del footer */
+.credit-block {
+            position: static;
             max-width: 360px;
-            text-align: left;
+            margin: 20px auto 0 auto;
+            text-align: center;
             background: transparent;
             padding: 6px 0;
+            box-sizing: border-box;
+        }
             box-sizing: border-box;
             /* Eliminamos max-height/overflow para evitar scroll interno; reducimos tamaño de letra arriba */
         }
@@ -811,6 +811,9 @@
                 padding-bottom: 18px;
                 /* reducir el padding superior en móviles para ahorrar espacio */
                 padding-top: 28px;
+            }
+            .match-svg {
+                display: none !important;
             }
             /* En móviles el caption vuelve a mostrarse debajo para no tapar la imagen */
             .article-caption {
@@ -1268,17 +1271,16 @@
 
         /* COLUMNA LATERAL */
         .column-opinion {
-            /* Positioned in the white space to the right of the centered .newspaper-container.
-               Position will be calculated with JS so it does not overlay the newspaper.
-            */
-            position: absolute;
-            width: 280px;
             background: #fff8e1;
             padding: 30px 20px;
             border-left: 6px solid #a91d21;
-            overflow: visible; /* no internal scrollbar, column will match newspaper height */
+            overflow: visible; /* no internal scrollbar, columna en el flujo del art�culo */
+            box-shadow: none;
+            position: static;
+            width: 100%;
+            max-width: 900px;
+            margin: 40px auto 0 auto;
             z-index: 10;
-            box-shadow: -4px 0 12px rgba(0,0,0,0.15);
         }
 
         .column-opinion .genre-tag {
@@ -1306,6 +1308,21 @@
             margin-bottom: 15px;
             text-align: justify;
             font-size: 0.9rem;
+        }
+
+        @media (min-width: 1520px) {
+            .newspaper-container {
+                margin-left: 0;
+                margin-right: 320px; /* Espacio para la columna lateral */
+            }
+
+            .column-opinion {
+                position: absolute;
+                width: 280px;
+                max-width: none;
+                margin: 0;
+                box-shadow: -4px 0 12px rgba(0,0,0,0.15);
+            }
         }
 
         .column-opinion .article-title {
@@ -1972,6 +1989,7 @@
             const svg = document.querySelector('.match-svg');
             const resetBtn = document.getElementById('resetBtn');
             const showBtn = document.getElementById('showBtn');
+            const MATCH_LINE_BREAKPOINT = 700;
 
             let leftItems = [];
             let rightItems = [];
@@ -1980,6 +1998,10 @@
             let startTime = Date.now();
             let attempts = 0;
             let timerInterval;
+
+            function linesEnabled() {
+                return svg && window.innerWidth >= MATCH_LINE_BREAKPOINT;
+            }
 
             function updateTimer() {
                 document.getElementById('timer').textContent = Math.floor((Date.now() - startTime) / 1000);
@@ -1995,6 +2017,10 @@
 
                 leftList.innerHTML = '';
                 rightList.innerHTML = '';
+
+                if (svg) {
+                    svg.style.display = linesEnabled() ? 'block' : 'none';
+                }
 
                 leftItems.forEach((it) => {
                     const li = document.createElement('li');
@@ -2103,10 +2129,13 @@
             }
 
             function clearSVG() {
+                if (!svg) return;
                 while (svg.firstChild) svg.removeChild(svg.firstChild);
             }
 
             function drawLineBetween(a, b, color, animate = false) {
+                if (!linesEnabled()) return;
+
                 const rectA = a.getBoundingClientRect();
                 const rectB = b.getBoundingClientRect();
                 const containerRect = svg.parentElement.getBoundingClientRect();
@@ -2148,7 +2177,16 @@
                 });
             };
 
-                window.addEventListener('resize', () => {
+            window.addEventListener('resize', () => {
+                if (!svg) return;
+
+                if (!linesEnabled()) {
+                    svg.style.display = 'none';
+                    clearSVG();
+                    return;
+                }
+
+                svg.style.display = 'block';
                 clearSVG();
                 if (Object.keys(matches).length) {
                     Object.values(matches).forEach(m => drawLineBetween(m.left, m.right, '#000000'));
@@ -2166,7 +2204,24 @@
             const container = document.querySelector('.newspaper-container');
             if (!col || !container) return;
 
+            const BREAKPOINT = 1520;
+
+            function resetInlineStyles() {
+                col.style.position = '';
+                col.style.left = '';
+                col.style.top = '';
+                col.style.height = '';
+                col.style.bottom = '';
+                col.style.overflowY = '';
+            }
+
+
             function update() {
+                if (window.innerWidth < BREAKPOINT) {
+                    resetInlineStyles();
+                    return;
+                }
+
                 const rect = container.getBoundingClientRect();
                 const containerTopDoc = rect.top + window.scrollY;
                 const containerRightDoc = rect.right + window.scrollX;
