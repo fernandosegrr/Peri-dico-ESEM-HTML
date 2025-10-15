@@ -340,6 +340,11 @@
                 flex-direction: column;
                 gap: 30px;
             }
+            .special-edition-stamp {
+                top: 10px;
+                right: 10px;
+                transform: rotate(-6deg);
+            }
             .ads-section {
                 max-width: 100%;
                 margin: 30px auto 0 auto;
@@ -360,6 +365,15 @@
             }
             header {
                 padding: 20px 5px;
+            }
+            .special-edition-stamp {
+                position: static;
+                display: inline-block;
+                margin: 12px auto 0 auto;
+                transform: none;
+                font-size: 0.85rem;
+                padding: 6px 16px;
+                border-width: 1px;
             }
             h1 {
                 font-size: 2rem;
@@ -795,8 +809,16 @@
             padding: 6px 0;
             box-sizing: border-box;
         }
-            box-sizing: border-box;
-            /* Eliminamos max-height/overflow para evitar scroll interno; reducimos tamaño de letra arriba */
+
+        @media (min-width: 1200px) {
+            .credit-block {
+                position: absolute;
+                left: 40px;
+                top: 10px; /* posicionar justo debajo de la l�nea divisoria */
+                bottom: 16px; /* aseguramos l�mite inferior dentro del footer */
+                margin: 0;
+                text-align: left;
+            }
         }
 
         /* Responsive: en pantallas pequeñas colocarlo debajo (estructura en columna) */
