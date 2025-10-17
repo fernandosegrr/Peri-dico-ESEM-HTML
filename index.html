@@ -280,7 +280,7 @@
             font-size: 1rem;
             color: #333;
             font-weight: 700;
-            line-height: 1.5;
+            line-height: 1.4;
             margin-bottom: 20px;
             border-left: 4px solid #a91d21;
             padding-left: 15px;
@@ -346,6 +346,7 @@
                 transform: rotate(-6deg);
             }
             .ads-section {
+                display: flex;
                 max-width: 100%;
                 margin: 30px auto 0 auto;
                 flex-direction: column;
@@ -354,6 +355,19 @@
             .ad-box {
                 width: 100%;
                 margin: 0 auto;
+            }
+            .wordsearch {
+                flex-direction: column;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+            .wordsearch-grid {
+                grid-template-columns: repeat(13, minmax(24px, 34px));
+            }
+            .wordsearch-wordlist {
+                width: 100%;
+                max-width: 420px;
+                flex: 0 0 auto;
             }
         }
 
@@ -420,6 +434,16 @@
             .footer-bottom {
                 margin-top: 20px;
                 padding-top: 15px;
+            }
+            .wordsearch-grid {
+                grid-template-columns: repeat(13, minmax(20px, 28px));
+            }
+            .ws-cell {
+                height: 32px;
+                font-size: 0.82rem;
+            }
+            .wordsearch-wordlist {
+                padding: 14px;
             }
         }
         }
@@ -569,7 +593,7 @@
             cursor: pointer;
             font-weight: 700;
             font-family: 'Crimson Text', serif;
-            font-size: 0.95rem;
+            font-size: 0.82rem;
             transition: background 0.08s ease;
             box-shadow: none;
         }
@@ -598,123 +622,260 @@
             height: 100%;
         }
 
-        .crossword-section {
-            background: #fff;
-            box-shadow: 0 2px 12px rgba(212,165,116,0.08);
-            border-radius: 14px;
-            padding: 24px 18px;
-            max-width: 950px;
-            margin: 30px auto 0 auto;
+        .game-block {
+            margin-bottom: 32px;
+            padding: 18px 22px;
+            border: 1px solid rgba(26,26,26,0.25);
+            background: rgba(255,248,225,0.65);
         }
 
-        .crossword-grid-container {
+        .game-block h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            color: #a91d21;
+            text-align: center;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .game-block > p {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 18px auto;
+            font-size: 1.05rem;
+            color: #4a4033;
+        }
+
+        .game-status {
+            text-align: center;
+            margin-top: 14px;
+            min-height: 1.5rem;
+            font-style: italic;
+            color: #a91d21;
+        }
+
+        .wordsearch {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: stretch;
+            gap: 32px;
+        }
+
+        .wordsearch-grid {
+            display: grid;
+            grid-template-columns: repeat(13, minmax(26px, 40px));
+            gap: 4px;
+            justify-content: center;
+            justify-self: stretch;
+            width: 100%;
+            max-width: none;
+            user-select: none;
+            touch-action: none;
+        }
+
+        .ws-cell {
+            width: 100%;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(26,26,26,0.3);
+            background: rgba(255,252,240,0.9);
+            color: #1a1a1a;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease;
+            user-select: none;
+        }
+
+        .ws-cell:focus {
+            outline: 2px solid rgba(169,29,33,0.45);
+            outline-offset: -2px;
+        }
+
+        .ws-cell.ws-preview {
+            background: rgba(169,29,33,0.18);
+            border-color: rgba(169,29,33,0.45);
+        }
+
+        .ws-cell.found {
+            background: rgba(169,29,33,0.24);
+            border-color: rgba(169,29,33,0.6);
+            color: #1a1a1a;
+        }
+
+        .ws-cell.ws-error {
+            animation: wsError 0.4s ease;
+        }
+
+        @keyframes wsError {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-3px); }
+            50% { transform: translateX(3px); }
+            75% { transform: translateX(-3px); }
+            100% { transform: translateX(0); }
+        }
+
+        .wordsearch-wordlist {
+            min-width: 240px;
+            max-width: 320px;
+            flex: 0 0 260px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            background: #fff8e1 url('https://www.transparenttextures.com/patterns/paper.png') repeat;
-            padding: 20px 15px;
-            border: 2px solid #a91d21;
-            border-radius: 12px;
-            box-shadow: 0 4px 16px rgba(169,29,33,0.10);
-            margin-top: 20px;
-            width: 100%;
-            max-width: 100%;
-            box-sizing: border-box;
+            background: rgba(255,252,235,0.85);
+            border: 1px solid rgba(26,26,26,0.2);
+            padding: 16px 18px;
         }
 
-        .crossword-grid {
-            display: grid;
-            grid-template-columns: repeat(11, 35px);
-            grid-template-rows: repeat(8, 35px);
-            gap: 2px;
-            background: #f5ecd7;
-            border: 2px solid #a91d21;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(169,29,33,0.12) inset;
-            padding: 12px;
-            margin: 0 auto;
-            box-sizing: border-box;
+        .wordsearch-wordlist h5 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #a91d21;
+            margin-bottom: 10px;
         }
 
-        .cw-cell {
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            font-size: 1.2em;
-            font-family: 'Crimson Text', serif;
-            background: #fffbe6;
-            border: 2px solid #a91d21;
-            border-radius: 4px;
-            color: #3a2a12;
-            box-shadow: 0 1px 2px rgba(169,29,33,0.10) inset;
-            transition: border-color 0.2s, box-shadow 0.2s;
+        .wordsearch-wordlist ul {
+            list-style: none;
             padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 8px;
+            flex: 1 1 auto;
+        }
+
+        .quiz-block {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            width: 100%;
+        }
+
+        .quiz-question {
+            border: 1px solid rgba(26,26,26,0.25);
+            background: rgba(255,252,235,0.85);
+            padding: 14px 16px;
+        }
+
+        .quiz-question legend {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: #a91d21;
+            margin-bottom: 10px;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            border: 1px dashed rgba(26,26,26,0.35);
+            padding: 8px 10px;
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .quiz-option input {
+            margin-top: 4px;
+        }
+
+        .quiz-option:hover {
+            border-color: #a91d21;
+        }
+
+        .quiz-option.correct {
+            border-color: rgba(61,153,112,0.6);
+            background: rgba(61,153,112,0.22);
+        }
+
+        .quiz-option.wrong {
+            border-color: rgba(169,29,33,0.6);
+            background: rgba(169,29,33,0.1);
+        }
+
+        .quiz-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .ads-section {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            align-self: stretch;
+            width: 100%;
+            max-width: 320px;
+            margin: 0;
+        }
+
+        .ad-box {
+            background: linear-gradient(135deg, rgba(255,245,214,0.95), rgba(240,226,192,0.95));
+            border: 2px solid rgba(26,26,26,0.45);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+            padding: 18px 16px;
+            text-align: center;
+            position: relative;
+        }
+
+        .ad-box::after {
+            content: '';
+            position: absolute;
+            inset: 10px;
+            border: 1px dashed rgba(26,26,26,0.35);
+            pointer-events: none;
+        }
+
+        .ad-box h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: #a91d21;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
             text-transform: uppercase;
         }
 
-        .cw-cell:focus {
-            border-color: #a91d21;
-            box-shadow: 0 0 8px rgba(169,29,33,0.4);
-            outline: none;
+        .ad-box strong {
+            font-family: 'Old Standard TT', serif;
+            font-size: 1.1rem;
         }
 
-        .crossword-grid-pos {
-            position: relative;
-            width: 100%;
-            height: 100%;
+        .ad-box p {
+            font-size: 0.98rem;
+            line-height: 1.4;
         }
 
-        .cw-black {
-            width: 100%;
-            height: 100%;
-            background: #2a2a2a;
-            border: 1px solid #1a1a1a;
-        }
 
-        .cw-number {
-            position: absolute;
-            font-size: 0.65em;
-            color: #a91d21;
-            left: 2px;
-            top: 0px;
-            font-weight: bold;
-            background: transparent;
-            z-index: 2;
-            pointer-events: none;
-            line-height: 1;
-        }
-
-        .crossword-clues-new {
-            min-width: 200px;
-            max-width: 100%;
-            color: #3a2a12;
-            font-size: 0.95em;
+        .wordsearch-wordlist li {
             font-family: 'Crimson Text', serif;
-            background: #f5ecd7;
-            border-radius: 8px;
-            padding: 18px 16px;
-            border: 2px solid #a91d21;
-            box-shadow: 0 2px 8px rgba(169,29,33,0.10) inset;
-            box-sizing: border-box;
+            font-size: 1rem;
+            color: #333;
         }
 
-        .crossword-clues-new .clue-title {
+        .wordsearch-wordlist li.found {
+            text-decoration: line-through;
             color: #a91d21;
-            font-weight: bold;
-            margin-top: 15px;
-            margin-bottom: 8px;
-            font-size: 1.1em;
+            font-weight: 600;
         }
 
-        .crossword-clues-new .clue-title:first-child {
-            margin-top: 0;
+        .wordsearch-actions {
+            margin-top: 16px;
+            display: flex;
+            justify-content: center;
         }
 
-        .crossword-clues-new p {
-            margin: 8px 0;
-            line-height: 1.6;
+        .wordsearch-wordlist ul {
+            flex: 1 1 auto;
         }
+
 
         .ads-section {
             display: flex;
@@ -769,10 +930,10 @@
         .footer-bottom p {
             /* Queremos un aspecto pálido/translúcido coherente con la estética del papel */
             color: rgba(26,26,26,0.45); /* gris muy pálido */
-            font-size: 0.95rem;
+            font-size: 0.82rem;
             margin: 10px 0;
             font-weight: 400;
-            opacity: 0.85; /* ligera traslucidez */
+            opacity: 70; /* ligera traslucidez */
             mix-blend-mode: normal;
         }
 
@@ -794,9 +955,9 @@
         }
 
         .credit-block .team-list {
-            line-height: 1.45;
+            line-height: 1.35;
             /* Reducimos el tamaño de letra para que la lista quepa sin generar scroll */
-            font-size: 0.88rem;
+            font-size: 0.72rem;
         }
 
         /* Posicionar el bloque de créditos en la esquina inferior izquierda del footer */
@@ -854,7 +1015,7 @@
             mix-blend-mode: normal;
             font-size: 0.92rem;
             text-align: center;
-            line-height: 1.5;
+            line-height: 1.4;
             font-family: 'Crimson Text', 'Libre Baskerville', serif;
         }
 
@@ -887,8 +1048,8 @@
 
         /* Ajustes adicionales de espaciado para las líneas de la lista de equipo */
         .credit-block .team-list {
-            line-height: 1.5;
-            font-size: 0.95rem;
+            line-height: 1.4;
+            font-size: 0.82rem;
         }
 
         .footer-quote {
@@ -1038,31 +1199,9 @@
                 font-size: 2.5rem;
             }
 
-            .crossword-grid {
-                grid-template-columns: repeat(11, 40px);
-                grid-template-rows: repeat(8, 40px);
-                gap: 3px;
-                padding: 18px;
-            }
-
-            .crossword-clues-new {
-                max-width: 280px;
-                font-size: 1em;
-            }
         }
 
         @media (min-width: 900px) {
-            .crossword-grid-container {
-                flex-direction: row;
-                align-items: flex-start;
-                justify-content: center;
-                gap: 40px;
-            }
-
-            .crossword-clues-new {
-                min-width: 260px;
-                max-width: 320px;
-            }
         }
 
         @media (min-width: 1024px) {
@@ -1112,11 +1251,6 @@
 
             .article-title {
                 font-size: 3rem;
-            }
-
-            .crossword-grid {
-                grid-template-columns: repeat(11, 45px);
-                grid-template-rows: repeat(8, 45px);
             }
 
             .footer-content {
@@ -1287,7 +1421,7 @@
             padding: 20px;
             background: #f5f5f5;
             border-top: 2px solid #a91d21;
-            font-size: 0.95rem;
+            font-size: 0.82rem;
             color: #666;
         }
 
@@ -1316,13 +1450,13 @@
 
         .columnist-name {
             font-style: italic;
-            font-size: 0.95rem;
+            font-size: 0.82rem;
             color: #666;
             margin: 10px 0 20px 0;
         }
 
         .column-content {
-            font-size: 0.95rem;
+            font-size: 0.82rem;
             line-height: 1.7;
         }
 
@@ -1525,6 +1659,9 @@
                             <p><strong>CIUDAD DE MÉXICO.—</strong> Liderados por Othón Salazar, miles de maestros de la Sección IX del SNTE han tomado el Zócalo capitalino. Hartos de la imposición y los bajos salarios, exigen un aumento salarial del 30% y el derecho a elegir a sus propios líderes.</p>
                             
                             <p>El gobierno minimiza sus demandas, pero la fuerza del magisterio en las calles demuestra una fractura profunda en el corporativismo sindical oficial que ha controlado al movimiento obrero mexicano.</p>
+                            
+                            <p>Más información y análisis sobre las movilizaciones magisteriales de 1958: <a href="https://www.mexicoescultura.com/actividad/139412/maestros-en-protesta-1958-en-perspectiva.html" target="_blank" rel="noopener">Maestros en protesta (1958) — México en la Cultura</a>.</p>
+                            <p>Contexto adicional: el Movimiento Revolucionario del Magisterio (MRM) y el Frente Sindical Magisterial, con figuras como Othón Salazar, reactivaron la protesta en abril de 1958 exigiendo aumentos salariales (cifras de demanda reportadas en torno al 14% en diversas fuentes contemporáneas) y democracia sindical. La movilización de 1958 conecta con oleadas previas de agitación obrera y magisterial en la década, y fue parcialmente reprimida por autoridades federales y locales. (Ver: <a href="https://www.mexicoescultura.com/actividad/139412/maestros-en-protesta-1958-en-perspectiva.html" target="_blank" rel="noopener">detalle histórico</a>).</p>
                         </div>
                     </div>
                 </article>
@@ -1568,7 +1705,9 @@
                             
                             <p>La protesta ha escalado sumando a miles de doctores que denuncian jornadas de hasta 36 horas continuas, falta de insumos y salarios miserables. La Asociación Mexicana de Médicos Residentes e Internos se ha formado en medio de la lucha.</p>
                             
-                            <p>La inconformidad ha llegado hasta los sectores profesionales de élite del país.</p>
+                            <p>Para una nota institucional y balance sobre el movimiento médico y el primer paro nacional, consulte la cobertura de la Comisión Nacional de los Derechos Humanos: <a href="https://www.cndh.org.mx/noticia/movimiento-de-los-medicos-primer-paro-nacional" target="_blank" rel="noopener">CNDH — Movimiento de los médicos: primer paro nacional</a>.</p>
+                            
+                            <p>Contexto adicional: el movimiento empezó el 26 de noviembre de 1964 como protesta por el impago de aguinaldos y condiciones laborales, convocado por la Asociación Mexicana de Médicos Residentes e Internos (AMMRI). El paro se extendió con adhesiones en hospitales de varios estados y llegó a convocarse un primer paro nacional; se mantuvo en distintas fases hasta 1965, con acciones parciales que respetaron servicios de emergencia y partos para proteger a la población. Entre los dirigentes y referentes del movimiento aparecen nombres como Guillermo Calderón, Abel Archundia y Roberto Sepúlveda, y las demandas incluyeron la restitución de médicos cesados, mejores condiciones contractuales y seguridad en el empleo. (Fuente: <a href="https://www.cndh.org.mx/noticia/movimiento-de-los-medicos-primer-paro-nacional" target="_blank" rel="noopener">CNDH</a> y compendios historiográficos).</p>
                         </div>
                     </div>
                 </article>
@@ -1766,6 +1905,116 @@
         <p class="column-closing">
             <em>La verdad siempre encuentra su camino, aunque sea entre líneas.</em>
         </p>
+
+        <hr style="border:0; border-top:2px solid rgba(169,29,33,0.08); margin:26px 0;">
+
+        <!-- Columna adicional estilo periódico (ampliada) -->
+<article class="column-content" aria-label="Columna adicional: Crónicas y Voces">
+    
+    <header class="article-header">
+        <h3 class="article-title">En las esquinas: crónicas y voces</h3>
+        <p class="columnist-name">Por: Crónica de la Calle</p>
+    </header>
+
+    <hr class="section-divider">
+
+    <section class="content-section" id="contexto-local">
+        <h4 class="section-heading">Contexto local</h4>
+        <p>La protesta no solo ocupó plazas académicas y estaciones de trabajo; también llenó las esquinas, los mercados y los cafés. Desde los vendedores ambulantes hasta las comisiones de padres de familia, las voces se organizaron en redes informales que compartían noticias, fotografías y volantes. Estas redes ayudaron a sostener la moral de las huelgas y a distribuir recursos básicos entre los movilizados.</p>
+    </section>
+
+    <section class="content-section" id="testimonios-memoria">
+        <h4 class="section-heading">Testimonios y memoria</h4>
+        <p>Los relatos orales que circularon después de las marchas recogen anécdotas de solidaridad: madres que ofrecían hogares temporales, vecinos que escondían comunicados y trabajadores que donaban alimento. Estos relatos fueron clave para reconstruir los hechos cuando la prensa oficial se negó a publicar el testimonio de víctimas y testigos. Muchas de esas narrativas están preservadas en archivos universitarios y en compilaciones recogidas por organismos como el <a href="https://www.inehrm.gob.mx/es/inehrm/Movimiento_Estudiantil_1968" target="_blank" rel="noopener noreferrer">INEHRM</a>.</p>
+    </section>
+
+    <section class="content-section" id="solidaridad-practica">
+        <h4 class="section-heading">Solidaridad práctica</h4>
+        <p>En barrios populares se formaron comités de apoyo que ofrecían comida, refugio temporal y atención básica a lesionados. Brigadas médicas espontáneas y colectivos de estudiantes organizaron redes de auxilio que, en algunos casos, continuaron operando tras las huelgas, transformándose en movimientos comunitarios de largo plazo. La existencia de estas redes demuestra que la movilización trascendió el plano meramente político y tuvo efectos tangibles en la vida cotidiana de mucha gente.</p>
+    </section>
+
+    <section class="content-section" id="relevancia-cultural">
+        <h4 class="section-heading">Relevancia cultural</h4>
+        <p>La circulación de panfletos, poemarios y obras de teatro callejero contribuyó a una cultura popular comprometida con la crítica social. Poetas y artistas formaron parte de un entramado que alimentó la resistencia simbólica: murales, canciones y folletos circularon como memoria activa de la protesta, y varias de esas piezas hoy se conservan en colecciones hemerográficas y museográficas.</p>
+    </section>
+
+    <section class="content-section" id="legado-lecciones">
+        <h4 class="section-heading">Legado y lecciones</h4>
+        <p>La movilización popular no fue solo estudiantil o sindical; fue una marea de solidaridad interclasista que dejó huella en la memoria colectiva. Sus efectos perduraron en formas de organización social y en la demanda de mayores niveles de transparencia y respeto a los derechos laborales.</p>
+    </section>
+
+    <footer class="article-footer">
+        
+        <div class="resources-list">
+            <h5 class="resources-heading">Consulta de documentación primaria:</h5>
+            <ul>
+                <li><a href="#link-a-cndh" aria-label="Recursos de la CNDH">CNDH</a></li>
+                <li><a href="https://www.inehrm.gob.mx/es/inehrm/Movimiento_Estudiantil_1968" target="_blank" rel="noopener noreferrer" aria-label="Recursos del INEHRM">INEHRM</a></li>
+                <li><a href="#link-a-agn" aria-label="Recursos del AGN">AGN</a></li>
+                <li><a href="#link-a-hemeroteca" aria-label="Recursos de la Hemeroteca UNAM">Hemeroteca UNAM</a></li>
+            </ul>
+        </div>
+        
+        <hr class="section-divider">
+        
+        <blockquote class="column-closing">
+            <p><em>Las esquinas guardan las voces que los titulares olvidan; escuchar a la gente es reconstruir la historia desde abajo.</em></p>
+        </blockquote>
+    </footer>
+
+</article>
+
+        <h3>Nuevas Voces, Nuevos Frentes</h3>
+        <p>La represión mediática empujó a estudiantes y trabajadores a crear boletines propios. <strong>La Voz del Pueblo</strong> y <strong>La Causa del CNH</strong> circularon en mimeógrafos portátiles que viajaban escondidos en mochilas. Cada tiraje se agotaba en horas porque la información se compartía de mano en mano, en salones de clase, talleres y mercados.</p>
+        <p>Las brigadas culturales también llevaron teatro callejero a colonias populares: dramatizaciones como <em>El Granulito</em> denunciaban el uso de infiltrados para provocar disturbios. Poetas como Jaime Sabines y Rosario Castellanos leían poemas frente a miles en Ciudad Universitaria, firmando con seudónimos para evadir la censura.</p>
+
+        <h3>Redes de Solidaridad</h3>
+        <p>Mientras los diarios callaban, las redacciones independientes se organizaron. <strong>El Diario de Yucatán</strong> envió corresponsales, <strong>Política</strong> abrió sus páginas a testimonios estudiantiles y <strong>El Día</strong> publicó fotos que mostraban el verdadero rostro del movimiento. En provincia, estaciones radiofónicas universitarias retransmitieron las conferencias del CNH por la noche, desafiando sanciones.</p>
+        <p>Las asociaciones de padres de familia lanzaron su propio boletín titulado <strong>Padres en Marcha</strong>, donde denunciaban desapariciones y solicitaban apoyo para sostener las huelgas. El texto se fotocopiaba en hospitales, juzgados y parroquias.</p>
+
+        <h3>Testigos Incómodos</h3>
+        <p>Fotógrafos como <strong>Armando López</strong> escondían rollos en botes de refresco para sacarlos del cerco policial. Esas imágenes circularon en revistas europeas y regresaron al país en forma de postales clandestinas que se vendían en la zona de la Merced.</p>
+        <p>En las universidades privadas, colectivos como <strong>Comité Estudiantil de la Ibero</strong> replicaron crónicas a través de boletines como <em>La Espiga</em>. Estudiantes de preparatoria tradujeron al inglés los comunicados del CNH y los enviaron por teléfono a estaciones de radio universitarias en California.</p>
+
+        <h3>El Eco en Latinoamérica</h3>
+        <p>Desde Buenos Aires, el periódico <strong>Marcha</strong> documentó la represión. Sus crónicas inspiraron a movimientos estudiantiles del Cono Sur. En Chile, la Universidad Técnica organizó un foro titulado “México: juventud y democracia”, con testimonios vía telégrafo.</p>
+        <p>Grupos de derechos humanos en Estados Unidos elaboraron expedientes que presentaron en foros de la ONU. Sin redes sociales, la información viajaba en valijas diplomáticas, microfilmes y grabaciones en casete que cruzaban la frontera en automóviles cargados de solidaridad.</p>
+
+        <h3>Memoria que se Imprime</h3>
+        <p>Tres años después, colectivos como el Movimiento de Liberación de la Mujer reimprimieron estas crónicas para vincular la lucha estudiantil con la agenda feminista; resaltaron el papel de brigadistas como <strong>Roberta Avendaño</strong> y <strong>Rosa Martha Fernández</strong>, quienes lideraron comités nocturnos y organizaron comedores populares.</p>
+        <p class="column-closing"><em>La memoria de 1968 no cabe en un solo titular: sobrevive en cada volante, mural y archivo independiente.</em></p>
+    </div>
+    
+    <!-- Sección añadida: contexto histórico y fuentes verificables -->
+    <div class="column-content" aria-label="Contexto y fuentes">
+        <hr style="border:0; border-top:2px solid rgba(169,29,33,0.08); margin:18px 0;">
+        <h3>Contexto y fuentes recomendadas</h3>
+        <p>Para entender mejor los sucesos referidos en estas páginas es útil consultar fuentes primarias y documentos elaborados por organismos de derechos humanos e instituciones de investigación histórica. A continuación se ofrecen puntos de referencia verificables y enlaces de consulta:</p>
+        <ul>
+            <li><strong>Huelga ferrocarrilera (1959):</strong> liderada por Demetrio Vallejo. La huelga puso en evidencia la conflictividad laboral del periodo y la respuesta del Estado; Vallejo fue detenido y permaneció años en prisión. Informe y nota conmemorativa de la Comisión Nacional de los Derechos Humanos: <a href="https://www.cndh.org.mx/noticia/muere-demetrio-vallejo-dirigente-obrero-lider-de-los-trabajadores-ferrocarrileros-defensor" target="_blank" rel="noopener">CNDH — Fallecimiento y legado de Demetrio Vallejo</a>.</li>
+            <li><strong>Movimiento estudiantil de 1968:</strong> surge de la movilización de estudiantes en todo el país y del trabajo del Consejo Nacional de Huelga (CNH), que presentó un pliego con demandas como la disolución del cuerpo de granaderos y la libertad de presos políticos. Información y recopilación documental del Instituto Nacional de Estudios Históricos de las Revoluciones de México: <a href="https://www.inehrm.gob.mx/es/inehrm/Movimiento_Estudiantil_1968" target="_blank" rel="noopener">INEHRM — Movimiento Estudiantil de 1968</a>. El documento del INEHRM incluye cronología, testimonios y bibliografía recomendada.</li>
+            <li><strong>Contexto político y Juegos Olímpicos 1968:</strong> La presidencia de Gustavo Díaz Ordaz (1964–1970) y la proximidad de los Juegos Olímpicos de 1968 influyeron en la estrategia gubernamental para mantener una imagen de control. La conflagración entre el afán de orden y la represión es un elemento clave para comprender la escala de la respuesta estatal.</li>
+            <li><strong>Contraste de cifras y testimonios:</strong> Los registros oficiales y las estimaciones de organismos y víctimas difieren en número de fallecidos y detenciones. Recomendamos consultar informes del INEHRM, notas de la CNDH, archivos periodísticos de la época y compilaciones de testimonios para construir una visión crítica y documentada.</li>
+            <li><strong>Lecturas adicionales:</strong> el INEHRM y la CNDH ofrecen bibliografías y referencias primarias (archivos, hemeroteca y testimonios). Consulte también colecciones universitarias y archivos públicos para obtener documentos originales y boletines mimeografiados que circularon durante el movimiento.</li>
+        </ul>
+
+        <p style="font-size:0.92rem;color:#444;">Nota: las cifras oficiales y las estimaciones independientes sobre víctimas y detenciones difieren; por eso recomendamos contrastar distintas fuentes (informes oficiales, testimonios de sobrevivientes, investigaciones académicas y archivos periodísticos) antes de extraer conclusiones definitivas.</p>
+    </div>
+    
+    <!-- Bloque adicional: recursos gubernamentales y académicos -->
+    <div class="column-content" aria-label="Recursos adicionales">
+        <hr style="border:0; border-top:2px solid rgba(169,29,33,0.08); margin:18px 0;">
+        <h3>Recursos gubernamentales y académicos</h3>
+        <p>Si deseas profundizar en los acontecimientos y consultar documentos primarios, hemerotecas y archivos oficiales, revisa las siguientes fuentes confiables:</p>
+        <ul>
+            <li><a href="https://www.inehrm.gob.mx/es/inehrm/Movimiento_Estudiantil_1968" target="_blank" rel="noopener">INEHRM — Movimiento Estudiantil de 1968</a>: cronologías, documentos y bibliografía académica.</li>
+            <li><a href="https://www.cndh.org.mx/noticia/muere-demetrio-vallejo-dirigente-obrero-lider-de-los-trabajadores-ferrocarrileros-defensor" target="_blank" rel="noopener">CNDH — Demetrio Vallejo</a>: notas y acciones relacionadas con derechos humanos y memoria histórica.</li>
+            <li><a href="https://www.cndh.org.mx/noticia/movimiento-de-los-medicos-primer-paro-nacional" target="_blank" rel="noopener">CNDH — Movimiento de los médicos: primer paro nacional</a>: nota y contexto sobre protestas médicas y acciones por derechos laborales.</li>
+            <li><a href="https://www.mexicoescultura.com/actividad/139412/maestros-en-protesta-1958-en-perspectiva.html" target="_blank" rel="noopener">México en la Cultura — Maestros en protesta (1958)</a>: análisis histórico y cronología del movimiento magisterial.</li>
+            <li><a href="https://www.fundacionunam.org.mx/auriazul/dos-de-octubre-ni-perdon-ni-olvido/" target="_blank" rel="noopener">UNAM — Portal institucional</a>: acceso a colecciones, archivos y publicaciones universitarias sobre 1958–1968.</li>
+            <li><a href="https://hndm.iib.unam.mx/index.php/es/" target="_blank" rel="noopener">Hemeroteca Nacional Digital de México (UNAM)</a>: hemerografía y periódicos digitalizados de la época.</li>
+            <li><a href="https://www.gob.mx/agn" target="_blank" rel="noopener">Archivo General de la Nación (AGN)</a>: fondos documentales oficiales y expedientes históricos.</li>
+        </ul>
     </div>
 </article>
 
@@ -1840,49 +2089,248 @@
             
             <div class="footer-content">
                 <div class="activity-section">
-                    <p>Relaciona cada inicio con su desarrollo y su cierre. Haz clic en un bloque de la columna izquierda y luego en el correspondiente de la derecha. También puedes usar "Mostrar respuestas" para ver las soluciones.</p>
-                    <div id="game-stats" style="text-align: center; margin-bottom: 20px; font-size: 1.1rem; color: #a91d21;">
-                        <span>Tiempo: <span id="timer">0</span>s</span> | <span>Intentos: <span id="attempts">0</span></span>
-                    </div>
-                    
-                    <div class="activity-wrap">
-                        <svg class="match-svg" aria-hidden="true"></svg>
-                        <div class="match-activity">
-                            <div class="match-column" id="column-left">
-                                <ul class="match-list" id="left-list"></ul>
-                            </div>
-                            <div class="match-column" id="column-right">
-                                <ul class="match-list" id="right-list"></ul>
-                            </div>
+
+                    <h3>Retos Interactivos</h3>
+
+                    <p>Explora estas actividades y vuelve a recorrer los conceptos clave del movimiento estudiantil con un toque lúdico e histórico.</p>
+
+
+
+                    <section class="game-block" id="matching-game">
+
+                        <h4>Arma la crónica</h4>
+
+                        <p>Relaciona cada inicio con su desarrollo y cierre. Selecciona un bloque de la columna izquierda y luego su complemento en la derecha para reconstruir los episodios.</p>
+
+                        <div id="game-stats" style="text-align: center; margin-bottom: 20px; font-size: 1.1rem; color: #a91d21;">
+
+                            <span>Tiempo: <span id="timer">0</span>s</span> | <span>Intentos: <span id="attempts">0</span></span>
+
                         </div>
-                    </div>
-                    
-                    <div class="match-controls">
-                        <button class="btn" id="resetBtn">Reiniciar</button>
-                        <button class="btn secondary" id="showBtn">Mostrar respuestas</button>
-                    </div>
+
+                        
+
+                        <div class="activity-wrap">
+
+                            <svg class="match-svg" aria-hidden="true"></svg>
+
+                            <div class="match-activity">
+
+                                <div class="match-column" id="column-left">
+
+                                    <ul class="match-list" id="left-list"></ul>
+
+                                </div>
+
+                                <div class="match-column" id="column-right">
+
+                                    <ul class="match-list" id="right-list"></ul>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        
+
+                        <div class="match-controls">
+
+                            <button class="btn" id="resetBtn">Reiniciar</button>
+
+                            <button class="btn secondary" id="showBtn">Mostrar respuestas</button>
+
+                        </div>
+
+                    </section>
+
+
+
+                    <section class="game-block" id="wordsearch-game">
+
+                        <h4>Sopa de letras de la memoria</h4>
+
+                        <p>Desliza el cursor o tu dedo para trazar las palabras ocultas en cualquier dirección. Cada concepto remite a un momento decisivo de 1958-1968.</p>
+
+                        <div class="wordsearch">
+
+                            <div class="wordsearch-grid" id="wordsearch-grid" role="grid" aria-label="Sopa de letras sobre los movimientos sociales"></div>
+
+                            <div class="wordsearch-wordlist">
+
+                                <h5>Palabras a encontrar</h5>
+
+                                <ul id="wordsearch-words"></ul>
+
+                                <div class="wordsearch-actions">
+
+                                    <button class="btn secondary" id="wordsearch-reset">Reiniciar</button>
+
+                                </div>
+
+                                <p class="game-status" id="wordsearch-status" aria-live="polite"></p>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    <section class="game-block" id="quiz-game">
+                        <h4>Trivia del 68</h4>
+                        <p>Elige la respuesta correcta en cada pregunta para repasar los hitos de 1958-1968. Luego presiona "Comprobar".</p>
+                        <form id="quiz-form" class="quiz-block">
+                            <fieldset class="quiz-question" data-answer="B">
+                                <legend>1. &iquest;Qu&eacute; exig&iacute;a el pliego petitorio del CNH?</legend>
+                                <div class="quiz-options">
+                                    <label class="quiz-option">
+                                        <input type="radio" name="q1" value="A">
+                                        <span>La renuncia del rector y la cancelaci&oacute;n de clases.</span>
+                                    </label>
+                                    <label class="quiz-option">
+                                        <input type="radio" name="q1" value="B">
+                                        <span>La liberaci&oacute;n de presos pol&iacute;ticos y el fin del cuerpo de granaderos.</span>
+                                    </label>
+                                    <label class="quiz-option">
+                                        <input type="radio" name="q1" value="C">
+                                        <span>El reconocimiento de nuevos partidos pol&iacute;ticos.</span>
+                                    </label>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="quiz-question" data-answer="C">
+                                <legend>2. &iquest;Qu&eacute; sector protagoniz&oacute; la huelga nacional de 1959?</legend>
+                                <div class="quiz-options">
+                                    <label class="quiz-option">
+                                        <input type="radio" name="q2" value="A">
+                                        <span>Los maestros normalistas.</span>
+                                    </label>
+                                    <label class="quiz-option">
+                                        <input type="radio" name="q2" value="B">
+                                        <span>Los m&eacute;dicos residentes.</span>
+                                    </label>
+                                    <label class="quiz-option">
+                                        <input type="radio" name="q2" value="C">
+                                        <span>Los trabajadores ferrocarrileros.</span>
+                                    </label>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="quiz-question" data-answer="A">
+                                <legend>3. &iquest;D&oacute;nde se concentr&oacute; la represi&oacute;n del 2 de octubre?</legend>
+                                <div class="quiz-options">
+                                    <label class="quiz-option">
+                                        <input type="radio" name="q3" value="A">
+                                        <span>En la Plaza de las Tres Culturas, en Tlatelolco.</span>
+                                    </label>
+                                    <label class="quiz-option">
+                                        <input type="radio" name="q3" value="B">
+                                        <span>En el Z&oacute;calo capitalino.</span>
+                                    </label>
+                                    <label class="quiz-option">
+                                        <input type="radio" name="q3" value="C">
+                                        <span>En Ciudad Universitaria.</span>
+                                    </label>
+                                </div>
+                            </fieldset>
+
+                            <div class="quiz-actions">
+                                <button class="btn" type="submit" id="quiz-submit">Comprobar</button>
+                                <button class="btn secondary" type="button" id="quiz-reset">Reiniciar</button>
+                            </div>
+                        </form>
+                        <p class="game-status" id="quiz-status" aria-live="polite"></p>
+                    </section>
+
                 </div>
 
-                <div class="ads-section">
+                <aside class="ads-section" aria-label="Anuncios destacados">
                     <div class="ad-box">
-                        <h3>¡A Estrenar!</h3>
+                        <h4>&iexcl;A Estrenar!</h4>
                         <p><strong>TELEVISORES A COLOR</strong></p>
-                        <p style="margin-top: 12px;">Vea el futuro en su sala. Una revolución para el hogar moderno.</p>
-                        <p style="margin-top: 8px; color: #a91d21; font-weight: bold;">¡Mensualidades sin intereses!</p>
+                        <p style="margin-top: 12px;">Vea el futuro en su sala. Una revoluci&oacute;n para el hogar moderno.</p>
+                        <p style="margin-top: 8px; color: #a91d21; font-weight: bold;">&iexcl;Mensualidades sin intereses!</p>
                     </div>
 
                     <div class="ad-box">
-                        <h3>Refresca el Momento</h3>
+                        <h4>Refresca el Momento</h4>
                         <p><strong>Pepsi-Cola</strong></p>
-                        <p style="margin-top: 12px;">El sabor de la nueva generación. Perfecta para sus momentos especiales.</p>
+                        <p style="margin-top: 12px;">El sabor de la nueva generaci&oacute;n. Perfecta para sus momentos especiales.</p>
                     </div>
 
                     <div class="ad-box">
-                        <h3>Cultura y Educación</h3>
-                        <p><strong>Enciclopedia Británica</strong></p>
-                        <p style="margin-top: 12px;">24 tomos de sabiduría universal. La inversión más inteligente para su familia.</p>
+                        <h4>Cultura y Educaci&oacute;n</h4>
+                        <p><strong>Enciclopedia Brit&aacute;nica</strong></p>
+                        <p style="margin-top: 12px;">24 tomos de sabidur&iacute;a universal. La inversi&oacute;n m&aacute;s inteligente para su familia.</p>
                     </div>
-                </div>
+
+                    <div class="ad-box">
+                        <h4>Sonido Hi-Fi</h4>
+                        <p><strong>Radiola Est&eacute;reo</strong></p>
+                        <p style="margin-top: 12px;">Sintonice las voces del pueblo con fidelidad cristalina.</p>
+                    </div>
+
+                    <div class="ad-box">
+                        <h4>Moda Juvenil</h4>
+                        <p><strong>Botas Go-Go</strong></p>
+                        <p style="margin-top: 12px;">Pasos firmes en cada marcha. Disponibles en blanco y rojo.</p>
+                    </div>
+
+                    <div class="ad-box">
+                        <h4>Lecturas Prohibidas</h4>
+                        <p><strong>Librer&iacute;a Aurora</strong></p>
+                        <p style="margin-top: 12px;">Ensayos cr&iacute;ticos y panfletos importados. Pregunte por la sala discreta.</p>
+                    </div>
+
+                    <div class="ad-box">
+                        <h4>Comun&iacute;cate</h4>
+                        <p><strong>Olivetti Lettera 32</strong></p>
+                        <p style="margin-top: 12px;">Teclas suaves para redactar manifiestos sin hacer ruido.</p>
+                    </div>
+
+                    <div class="ad-box">
+                        <h4>Noches De Ruta</h4>
+                        <p><strong>Caf&eacute; La Ruta</strong></p>
+                        <p style="margin-top: 12px;">Jazz en vivo, tertulias rebeldes y caf&eacute; de olla hasta el amanecer.</p>
+                    </div>
+
+                    <div class="ad-box">
+                        <h4>Transporte Solidario</h4>
+                        <p><strong>Autobuses &quot;El Estudiante&quot;</strong></p>
+                        <p style="margin-top: 12px;">Rutas directas a CU y Zacatenco. Conductor aliado del movimiento.</p>
+                    </div>
+
+                    <div class="ad-box">
+                        <h4>Documenta La Historia</h4>
+                        <p><strong>Kodak Instamatic</strong></p>
+                        <p style="margin-top: 12px;">Dispare y comparta. Im&aacute;genes n&iacute;tidas del 68.</p>
+                    </div>
+
+                    <div class="ad-box">
+                        <h4>Guardia Nocturna</h4>
+                        <p><strong>Linterna Eveready</strong></p>
+                        <p style="margin-top: 12px;">Bater&iacute;as de larga duraci&oacute;n para vigilias y brigadas nocturnas.</p>
+                    </div>
+
+                    <div class="ad-box">
+                        <h4>Reforma Editorial</h4>
+                        <p><strong>Revista &quot;La Voz&quot;</strong></p>
+                        <p style="margin-top: 12px;">An&aacute;lisis independiente y cr&oacute;nicas que el diario oficial no publica.</p>
+                    </div>
+
+                    <div class="ad-box">
+                        <h4>Seguro Solidario</h4>
+                        <p><strong>Cooperativa SalvaGuarda</strong></p>
+                        <p style="margin-top: 12px;">Apoyo legal y m&eacute;dico para brigadistas y estudiantes.</p>
+                    </div>
+
+                    <div class="ad-box">
+                        <h4>Imprime Tus Ideas</h4>
+                        <p><strong>Mime&oacute;grafos Aurora</strong></p>
+                        <p style="margin-top: 12px;">Equipos listos para volantes. Entrega nocturna discreta.</p>
+                    </div>
+                </aside>
+
                 </div>
 
             <div class="footer-bottom">
@@ -1890,14 +2338,13 @@
                 <p>© 1968 La Crónica Inquieta - Todos los derechos reservados</p>
                 <p>Una publicación independiente al servicio de la verdad</p>
                 <div class="credit-block" aria-label="Datos del docente y equipo">
-                    <div>Datos del docente y grupo</div>
                     <div class="team-list">
                         <div>Docente: Juan Antonio Aldaco Aldaco</div>
-                        <div>Materia: Estructura Socioeconómica de México</div>
-                        <div>Grupo: Físico-Matemático</div>
-                        <div style="margin-top:8px;">Equipo:</div>
+                        <div>Materia: Estructura Socioecon&oacute;mica de M&eacute;xico</div>
+                        <div>Grupo: F&iacute;sico-Matem&aacute;tico</div>
+                        <div style="margin-top:4px;">Equipo:</div>
                         <div>Guerrero Segoviando Jaime Fernando</div>
-                        <div>Pérez López Juan Pablo</div>
+                        <div>P&eacute;rez L&oacute;pez Juan Pablo</div>
                         <div>Regalado Razo Luis Angel</div>
                         <div>Rubalcava Ledesma Ian Eduardo</div>
                         <div>Sandoval Guevara Rodrigo</div>
@@ -1935,68 +2382,307 @@
             if (event.target == modal) {
                 modal.style.display = "none";
             }
-        }
+        };
 
-        // Navegación del crucigrama
-        document.querySelectorAll('.cw-cell').forEach(input => {
-            input.addEventListener('input', function(e) {
-                this.value = this.value.toUpperCase();
-                
-                if (this.value.length === 1) {
-                    if (this.dataset.horizontal) {
-                        const nextHPos = parseInt(this.dataset.hpos) + 1;
-                        const nextCell = document.querySelector(`.cw-cell[data-horizontal="${this.dataset.horizontal}"][data-hpos="${nextHPos}"]`);
-                        if (nextCell) nextCell.focus();
-                    } else if (this.dataset.vertical) {
-                        const nextVPos = parseInt(this.dataset.vpos) + 1;
-                        const nextCell = document.querySelector(`.cw-cell[data-vertical="${this.dataset.vertical}"][data-vpos="${nextVPos}"]`);
-                        if (nextCell) nextCell.focus();
+﻿﻿        // Juego: Sopa de letras
+        (() => {
+            const gridData = [
+                "MIMRSQMQXTKDD",
+                "DEMOCRACIAJUA",
+                "VNWSSUHPLMTCT",
+                "GXTLATELOLCOR",
+                "SELSORTSEAMQE",
+                "CDIALOGOZIPQB",
+                "WQPJPLIEGOGCI",
+                "ESTUDIANTESML",
+                "ECUWUHUELGAMP",
+                "AHCRAMZRSJSOA",
+                "RBLIRRACORREF",
+                "DHGRYBREGIKED",
+                "RQGSBWWGPBSRD"
+            ];
+
+            const words = [
+                { id: "FERROCARRIL", word: "FERROCARRIL", clue: "Paro ferrocarrilero que encendio 1958.", start: { row: 10, col: 12 }, dir: { dr: 0, dc: -1 } },
+                { id: "ESTUDIANTES", word: "ESTUDIANTES", clue: "Protagonistas de la movilizacion de 1968.", start: { row: 7, col: 0 }, dir: { dr: 0, dc: 1 } },
+                { id: "DEMOCRACIA", word: "DEMOCRACIA", clue: "Demanda central en cada asamblea.", start: { row: 1, col: 0 }, dir: { dr: 0, dc: 1 } },
+                { id: "TLATELOLCO", word: "TLATELOLCO", clue: "Plaza que marco el 2 de octubre.", start: { row: 3, col: 2 }, dir: { dr: 0, dc: 1 } },
+                { id: "MAESTROS", word: "MAESTROS", clue: "Gremio que exigio democracia sindical.", start: { row: 4, col: 10 }, dir: { dr: 0, dc: -1 } },
+                { id: "LIBERTAD", word: "LIBERTAD", clue: "Derecho coreado en las marchas.", start: { row: 7, col: 12 }, dir: { dr: -1, dc: 0 } },
+                { id: "DIALOGO", word: "DIALOGO", clue: "Lo que el CNH pidio al gobierno.", start: { row: 5, col: 1 }, dir: { dr: 0, dc: 1 } },
+                { id: "HUELGA", word: "HUELGA", clue: "Herramienta de presion colectiva.", start: { row: 8, col: 5 }, dir: { dr: 0, dc: 1 } },
+                { id: "PLIEGO", word: "PLIEGO", clue: "Documento con los puntos del CNH.", start: { row: 6, col: 4 }, dir: { dr: 0, dc: 1 } },
+                { id: "MARCHA", word: "MARCHA", clue: "Traslado multitudinario por la ciudad.", start: { row: 9, col: 5 }, dir: { dr: 0, dc: -1 } }
+            ];
+
+            const gridEl = document.getElementById("wordsearch-grid");
+            const listEl = document.getElementById("wordsearch-words");
+            const resetBtn = document.getElementById("wordsearch-reset");
+            const statusEl = document.getElementById("wordsearch-status");
+            if (!gridEl || !listEl || !resetBtn || !statusEl) {
+                return;
+            }
+
+            const keyFor = (row, col) => `${row}-${col}`;
+            const cellMap = new Map();
+            const previewCells = new Set();
+            const foundWords = new Set();
+            const selection = { pointerId: null, startCell: null, path: [] };
+            const defaultMessage = "Selecciona una palabra arrastrando sobre las letras.";
+
+            statusEl.textContent = defaultMessage;
+
+            gridData.forEach((rowStr, rowIndex) => {
+                rowStr.split("").forEach((char, colIndex) => {
+                    const cell = document.createElement("button");
+                    cell.type = "button";
+                    cell.className = "ws-cell";
+                    cell.dataset.row = String(rowIndex);
+                    cell.dataset.col = String(colIndex);
+                    cell.textContent = char;
+                    cell.setAttribute("aria-label", `Fila ${rowIndex + 1}, columna ${colIndex + 1}, letra ${char}`);
+                    gridEl.appendChild(cell);
+                    cellMap.set(keyFor(rowIndex, colIndex), cell);
+                });
+            });
+
+            function clearPreview() {
+                previewCells.forEach(cell => cell.classList.remove("ws-preview"));
+                previewCells.clear();
+            }
+
+            function resetSelectionState() {
+                selection.startCell = null;
+                selection.path = [];
+            }
+
+            function computePath(start, target) {
+                if (!start || !target) return null;
+                const sr = Number(start.dataset.row);
+                const sc = Number(start.dataset.col);
+                const tr = Number(target.dataset.row);
+                const tc = Number(target.dataset.col);
+                const dr = tr - sr;
+                const dc = tc - sc;
+                if (dr === 0 && dc === 0) return [start];
+                const absDr = Math.abs(dr);
+                const absDc = Math.abs(dc);
+                if (!(dr === 0 || dc === 0 || absDr === absDc)) {
+                    return null;
+                }
+                const stepR = dr === 0 ? 0 : dr / absDr;
+                const stepC = dc === 0 ? 0 : dc / absDc;
+                const length = Math.max(absDr, absDc) + 1;
+                const path = [];
+                for (let i = 0; i < length; i += 1) {
+                    const row = sr + stepR * i;
+                    const col = sc + stepC * i;
+                    const cell = cellMap.get(keyFor(row, col));
+                    if (!cell) return null;
+                    path.push(cell);
+                }
+                return path;
+            }
+
+            function updatePreview(target) {
+                if (!selection.startCell) return;
+                clearPreview();
+                const path = computePath(selection.startCell, target);
+                if (!path) {
+                    selection.path = [selection.startCell];
+                    selection.startCell.classList.add("ws-preview");
+                    previewCells.add(selection.startCell);
+                    return;
+                }
+                selection.path = path;
+                path.forEach(cell => {
+                    cell.classList.add("ws-preview");
+                    previewCells.add(cell);
+                });
+            }
+
+            function resolveSelection() {
+                if (!selection.path.length) return;
+                const letters = selection.path.map(cell => cell.textContent).join("");
+                const reversed = letters.split("").reverse().join("");
+                let match = null;
+                for (const entry of words) {
+                    if (foundWords.has(entry.id)) continue;
+                    if (letters === entry.word || reversed === entry.word) {
+                        match = entry;
+                        break;
                     }
+                }
+                if (match) {
+                    selection.path.forEach(cell => {
+                        cell.classList.add("found");
+                        cell.classList.remove("ws-preview");
+                    });
+                    foundWords.add(match.id);
+                    const item = listEl.querySelector(`[data-word="${match.id}"]`);
+                    if (item) item.classList.add("found");
+                    statusEl.textContent = foundWords.size === words.length
+                        ? "Sopa completada. Todos los conceptos quedaron resaltados."
+                        : `Bien: ${match.word}.`;
+                } else {
+                    selection.path.forEach(cell => {
+                        cell.classList.add("ws-error");
+                        setTimeout(() => cell.classList.remove("ws-error"), 400);
+                    });
+                    statusEl.textContent = "Esa seleccion no corresponde a ningun concepto.";
+                }
+                clearPreview();
+                resetSelectionState();
+            }
+
+            function beginSelection(cell, pointerId) {
+                clearPreview();
+                resetSelectionState();
+                selection.startCell = cell;
+                selection.pointerId = pointerId;
+                gridEl.setPointerCapture?.(pointerId);
+                updatePreview(cell);
+            }
+
+            function endSelection(pointerId, finalize) {
+                if (selection.pointerId !== pointerId) return;
+                if (finalize) {
+                    resolveSelection();
+                } else {
+                    clearPreview();
+                    resetSelectionState();
+                }
+                gridEl.releasePointerCapture?.(pointerId);
+                selection.pointerId = null;
+            }
+
+            gridEl.addEventListener("pointerdown", event => {
+                const cell = event.target.closest(".ws-cell");
+                if (!cell || cell.classList.contains("found")) return;
+                event.preventDefault();
+                beginSelection(cell, event.pointerId);
+            });
+
+            gridEl.addEventListener("pointermove", event => {
+                if (selection.pointerId !== event.pointerId || !selection.startCell) return;
+                const target = document.elementFromPoint(event.clientX, event.clientY);
+                const cell = target && target.closest(".ws-cell");
+                if (cell) updatePreview(cell);
+            });
+
+            gridEl.addEventListener("pointerup", event => {
+                endSelection(event.pointerId, true);
+            });
+
+            gridEl.addEventListener("pointercancel", event => {
+                endSelection(event.pointerId, false);
+            });
+
+            document.addEventListener("pointerup", event => {
+                if (selection.pointerId === event.pointerId) {
+                    endSelection(event.pointerId, true);
                 }
             });
 
-            input.addEventListener('keydown', function(e) {
-                if (e.key === 'Backspace' && this.value === '') {
-                    if (this.dataset.horizontal) {
-                        const prevHPos = parseInt(this.dataset.hpos) - 1;
-                        const prevCell = document.querySelector(`.cw-cell[data-horizontal="${this.dataset.horizontal}"][data-hpos="${prevHPos}"]`);
-                        if (prevCell) prevCell.focus();
-                    } else if (this.dataset.vertical) {
-                        const prevVPos = parseInt(this.dataset.vpos) - 1;
-                        const prevCell = document.querySelector(`.cw-cell[data-vertical="${this.dataset.vertical}"][data-vpos="${prevVPos}"]`);
-                        if (prevCell) prevCell.focus();
+            words.forEach(entry => {
+                const li = document.createElement("li");
+                li.dataset.word = entry.id;
+                li.textContent = `${entry.word} - ${entry.clue}`;
+                listEl.appendChild(li);
+            });
+
+            function resetGame() {
+                clearPreview();
+                foundWords.clear();
+                selection.pointerId = null;
+                resetSelectionState();
+                gridEl.querySelectorAll(".ws-cell").forEach(cell => {
+                    cell.classList.remove("found", "ws-error", "ws-preview");
+                });
+                listEl.querySelectorAll("li").forEach(li => li.classList.remove("found"));
+                statusEl.textContent = defaultMessage;
+            }
+
+            resetBtn.addEventListener("click", resetGame);
+        })();
+
+        // Juego: Trivia del 68
+        (() => {
+            const form = document.getElementById('quiz-form');
+            const statusEl = document.getElementById('quiz-status');
+            const resetBtn = document.getElementById('quiz-reset');
+            if (!form || !statusEl || !resetBtn) {
+                return;
+            }
+
+            const questions = Array.from(form.querySelectorAll('.quiz-question'));
+
+            function clearMarks() {
+                questions.forEach(fieldset => {
+                    fieldset.querySelectorAll('.quiz-option').forEach(option => {
+                        option.classList.remove('correct', 'wrong');
+                    });
+                });
+            }
+
+            form.addEventListener('submit', event => {
+                event.preventDefault();
+                clearMarks();
+
+                const selections = questions.map(fieldset => {
+                    const answer = fieldset.dataset.answer;
+                    const inputs = fieldset.querySelectorAll('input[type="radio"]');
+                    let selectedValue = null;
+
+                    inputs.forEach(input => {
+                        if (input.checked) {
+                            selectedValue = input.value;
+                        }
+                    });
+
+                    return { fieldset, answer, selectedValue };
+                });
+
+                const unanswered = selections.some(item => !item.selectedValue);
+                if (unanswered) {
+                    statusEl.textContent = 'Resuelve todas las preguntas antes de comprobar.';
+                    return;
+                }
+
+                let correct = 0;
+
+                selections.forEach(({ fieldset, answer, selectedValue }) => {
+                    const options = Array.from(fieldset.querySelectorAll('.quiz-option'));
+                    options.forEach(option => {
+                        const value = option.querySelector('input').value;
+                        if (value === answer) {
+                            option.classList.add('correct');
+                        }
+                        if (value === selectedValue && value !== answer) {
+                            option.classList.add('wrong');
+                        }
+                    });
+
+                    if (selectedValue === answer) {
+                        correct += 1;
                     }
-                }
-                
-                if (e.key === 'ArrowRight' && this.dataset.horizontal) {
-                    e.preventDefault();
-                    const nextHPos = parseInt(this.dataset.hpos) + 1;
-                    const nextCell = document.querySelector(`.cw-cell[data-horizontal="${this.dataset.horizontal}"][data-hpos="${nextHPos}"]`);
-                    if (nextCell) nextCell.focus();
-                }
-                
-                if (e.key === 'ArrowLeft' && this.dataset.horizontal) {
-                    e.preventDefault();
-                    const prevHPos = parseInt(this.dataset.hpos) - 1;
-                    const prevCell = document.querySelector(`.cw-cell[data-horizontal="${this.dataset.horizontal}"][data-hpos="${prevHPos}"]`);
-                    if (prevCell) prevCell.focus();
-                }
-                
-                if (e.key === 'ArrowDown' && this.dataset.vertical) {
-                    e.preventDefault();
-                    const nextVPos = parseInt(this.dataset.vpos) + 1;
-                    const nextCell = document.querySelector(`.cw-cell[data-vertical="${this.dataset.vertical}"][data-vpos="${nextVPos}"]`);
-                    if (nextCell) nextCell.focus();
-                }
-                
-                if (e.key === 'ArrowUp' && this.dataset.vertical) {
-                    e.preventDefault();
-                    const prevVPos = parseInt(this.dataset.vpos) - 1;
-                    const prevCell = document.querySelector(`.cw-cell[data-vertical="${this.dataset.vertical}"][data-vpos="${prevVPos}"]`);
-                    if (prevCell) prevCell.focus();
+                });
+
+                if (correct === questions.length) {
+                    statusEl.textContent = '\u00a1Perfecto! Conoces cada detalle del movimiento.';
+                } else {
+                    statusEl.textContent = `Acertaste ${correct} de ${questions.length}. Repasa tus notas y vuelve a intentarlo.`;
                 }
             });
-        });
+
+            resetBtn.addEventListener('click', () => {
+                form.reset();
+                clearMarks();
+                statusEl.textContent = 'Selecciona una respuesta para cada pregunta.';
+            });
+
+            statusEl.textContent = 'Selecciona una respuesta para cada pregunta.';
+        })();
 
         // Actividad "Une los párrafos"
         (() => {
