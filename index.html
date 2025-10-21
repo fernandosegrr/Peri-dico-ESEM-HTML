@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Edición especial histórica sobre movimientos sociales en México: crónicas, imágenes y reflexiones de 1958-1968.">
+    <meta name="description" content="EdiciÃ³n especial histÃ³rica sobre movimientos sociales en MÃ©xico: crÃ³nicas, imÃ¡genes y reflexiones de 1958-1968.">
     <meta name="theme-color" content="#1a1a1a">
-    <title>La Crónica Inquieta - Movimientos Sociales en México</title>
+    <title>La CrÃ³nica Inquieta - Movimientos Sociales en MÃ©xico</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,12 +47,22 @@
         .newspaper-container {
             max-width: 1200px;
             margin: 0 auto;
-            margin-right: 0;
             background: #fff8e1 url('https://www.transparenttextures.com/patterns/paper.png') repeat;
-            /* Sombra más realista y sutil, no exagerada */
+            /* Sombra mÃ¡s realista y sutil, no exagerada */
             box-shadow: 0 4px 6px rgba(0,0,0,0.10), 0 10px 20px rgba(0,0,0,0.10);
             border: 2px solid #1a1a1a;
             filter: contrast(1.02) brightness(1.01);
+        }
+
+        .newspaper-container.is-notas-active {
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        @media (min-width: 1520px) {
+            .newspaper-container.is-notas-active {
+                margin-right: 320px;
+            }
         }
 
         header {
@@ -135,14 +145,100 @@
 
         main {
             padding: 30px 20px;
-            /* Asegurar que el área principal muestre la textura del papel de forma pareja */
+            /* Asegurar que el Ã¡rea principal muestre la textura del papel de forma pareja */
             background: transparent;
+        }
+
+        .tab-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 30px auto 10px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #1a1a1a;
+            justify-content: center;
+            max-width: 1020px;
+        }
+
+        .tab-button {
+            background: #fff8e1;
+            border: 2px solid #1a1a1a;
+            color: #1a1a1a;
+            padding: 6px 12px;
+            font-family: 'Old Standard TT', serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.9px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+            flex: 0 0 auto;
+            white-space: nowrap;
+        }
+
+        .tab-button:hover:not(.is-active) {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .tab-button.is-active {
+            background: #a91d21;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .tab-button:focus-visible {
+            outline: 2px solid #a91d21;
+            outline-offset: 3px;
+        }
+
+        .tab-panels {
+            padding-top: 20px;
+        }
+
+        .tab-panel {
+            display: none;
+            width: 100%;
+        }
+
+        .tab-panel[hidden] {
+            display: none !important;
+        }
+
+        .tab-panel.is-active {
+            display: block;
+        }
+
+        .tab-panel.is-active[data-tab]:not([data-tab="notas"]) {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 36px;
+            padding: 0 20px 40px;
+        }
+
+        .tab-panel.is-active[data-tab]:not([data-tab="notas"]) > * {
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .tab-panel.is-active[data-tab="ocio"] > * {
+            max-width: 1040px;
+        }
+
+        .tab-panel.is-active[data-tab]:not([data-tab="notas"]) .column-content,
+        .tab-panel.is-active[data-tab]:not([data-tab="notas"]) .analysis-content,
+        .tab-panel.is-active[data-tab]:not([data-tab="notas"]) .reportage-content,
+        .tab-panel.is-active[data-tab]:not([data-tab="notas"]) .activity-section,
+        .tab-panel.is-active[data-tab]:not([data-tab="notas"]) .footer-content,
+        .tab-panel.is-active[data-tab]:not([data-tab="notas"]) .footer-bottom {
+            width: 100%;
         }
 
         .article-grid {
             display: flex;
             flex-direction: column;
-            gap: 60px; /* Aumentado para dar más aire entre secciones */
+            gap: 60px; /* Aumentado para dar mÃ¡s aire entre secciones */
         }
 
         .article {
@@ -240,13 +336,13 @@
             z-index: 1;
         }
 
-        /* Mejor encuadre de las imágenes al recortar: centramos hacia la parte superior */
+        /* Mejor encuadre de las imÃ¡genes al recortar: centramos hacia la parte superior */
         .featured-article .article-image {
             object-position: center top;
         }
 
-        /* Caption específico para el artículo de médicos: texto oscuro sobre fondo claro
-           se fuerza color distinto para máxima legibilidad en esa imagen */
+        /* Caption especÃ­fico para el artÃ­culo de mÃ©dicos: texto oscuro sobre fondo claro
+           se fuerza color distinto para mÃ¡xima legibilidad en esa imagen */
         .caption-medicos {
             color: rgba(10,10,10,0.9) !important;
             background: linear-gradient(180deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.6) 100%);
@@ -257,8 +353,37 @@
         .article:hover .article-image {
             filter: grayscale(0%) sepia(8%) contrast(1.05);
         }
-            margin-right: 10px;
-            font-size: 1.2em;
+
+        /* Forzar que las imÃ¡genes destacadas no excedan el ancho del contenedor */
+        .article-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Placeholder gallery para aÃ±adir imÃ¡genes posteriormente */
+        .gallery {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .gallery .gallery-item {
+            width: calc(33% - 8px);
+            max-width: 240px;
+            background: rgba(255,248,225,0.9);
+            border: 1px dashed rgba(26,26,26,0.08);
+            padding: 6px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .gallery .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
         .article-title::after {
@@ -414,7 +539,7 @@
             }
             .article-title {
                 font-size: 1.2rem;
-                content: "◆";
+                content: "â—†";
                 color: #a91d21;
                 font-size: 0.9rem;
                 padding-left: 8px;
@@ -458,7 +583,7 @@
 
         /* Hacemos la actividad plana: eliminamos la caja visual vermiculada */
         .activity-section {
-            background: transparent; /* vive sobre el papel del periódico */
+            background: transparent; /* vive sobre el papel del periÃ³dico */
             box-shadow: none;
             border-radius: 0;
             padding: 0 0 20px 0;
@@ -926,18 +1051,18 @@
         .footer-bottom {
             text-align: center;
             margin-top: 40px;
-            /* Aumentamos el padding-top para dejar espacio debajo de la línea divisoria
-               y así colocar los créditos sin superponer la cita central */
+            /* Aumentamos el padding-top para dejar espacio debajo de la lÃ­nea divisoria
+               y asÃ­ colocar los crÃ©ditos sin superponer la cita central */
             padding-top: 72px;
             border-top: 1px solid #a91d21;
-            position: relative; /* para posicionar el bloque de créditos en relación al footer */
+            position: relative; /* para posicionar el bloque de crÃ©ditos en relaciÃ³n al footer */
             min-height: 140px;
-            padding-bottom: 30px; /* espacio extra para que los créditos no toquen el borde inferior */
+            padding-bottom: 30px; /* espacio extra para que los crÃ©ditos no toquen el borde inferior */
         }
 
         .footer-bottom p {
-            /* Queremos un aspecto pálido/translúcido coherente con la estética del papel */
-            color: rgba(26,26,26,0.45); /* gris muy pálido */
+            /* Queremos un aspecto pÃ¡lido/translÃºcido coherente con la estÃ©tica del papel */
+            color: rgba(26,26,26,0.45); /* gris muy pÃ¡lido */
             font-size: 0.82rem;
             margin: 10px 0;
             font-weight: 400;
@@ -945,9 +1070,9 @@
             mix-blend-mode: normal;
         }
 
-        /* Cita del footer con aspecto pálido pero legible */
+        /* Cita del footer con aspecto pÃ¡lido pero legible */
         .footer-quote {
-            color: rgba(169,29,33,0.38); /* rojo pálido */
+            color: rgba(169,29,33,0.38); /* rojo pÃ¡lido */
             margin-bottom: 15px;
             font-style: italic;
             font-weight: 400;
@@ -955,7 +1080,7 @@
             mix-blend-mode: normal;
         }
 
-        /* Hacer pálido también el bloque de créditos para que combine con la cita */
+        /* Hacer pÃ¡lido tambiÃ©n el bloque de crÃ©ditos para que combine con la cita */
         .credit-block,
         .credit-block * {
             color: rgba(26,26,26,0.45) !important;
@@ -964,11 +1089,11 @@
 
         .credit-block .team-list {
             line-height: 1.35;
-            /* Reducimos el tamaño de letra para que la lista quepa sin generar scroll */
+            /* Reducimos el tamaÃ±o de letra para que la lista quepa sin generar scroll */
             font-size: 0.72rem;
         }
 
-        /* Posicionar el bloque de créditos en la esquina inferior izquierda del footer */
+        /* Posicionar el bloque de crÃ©ditos en la esquina inferior izquierda del footer */
 .credit-block {
             position: static;
             max-width: 360px;
@@ -983,14 +1108,14 @@
             .credit-block {
                 position: absolute;
                 left: 40px;
-                top: 10px; /* posicionar justo debajo de la l�nea divisoria */
-                bottom: 16px; /* aseguramos l�mite inferior dentro del footer */
+                top: 10px; /* posicionar justo debajo de la lï¿½nea divisoria */
+                bottom: 16px; /* aseguramos lï¿½mite inferior dentro del footer */
                 margin: 0;
                 text-align: left;
             }
         }
 
-        /* Responsive: en pantallas pequeñas colocarlo debajo (estructura en columna) */
+        /* Responsive: en pantallas pequeÃ±as colocarlo debajo (estructura en columna) */
         @media (max-width: 700px) {
             .credit-block {
                 position: static;
@@ -1000,13 +1125,13 @@
             }
             .footer-bottom {
                 padding-bottom: 18px;
-                /* reducir el padding superior en móviles para ahorrar espacio */
+                /* reducir el padding superior en mÃ³viles para ahorrar espacio */
                 padding-top: 28px;
             }
             .match-svg {
                 display: none !important;
             }
-            /* En móviles el caption vuelve a mostrarse debajo para no tapar la imagen */
+            /* En mÃ³viles el caption vuelve a mostrarse debajo para no tapar la imagen */
             .article-caption {
                 position: static;
                 background: transparent;
@@ -1017,7 +1142,7 @@
             margin-top: 18px;
             border-top: 1px dashed rgba(26,26,26,0.06);
             padding-top: 14px;
-            /* Forzar color sólido y opacidad plena para igualar la densidad visual */
+            /* Forzar color sÃ³lido y opacidad plena para igualar la densidad visual */
             color: #1a1a1a;
             opacity: 1;
             mix-blend-mode: normal;
@@ -1041,9 +1166,9 @@
             margin-left: 6px;
         }
 
-        /* Hacer que cada línea de datos use el mismo estilo (color/tamaño) */
-        /* Forzar que título y líneas del bloque luzcan exactamente igual */
-        /* Forzar estilo uniforme en todo el bloque de créditos: misma familia y peso
+        /* Hacer que cada lÃ­nea de datos use el mismo estilo (color/tamaÃ±o) */
+        /* Forzar que tÃ­tulo y lÃ­neas del bloque luzcan exactamente igual */
+        /* Forzar estilo uniforme en todo el bloque de crÃ©ditos: misma familia y peso
            Queremos evitar variaciones (Playfair/Playfair bold) y mantener una densidad visual pareja. */
         .credit-block,
         .credit-block * {
@@ -1054,7 +1179,7 @@
             mix-blend-mode: normal !important;
         }
 
-        /* Ajustes adicionales de espaciado para las líneas de la lista de equipo */
+        /* Ajustes adicionales de espaciado para las lÃ­neas de la lista de equipo */
         .credit-block .team-list {
             line-height: 1.4;
             font-size: 0.82rem;
@@ -1230,8 +1355,8 @@
 
             /* Evitar que la imagen llene toda la columna y oculte el figcaption
                Forzamos un max-height y permitimos que el caption quede visible debajo */
-            /* Hacer que la figura llene la columna; la imagen cubrirá esa altura
-               Esto evita huecos en blanco cuando la columna de texto es más alta */
+            /* Hacer que la figura llene la columna; la imagen cubrirÃ¡ esa altura
+               Esto evita huecos en blanco cuando la columna de texto es mÃ¡s alta */
             .featured-article .article-figure {
                 display: block;
                 height: 100%;
@@ -1274,7 +1399,7 @@
         }
         /* ==================== ESTILOS PARA NUEVAS SECCIONES ==================== */
 
-        /* Etiquetas de género */
+        /* Etiquetas de gÃ©nero */
         .genre-tag {
             background: #a91d21;
             color: white;
@@ -1438,7 +1563,7 @@
             background: #fff8e1;
             padding: 30px 20px;
             border-left: 6px solid #a91d21;
-            overflow: visible; /* no internal scrollbar, columna en el flujo del art�culo */
+            overflow: visible; /* no internal scrollbar, columna en el flujo del artÃ­culo */
             box-shadow: none;
             position: static;
             width: 100%;
@@ -1474,12 +1599,12 @@
             font-size: 0.9rem;
         }
 
-        @media (min-width: 1520px) {
-            .newspaper-container {
-                margin-left: 0;
-                margin-right: 320px; /* Espacio para la columna lateral */
-            }
+        .column-opinion .article-title.column-title-small {
+            font-size: 2rem;
+            letter-spacing: 0.08em;
+        }
 
+        @media (min-width: 1520px) {
             .column-opinion {
                 position: absolute;
                 width: 280px;
@@ -1489,88 +1614,6 @@
             }
         }
 
-        .column-opinion .article-title {
-            font-size: 1.8rem;
-        }
-
-        .drop-cap::first-letter {
-            font-size: 3.5em;
-            margin: 0.05em 0.08em 0 0;
-        }
-
-        .column-closing {
-            margin-top: 30px;
-            text-align: right;
-            font-size: 1.1rem;
-            color: #a91d21;
-            padding-top: 20px;
-            border-top: 2px solid #a91d21;
-        }
-
-        /* ANÁLISIS */
-        .analysis-piece {
-            background: white;
-            padding: 40px 35px;
-            border: 1px solid #ddd;
-        }
-
-        .lead-analysis {
-            font-size: 1.15rem;
-            font-weight: 600;
-            line-height: 1.9;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: rgba(169,29,33,0.03);
-            border-left: 4px solid #a91d21;
-        }
-
-        .analysis-content h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.7rem;
-            color: #a91d21;
-            margin: 35px 0 20px 0;
-        }
-
-        .analysis-content p {
-            font-size: 1rem;
-            line-height: 1.85;
-            margin-bottom: 18px;
-            text-align: justify;
-        }
-
-        .analysis-sidebar {
-            background: #f5f5f5;
-            padding: 25px;
-            margin: 30px 0;
-            border-left: 4px solid #a91d21;
-        }
-
-        .analysis-sidebar h4 {
-            font-family: 'Playfair Display', serif;
-            color: #a91d21;
-            margin-bottom: 15px;
-        }
-
-        .analysis-sidebar ol {
-            line-height: 1.9;
-            padding-left: 20px;
-        }
-
-        .analysis-conclusion {
-            margin-top: 40px;
-            padding: 25px;
-            background: #1a1a1a;
-            color: white;
-            border-radius: 8px;
-        }
-
-        .analysis-conclusion p {
-            margin: 0;
-            line-height: 1.8;
-            text-align: left;
-        }
-
-        /* Responsive para nuevas secciones */
         @media (max-width: 768px) {
             .reportage-special,
             .interview-feature,
@@ -1587,7 +1630,7 @@
             .timeline-item {
                 padding: 15px;
             }
-            /* En móviles la columna lateral vuelve al flujo normal (artículo) */
+            /* En mÃ³viles la columna lateral vuelve al flujo normal (artÃ­culo) */
             .column-opinion {
                 position: static !important;
                 width: 100% !important;
@@ -1607,756 +1650,778 @@
 <body>
     <a href="#main-content" class="skip-link">Saltar al contenido</a>
     
-    <div class="newspaper-container">
+    <div class="newspaper-container is-notas-active">
         <header>
-            <p class="subtitle">Edición Especial Histórica</p>
-            <h1>LA CRÓNICA INQUIETA</h1>
-            <div class="special-edition-stamp">EDICIÓN ESPECIAL</div>
+            <p class="subtitle">EdiciÃ³n Especial HistÃ³rica</p>
+            <h1>LA CRÃ“NICA INQUIETA</h1>
+            <div class="special-edition-stamp">EDICIÃ“N ESPECIAL</div>
             <div class="ornament"></div>
-            <p class="tagline">El Pulso de una Nación en Transformación</p>
+            <p class="tagline">El Pulso de una NaciÃ³n en TransformaciÃ³n</p>
             <div class="date-info">
-                <span>Año X, Número 365</span>
-                <span>Ciudad de México</span>
-                <span>Otoño de 1968</span>
+                <span>AÃ±o X, NÃºmero 365</span>
+                <span>Ciudad de MÃ©xico</span>
+                <span>OtoÃ±o de 1968</span>
                 <span>Precio: $2.50 MXN</span>
                 <span>Ejemplares: 50,000</span>
             </div>
             <div class="stain"></div>
             <div class="news-ticker">
-                <div class="ticker-content">NOTICIAS BREVE: Movimiento estudiantil crece en todo el país... | Gobierno responde con represión... | Olimpiadas de 1968 en riesgo... | Vallejo paraliza ferrocarriles... | Maestros exigen democracia sindical...</div>
+                <div class="ticker-content">NOTICIAS BREVE: Movimiento estudiantil crece en todo el paÃ­s... | Gobierno responde con represiÃ³n... | Olimpiadas de 1968 en riesgo... | Vallejo paraliza ferrocarriles... | Maestros exigen democracia sindical...</div>
             </div>
         </header>
 
         <main id="main-content">
-            <div class="article-grid">
-                <!-- Movimiento Estudiantil 1968 -->
-                <article class="article featured-article">
-                    <figure class="article-figure">
-                        <img loading="lazy" src="https://files.catbox.moe/5n3q6l.jpg" alt="Manifestación estudiantil" class="article-image">
-                        <figcaption class="article-caption">Manifestación estudiantil de 1968: clamor por libertad y diálogo.</figcaption>
-                    </figure>
-                    <div class="article-content">
-                        <span class="article-year">1968</span>
-                        <h2 class="article-title">¡BASTA YA!</h2>
+            <nav class="tab-nav" role="tablist" aria-label="Secciones del periÃ³dico">
+                <button class="tab-button is-active" type="button" role="tab" id="tab-button-notas" aria-controls="tab-notas" aria-selected="true" data-tab="notas" tabindex="0">Notas</button>
+                <button class="tab-button" type="button" role="tab" id="tab-button-reportaje" aria-controls="tab-reportaje" aria-selected="false" data-tab="reportaje" tabindex="-1">Gran Reportaje</button>
+                <button class="tab-button" type="button" role="tab" id="tab-button-entrevista" aria-controls="tab-entrevista" aria-selected="false" data-tab="entrevista" tabindex="-1">Entrevista</button>
+                <button class="tab-button" type="button" role="tab" id="tab-button-cronicas" aria-controls="tab-cronicas" aria-selected="false" data-tab="cronicas" tabindex="-1">CrÃ³nicas y Voces</button>
+                <button class="tab-button" type="button" role="tab" id="tab-button-contexto" aria-controls="tab-contexto" aria-selected="false" data-tab="contexto" tabindex="-1">Contexto y Fuentes</button>
+                <button class="tab-button" type="button" role="tab" id="tab-button-ocio" aria-controls="tab-ocio" aria-selected="false" data-tab="ocio" tabindex="-1">Ocio y Clasificados</button>
+            </nav>
+
+            <div class="tab-panels">
+                <section class="tab-panel is-active" id="tab-notas" role="tabpanel" aria-labelledby="tab-button-notas" data-tab="notas" tabindex="0">
+                    <div class="article-grid">
+                        <!-- Movimiento Estudiantil 1968 -->
+                        <article class="article featured-article">
+                            <figure class="article-figure">
+                                <img loading="lazy" src="https://files.catbox.moe/5n3q6l.jpg" alt="ManifestaciÃ³n estudiantil" class="article-image">
+                                <figcaption class="article-caption">ManifestaciÃ³n estudiantil de 1968: clamor por libertad y diÃ¡logo.</figcaption>
+                            </figure>
+                            <div class="article-content">
+                                <span class="article-year">1968</span>
+                                <h2 class="article-title">Â¡BASTA YA!</h2>
+                                <p class="article-subtitle">
+                                    La juventud mexicana exige libertad y diÃ¡logo; el gobierno responde con autoritarismo
+                                </p>
+                                <p class="article-author">Por: Ana GutiÃ©rrez</p>
+                                <div class="article-text">
+                                    <p><strong>CIUDAD DE MÃ‰XICO.â€”</strong> Las calles de la capital son un clamor. Miles de estudiantes de la UNAM y el Instituto PolitÃ©cnico Nacional, unidos en un frente comÃºn sin precedentes, marchan exigiendo el cese a la represiÃ³n policial y la apertura de un diÃ¡logo pÃºblico.</p>
+
+                                    <p>Su pliego petitorio de seis puntos â€”que incluye la disoluciÃ³n del cuerpo de granaderos, la derogaciÃ³n del artÃ­culo 145, la liberaciÃ³n de presos polÃ­ticos y la indemnizaciÃ³n a las vÃ­ctimasâ€” ha puesto en jaque al gobierno de DÃ­az Ordaz a semanas de las Olimpiadas.</p>
+
+                                    <p>El grito "Â¡Ãšnete, pueblo!" resuena en cada rincÃ³n, transformando una riÃ±a entre preparatorias en el movimiento social mÃ¡s importante de la historia reciente.</p>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Movimiento Magisterial 1958 -->
+                        <article class="article featured-article reverse">
+                            <figure class="article-figure">
+                                <img loading="lazy" src="https://files.catbox.moe/clz542.jpg" alt="Protesta de maestros" class="article-image">
+                                <figcaption class="article-caption">Movimiento magisterial de 1958: demanda de democracia sindical.</figcaption>
+                            </figure>
+                            <div class="article-content">
+                                <span class="article-year">1958</span>
+                                <h2 class="article-title">El PizarrÃ³n se Rebela</h2>
+                                <p class="article-subtitle">
+                                    Maestros exigen democracia sindical y salarios dignos
+                                </p>
+                                <p class="article-author">Por: OthÃ³n Salazar</p>
+                                <div class="article-text">
+                                    <p><strong>CIUDAD DE MÃ‰XICO.â€”</strong> Liderados por OthÃ³n Salazar, miles de maestros de la SecciÃ³n IX del SNTE han tomado el ZÃ³calo capitalino. Hartos de la imposiciÃ³n y los bajos salarios, exigen un aumento salarial del 30% y el derecho a elegir a sus propios lÃ­deres.</p>
+
+                                    <p>El gobierno minimiza sus demandas, pero la fuerza del magisterio en las calles demuestra una fractura profunda en el corporativismo sindical oficial que ha controlado al movimiento obrero mexicano.</p>
+
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Movimiento Ferrocarrilero 1959 -->
+                        <article class="article featured-article">
+                            <figure class="article-figure">
+                                <img loading="lazy" src="https://files.catbox.moe/0nqtn6.jpg" alt="Ferrocarril" class="article-image">
+                                <figcaption class="article-caption">Huelga ferrocarrilera de 1959: paros y bloqueos en rutas clave.</figcaption>
+                            </figure>
+                            <div class="article-content">
+                                <span class="article-year">1959</span>
+                                <h2 class="article-title">VÃ­as de Lucha</h2>
+                                <p class="article-subtitle">
+                                    Demetrio Vallejo paraliza el paÃ­s en un desafÃ­o histÃ³rico
+                                </p>
+                                <p class="article-author">Por: Demetrio Vallejo</p>
+                                <div class="article-text">
+                                    <p><strong>NACIONAL.â€”</strong> El paÃ­s se encuentra paralizado. El Sindicato de Trabajadores Ferrocarrileros, bajo el liderazgo de Demetrio Vallejo, ha iniciado paros escalonados que hoy culminan en huelga nacional.</p>
+
+                                    <p>Exigen el cumplimiento de contratos laborales y la autonomÃ­a de su sindicato. La respuesta del presidente LÃ³pez Mateos ha sido brutal: encarcelamiento masivo de lÃ­deres y ocupaciÃ³n militar de instalaciones.</p>
+
+                                    <p>El "milagro mexicano" se detiene sobre los rieles del descontento obrero.</p>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Movimiento MÃ©dico 1964 -->
+                        <article class="article featured-article reverse">
+                            <figure class="article-figure">
+                                <img loading="lazy" src="https://files.catbox.moe/x94fw4.jpg" alt="Personal mÃ©dico" class="article-image">
+                                <figcaption class="article-caption caption-medicos">Protesta de mÃ©dicos residentes (1964): condiciones y jornadas extenuantes.</figcaption>
+                            </figure>
+                            <div class="article-content">
+                                <span class="article-year">1964</span>
+                                <h2 class="article-title">Batas Blancas Alzan la Voz</h2>
+                                <p class="article-subtitle">
+                                    MÃ©dicos residentes denuncian condiciones precarias
+                                </p>
+                                <p class="article-author">Por: Dr. MarÃ­a LÃ³pez</p>
+                                <div class="article-text">
+                                    <p><strong>CIUDAD DE MÃ‰XICO.â€”</strong> Quienes cuidan la salud de la naciÃ³n hoy protestan por la suya. MÃ©dicos residentes e internos del Hospital 20 de Noviembre iniciaron un paro por la falta de pago de aguinaldos.</p>
+
+                                    <p>La protesta ha escalado sumando a miles de doctores que denuncian jornadas de hasta 36 horas continuas, falta de insumos y salarios miserables. La AsociaciÃ³n Mexicana de MÃ©dicos Residentes e Internos se ha formado en medio de la lucha.</p>
+                            </div>
+                        </article>
+                    </div>
+
+                        <article class="article column-opinion">
+                        <div class="genre-tag">âœï¸ COLUMNA</div>
+                        <h2 class="article-title column-title-small">El Autoritarismo y Sus MÃ¡scaras</h2>
+                        <p class="columnist-name">Por: Una Periodista Comprometida</p>
+
+                        <div class="column-content">
+                            <p class="drop-cap">
+                                Dicen que MÃ©xico vive su "milagro econÃ³mico". Que somos el orgullo de AmÃ©rica Latina. Que nuestro sistema polÃ­tico es estable, moderno, democrÃ¡tico. Pero las balas que silenciaron a los estudiantes en Tlatelolco, los tanques que ocuparon Ciudad Universitaria, las celdas que guardan a Demetrio Vallejo desde hace casi una dÃ©cada, cuentan otra historia.
+                            </p>
+
+                            <p>
+                                El gobierno de DÃ­az Ordaz, como antes el de LÃ³pez Mateos, ha respondido a cada demanda legÃ­tima con la misma receta autoritaria: primero, la negaciÃ³n; despuÃ©s, la difamaciÃ³n en los medios oficiales (comunistas, agitadores, enemigos de MÃ©xico); finalmente, la represiÃ³n brutal.
+                            </p>
+
+                            <p>
+                                Los maestros que pedÃ­an democracia sindical fueron reprimidos. Los ferrocarrileros que exigÃ­an autonomÃ­a fueron encarcelados. Los mÃ©dicos que demandaban condiciones dignas fueron despedidos. Y ahora, los estudiantes que clamaban por libertad y diÃ¡logo fueron masacrados.
+                            </p>
+
+                            <p>
+                                Â¿QuÃ© clase de democracia es esta, que no tolera la disidencia? Â¿QuÃ© clase de progreso es este, que se construye sobre la represiÃ³n? El "milagro mexicano" tiene un precio oculto: el silencio forzado, la cÃ¡rcel para quien piensa diferente, la muerte para quien se atreve a protestar.
+                            </p>
+
+                            <p>
+                                Las autoridades hablan de orden, de estabilidad, de progreso. Pero nosotros preguntamos: Â¿orden para quiÃ©n? Â¿Estabilidad de quÃ©? Â¿Progreso a costa de quÃ©?
+                            </p>
+
+                            <p>
+                                La sangre derramada en Tlatelolco no se borrarÃ¡ con comunicados oficiales ni cifras maquilladas. Los testimonios estÃ¡n ahÃ­, las voces de los sobrevivientes, las fotografÃ­as que el gobierno no pudo censurar. La historia no se escribe solo desde Palacio Nacional. TambiÃ©n se escribe desde las plazas, desde las cÃ¡rceles, desde los hospitales donde se atiende a los heridos que "oficialmente" no existen.
+                            </p>
+
+                            <p>
+                                MÃ©xico tiene dos caras: la del discurso oficial y la de la realidad vivida. Una habla de desarrollo y modernidad; la otra, de represiÃ³n y miedo. Y entre ambas, crece una grieta que ningÃºn tanque podrÃ¡ cerrar: la conciencia de que otro MÃ©xico es posible, un MÃ©xico donde la voz del pueblo sea escuchada sin necesidad de gritos, sin necesidad de sangre.
+                            </p>
+
+                            <p class="column-closing">
+                                <em>La historia, al final, la escriben los que luchan. No los que disparan.</em>
+                            </p>
+                        </div>
+
+                                        </article>
+                </section>
+
+                <section class="tab-panel" id="tab-reportaje" role="tabpanel" aria-labelledby="tab-button-reportaje" data-tab="reportaje" tabindex="0" hidden>
+                    <article class="article reportage-special">
+                        <div class="genre-tag">ðŸ“¸ GRAN REPORTAJE</div>
+                        <h2 class="article-title">Diez AÃ±os que Sacudieron MÃ©xico</h2>
                         <p class="article-subtitle">
-                            La juventud mexicana exige libertad y diálogo; el gobierno responde con autoritarismo
+                            CrÃ³nica visual de una dÃ©cada de resistencia: 1958-1968
                         </p>
-                        <p class="article-author">Por: Ana Gutiérrez</p>
-                        <div class="article-text">
-                            <p><strong>CIUDAD DE MÉXICO.—</strong> Las calles de la capital son un clamor. Miles de estudiantes de la UNAM y el Instituto Politécnico Nacional, unidos en un frente común sin precedentes, marchan exigiendo el cese a la represión policial y la apertura de un diálogo público.</p>
-                            
-                            <p>Su pliego petitorio de seis puntos —que incluye la disolución del cuerpo de granaderos, la derogación del artículo 145, la liberación de presos políticos y la indemnización a las víctimas— ha puesto en jaque al gobierno de Díaz Ordaz a semanas de las Olimpiadas.</p>
-                            
-                            <p>El grito "¡Únete, pueblo!" resuena en cada rincón, transformando una riña entre preparatorias en el movimiento social más importante de la historia reciente.</p>
+                        <div class="reportage-content">
+                            <p class="lead-paragraph">
+                                Del riel a las aulas, de los hospitales a las plazas pÃºblicas. Una dÃ©cada completa de luchas sociales que revelan las fracturas profundas del "milagro mexicano". Este reportaje recorre los momentos clave de cuatro movimientos que desafiaron al poder y transformaron la conciencia nacional.
+                            </p>
+
+                            <div class="timeline-section">
+                                <h3>CronologÃ­a de la Resistencia</h3>
+
+                                <div class="timeline-item">
+                                    <span class="timeline-year">1958</span>
+                                    <p><strong>Abril-Agosto:</strong> El magisterio se levanta. Maestros de la SecciÃ³n IX del SNTE, liderados por OthÃ³n Salazar, toman el ZÃ³calo exigiendo 30% de aumento salarial y democracia sindical. Las marchas crecen hasta reunir a 100,000 manifestantes.</p>
+                                </div>
+
+                                <div class="timeline-item">
+                                    <span class="timeline-year">1959</span>
+                                    <p><strong>Febrero-Marzo:</strong> Huelga nacional ferrocarrilera. Demetrio Vallejo paraliza el paÃ­s. El gobierno responde con el EjÃ©rcito: mÃ¡s de 10,000 ferrocarrileros despedidos, cientos detenidos. Vallejo es encarcelado y permanecerÃ¡ 11 aÃ±os en prisiÃ³n.</p>
+                                </div>
+
+                                <div class="timeline-item">
+                                    <span class="timeline-year">1964-1965</span>
+                                    <p><strong>Noviembre-Septiembre:</strong> MÃ©dicos residentes e internos exigen condiciones laborales dignas. Jornadas de 36 horas continuas, falta de pago de aguinaldos. La protesta crece hasta incluir a 40,000 mÃ©dicos. RepresiÃ³n y despidos masivos.</p>
+                                </div>
+
+                                <div class="timeline-item">
+                                    <span class="timeline-year">1968</span>
+                                    <p><strong>Julio-Octubre:</strong> Movimiento estudiantil. De una riÃ±a callejera a la mayor movilizaciÃ³n social de la historia moderna de MÃ©xico. El pliego de seis puntos. Las marchas de mÃ¡s de 300,000 personas. La respuesta: tanques en CU y la masacre del 2 de octubre.</p>
+                                </div>
+                            </div>
+
+                            <!-- GalerÃ­a de imÃ¡genes (placeholders) -->
+                            <div class="gallery" aria-label="GalerÃ­a del reportaje">
+                                <div class="gallery-item"><img src="https://via.placeholder.com/600x400?text=Reportaje+1" alt="Reportaje imagen 1" class="gallery-image"></div>
+                                <div class="gallery-item"><img src="https://via.placeholder.com/600x400?text=Reportaje+2" alt="Reportaje imagen 2" class="gallery-image"></div>
+                                <div class="gallery-item"><img src="https://via.placeholder.com/600x400?text=Reportaje+3" alt="Reportaje imagen 3" class="gallery-image"></div>
+                            </div>
+
+                            <div class="pattern-analysis">
+                                <h3>El PatrÃ³n de la RepresiÃ³n</h3>
+                                <p>
+                                    Cuatro movimientos diferentes comparten el mismo desenlace: la violencia estatal. El gobierno de LÃ³pez Mateos y luego el de DÃ­az Ordaz responden con la misma fÃ³rmula autoritaria: negaciÃ³n del diÃ¡logo, campaÃ±a mediÃ¡tica de desprestigio, infiltraciÃ³n, y finalmente, la fuerza bruta.
+                                </p>
+                                <p>
+                                    El corporativismo sindical â€”columna vertebral del sistema polÃ­tico mexicanoâ€” se fractura ante la exigencia de autonomÃ­a. Los trabajadores, los profesionistas, los estudiantes, todos reclaman lo mismo: democracia, libertad, justicia.
+                                </p>
+                            </div>
+
+                            <div class="data-box">
+                                <h4>Datos del Movimiento Estudiantil 1968</h4>
+                                <ul>
+                                    <li>â€¢ MÃ¡s de 50 escuelas en paro</li>
+                                    <li>â€¢ 15 manifestaciones masivas</li>
+                                    <li>â€¢ La del 27 de agosto: 400,000 asistentes</li>
+                                    <li>â€¢ 6 demandas del CNH</li>
+                                    <li>â€¢ 18 de septiembre: ocupaciÃ³n militar de CU</li>
+                                    <li>â€¢ 2 de octubre: matanza en Tlatelolco</li>
+                                    <li>â€¢ Cifra oficial: 30 muertos (cuestionada por testimonios)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+
+                </section>
+
+                <section class="tab-panel" id="tab-entrevista" role="tabpanel" aria-labelledby="tab-button-entrevista" data-tab="entrevista" tabindex="0" hidden>
+                    <article class="article interview-feature">
+                        <div class="genre-tag">ðŸŽ¤ ENTREVISTA EXCLUSIVA</div>
+                        <h2 class="article-title">"Solo Volveremos cuando Vallejo lo Ordene"</h2>
+                        <p class="article-subtitle">
+                            ConversaciÃ³n con un ferrocarrilero de la SecciÃ³n 15
+                        </p>
+
+                        <div class="interview-intro">
+                            <p>
+                                En medio de la huelga que paraliza al paÃ­s, logramos conversar con uno de los miles de trabajadores que defienden su derecho a elegir libremente a sus lÃ­deres sindicales. Por razones de seguridad, omitimos su nombre.
+                            </p>
+                        </div>
+
+                        <div class="interview-content">
+                            <div class="question">
+                                <span class="q-label">Pregunta:</span>
+                                <p>Â¿Por quÃ© estÃ¡n en huelga?</p>
+                            </div>
+                            <div class="answer">
+                                <span class="a-label">Respuesta:</span>
+                                <p>"Mire usted, nosotros no pedimos nada que no sea justo. Queremos que se respete nuestro contrato, que se cumplan los acuerdos. Y sobre todo, queremos elegir a nuestros propios lÃ­deres, no que nos los impongan desde arriba. Vallejo fue elegido democrÃ¡ticamente, y el gobierno no lo puede aceptar."</p>
+                            </div>
+
+                            <div class="question">
+                                <span class="q-label">P:</span>
+                                <p>Los medios dicen que son un movimiento comunista, que quieren desestabilizar al paÃ­s...</p>
+                            </div>
+                            <div class="answer">
+                                <span class="a-label">R:</span>
+                                <p>"Eso es lo que dicen siempre. Comunistas, agitadores, revoltosos. Nosotros solo somos trabajadores que queremos condiciones dignas. Â¿Es comunista pedir que te paguen lo justo? Â¿Es comunista querer elegir a tu representante? Durante los mÃ­tines, todos declaramos lo mismo: solo volveremos a nuestras labores hasta que nuestro lÃ­der, Demetrio Vallejo, nos lo ordene personalmente."</p>
+                            </div>
+
+                            <div class="question">
+                                <span class="q-label">P:</span>
+                                <p>Â¿QuÃ© ha significado este movimiento para ustedes?</p>
+                            </div>
+                            <div class="answer">
+                                <span class="a-label">R:</span>
+                                <p>"Ha significado darnos cuenta de nuestra fuerza. Cuando paramos, el paÃ­s se para. Los trenes no se mueven y nada funciona. Pero tambiÃ©n nos damos cuenta del precio: ya van cientos de compaÃ±eros despedidos, arrestados. El EjÃ©rcito ocupa nuestras instalaciones. Pero no nos vamos a rajar. Esto ya no se trata solo de salarios, se trata de dignidad."</p>
+                            </div>
+
+                            <div class="question">
+                                <span class="q-label">P:</span>
+                                <p>Â¿QuÃ© esperan del gobierno?</p>
+                            </div>
+                            <div class="answer">
+                                <span class="a-label">R:</span>
+                                <p>"Que nos respeten. Que entiendan que los trabajadores no somos ganado que se puede arrear. Pero ya vemos que el gobierno de LÃ³pez Mateos solo entiende un lenguaje: el de la fuerza. Nos responden con bayonetas y cÃ¡rcel. Pero la historia juzgarÃ¡ quiÃ©n tenÃ­a razÃ³n."</p>
+                            </div>
+                        </div>
+
+                        <!-- GalerÃ­a de la entrevista -->
+                        <div class="gallery" aria-label="GalerÃ­a de la entrevista">
+                            <div class="gallery-item"><img src="https://via.placeholder.com/600x400?text=Entrevista+1" alt="Entrevista imagen 1" class="gallery-image"></div>
+                            <div class="gallery-item"><img src="https://via.placeholder.com/600x400?text=Entrevista+2" alt="Entrevista imagen 2" class="gallery-image"></div>
+                            <div class="gallery-item"><img src="https://via.placeholder.com/600x400?text=Entrevista+3" alt="Entrevista imagen 3" class="gallery-image"></div>
+                        </div>
+
+                        <div class="interview-note">
+                            <p><em>Esta entrevista fue realizada en febrero de 1959, dÃ­as antes de la represiÃ³n masiva que resultÃ³ en mÃ¡s de 10,000 despidos y el encarcelamiento de los lÃ­deres sindicales. Demetrio Vallejo permanecerÃ­a 11 aÃ±os en prisiÃ³n.</em></p>
+                        </div>
+                    </article>
+
+                </section>
+
+                <section class="tab-panel" id="tab-cronicas" role="tabpanel" aria-labelledby="tab-button-cronicas" data-tab="cronicas" tabindex="0" hidden>
+                    <!-- Segunda columna para cubrir espacio en blanco -->
+                        <div class="column-content" aria-label="Segunda columna">
+                            <hr style="border:0; border-top:2px solid rgba(169,29,33,0.08); margin:18px 0;">
+                            <h2 class="article-title">La Prensa CÃ³mplice</h2>
+                            <p class="columnist-name">Por: Un Cronista del Silencio</p>
+
+                            <p class="drop-cap">
+                                Mientras las calles ardÃ­an, los titulares mentÃ­an. La gran mayorÃ­a de periÃ³dicos mexicanos, atados al gobierno por el cordÃ³n umbilical de la publicidad oficial y el "embute" (sobornos directos a periodistas), reprodujeron fielmente la versiÃ³n gubernamental.
+                            </p>
+
+                            <p>
+                                "Agitadores comunistas", "grupos de choque extranjeros", "complot internacional": esas fueron las etiquetas con que la prensa vendida bautizÃ³ a los estudiantes. ExcÃ©lsior, El Universal, Novedades... todos marcharon al mismo son.
+                            </p>
+
+                            <p>
+                                Hubo excepciones, por supuesto. Algunos reporteros arriesgaron su carrera para contar la verdad. Pero fueron voces aisladas en un coro de silencio cÃ³mplice. La censura no siempre fue explÃ­cita; mÃ¡s efectiva resultÃ³ la autocensura de directores y editores que sabÃ­an dÃ³nde estaba la lÃ­nea que no debÃ­an cruzar.
+                            </p>
+
+                            <p>
+                                El 2 de octubre, cuando la Plaza de las Tres Culturas se tiÃ±Ã³ de sangre, la prensa hablÃ³ de "enfrentamiento entre grupos". Las cifras oficiales â€”treinta muertosâ€” fueron reproducidas sin cuestionamiento. Los testimonios de sobrevivientes, ignorados. Las fotografÃ­as de cadÃ¡veres, censuradas.
+                            </p>
+
+                            <p>
+                                Fue la prensa extranjera â€”los corresponsales que ya estaban en MÃ©xico para cubrir las Olimpiadasâ€” quien contÃ³ lo que realmente sucediÃ³. The Guardian, Le Monde, The Washington Post: ellos sÃ­ hablaron de masacre.
+                            </p>
+
+                            <p>
+                                Esta complicidad tiene un costo histÃ³rico. El periodismo mexicano perdiÃ³ credibilidad ante toda una generaciÃ³n. Los jÃ³venes aprendieron que no podÃ­an confiar en lo que leÃ­an en los diarios "serios". Buscaron informaciÃ³n en volantes, en publicaciones clandestinas, en el boca a boca.
+                            </p>
+
+                            <p>
+                                Hoy, aÃ±os despuÃ©s, algunos de esos mismos periodistas que callaron se dicen arrepentidos. Otros defienden su silencio como "profesionalismo" o "prudencia". Pero la historia no olvida. Y las pÃ¡ginas en blanco que dejaron en 1968 son su monumento de vergÃ¼enza.
+                            </p>
+
+                            <p class="column-closing">
+                                <em>La verdad siempre encuentra su camino, aunque sea entre lÃ­neas.</em>
+                            </p>
+
+                            <hr style="border:0; border-top:2px solid rgba(169,29,33,0.08); margin:26px 0;">
+
+                            <!-- Columna adicional estilo periÃ³dico (ampliada) -->
+                    <article class="column-content" aria-label="Columna adicional: CrÃ³nicas y Voces">
+
+                        <header class="article-header">
+                            <h3 class="article-title">En las esquinas: crÃ³nicas y voces</h3>
+                            <p class="columnist-name">Por: CrÃ³nica de la Calle</p>
+                        </header>
+
+                        <hr class="section-divider">
+
+                        <section class="content-section" id="contexto-local">
+                            <h4 class="section-heading">Contexto local</h4>
+                            <p>La protesta no solo ocupÃ³ plazas acadÃ©micas y estaciones de trabajo; tambiÃ©n llenÃ³ las esquinas, los mercados y los cafÃ©s. Desde los vendedores ambulantes hasta las comisiones de padres de familia, las voces se organizaron en redes informales que compartÃ­an noticias, fotografÃ­as y volantes. Estas redes ayudaron a sostener la moral de las huelgas y a distribuir recursos bÃ¡sicos entre los movilizados.</p>
+                        </section>
+
+                        <section class="content-section" id="testimonios-memoria">
+                            <h4 class="section-heading">Testimonios y memoria</h4>
+                            <p>Los relatos orales que circularon despuÃ©s de las marchas recogen anÃ©cdotas de solidaridad: madres que ofrecÃ­an hogares temporales, vecinos que escondÃ­an comunicados y trabajadores que donaban alimento. Estos relatos fueron clave para reconstruir los hechos cuando la prensa oficial se negÃ³ a publicar el testimonio de vÃ­ctimas y testigos. Muchas de esas narrativas estÃ¡n preservadas en archivos universitarios y en compilaciones recogidas por organismos como el <a href="https://www.inehrm.gob.mx/es/inehrm/Movimiento_Estudiantil_1968" target="_blank" rel="noopener noreferrer">INEHRM</a>.</p>
+                        </section>
+
+                        <section class="content-section" id="solidaridad-practica">
+                            <h4 class="section-heading">Solidaridad prÃ¡ctica</h4>
+                            <p>En barrios populares se formaron comitÃ©s de apoyo que ofrecÃ­an comida, refugio temporal y atenciÃ³n bÃ¡sica a lesionados. Brigadas mÃ©dicas espontÃ¡neas y colectivos de estudiantes organizaron redes de auxilio que, en algunos casos, continuaron operando tras las huelgas, transformÃ¡ndose en movimientos comunitarios de largo plazo. La existencia de estas redes demuestra que la movilizaciÃ³n trascendiÃ³ el plano meramente polÃ­tico y tuvo efectos tangibles en la vida cotidiana de mucha gente.</p>
+                        </section>
+
+                        <section class="content-section" id="relevancia-cultural">
+                            <h4 class="section-heading">Relevancia cultural</h4>
+                            <p>La circulaciÃ³n de panfletos, poemarios y obras de teatro callejero contribuyÃ³ a una cultura popular comprometida con la crÃ­tica social. Poetas y artistas formaron parte de un entramado que alimentÃ³ la resistencia simbÃ³lica: murales, canciones y folletos circularon como memoria activa de la protesta, y varias de esas piezas hoy se conservan en colecciones hemerogrÃ¡ficas y museogrÃ¡ficas.</p>
+                        </section>
+
+                        <section class="content-section" id="legado-lecciones">
+                            <h4 class="section-heading">Legado y lecciones</h4>
+                            <p>La movilizaciÃ³n popular no fue solo estudiantil o sindical; fue una marea de solidaridad interclasista que dejÃ³ huella en la memoria colectiva. Sus efectos perduraron en formas de organizaciÃ³n social y en la demanda de mayores niveles de transparencia y respeto a los derechos laborales.</p>
+                        </section>
+
+                        <footer class="article-footer">
+
+                            <div class="resources-list">
+                                <h5 class="resources-heading">Consulta de documentaciÃ³n primaria:</h5>
+                                <ul>
+                                    <li><a href="#link-a-cndh" aria-label="Recursos de la CNDH">CNDH</a></li>
+                                    <li><a href="https://www.inehrm.gob.mx/es/inehrm/Movimiento_Estudiantil_1968" target="_blank" rel="noopener noreferrer" aria-label="Recursos del INEHRM">INEHRM</a></li>
+                                    <li><a href="#link-a-agn" aria-label="Recursos del AGN">AGN</a></li>
+                                    <li><a href="#link-a-hemeroteca" aria-label="Recursos de la Hemeroteca UNAM">Hemeroteca UNAM</a></li>
+                                </ul>
+                            </div>
+
+                            <hr class="section-divider">
+
+                            <blockquote class="column-closing">
+                                <p><em>Las esquinas guardan las voces que los titulares olvidan; escuchar a la gente es reconstruir la historia desde abajo.</em></p>
+                            </blockquote>
+                        </footer>
+
+                    </article>
+
+                    <!-- GalerÃ­a de crÃ³nicas y voces -->
+                    <div class="gallery" aria-label="GalerÃ­a de crÃ³nicas">
+                        <div class="gallery-item"><img src="https://via.placeholder.com/600x400?text=Cronicas+1" alt="CrÃ³nicas imagen 1" class="gallery-image"></div>
+                        <div class="gallery-item"><img src="https://via.placeholder.com/600x400?text=Cronicas+2" alt="CrÃ³nicas imagen 2" class="gallery-image"></div>
+                        <div class="gallery-item"><img src="https://via.placeholder.com/600x400?text=Cronicas+3" alt="CrÃ³nicas imagen 3" class="gallery-image"></div>
+                    </div>
+
+                            <h3>Nuevas Voces, Nuevos Frentes</h3>
+                            <p>La represiÃ³n mediÃ¡tica empujÃ³ a estudiantes y trabajadores a crear boletines propios. <strong>La Voz del Pueblo</strong> y <strong>La Causa del CNH</strong> circularon en mimeÃ³grafos portÃ¡tiles que viajaban escondidos en mochilas. Cada tiraje se agotaba en horas porque la informaciÃ³n se compartÃ­a de mano en mano, en salones de clase, talleres y mercados.</p>
+                            <p>Las brigadas culturales tambiÃ©n llevaron teatro callejero a colonias populares: dramatizaciones como <em>El Granulito</em> denunciaban el uso de infiltrados para provocar disturbios. Poetas como Jaime Sabines y Rosario Castellanos leÃ­an poemas frente a miles en Ciudad Universitaria, firmando con seudÃ³nimos para evadir la censura.</p>
+
+                            <h3>Redes de Solidaridad</h3>
+                            <p>Mientras los diarios callaban, las redacciones independientes se organizaron. <strong>El Diario de YucatÃ¡n</strong> enviÃ³ corresponsales, <strong>PolÃ­tica</strong> abriÃ³ sus pÃ¡ginas a testimonios estudiantiles y <strong>El DÃ­a</strong> publicÃ³ fotos que mostraban el verdadero rostro del movimiento. En provincia, estaciones radiofÃ³nicas universitarias retransmitieron las conferencias del CNH por la noche, desafiando sanciones.</p>
+                            <p>Las asociaciones de padres de familia lanzaron su propio boletÃ­n titulado <strong>Padres en Marcha</strong>, donde denunciaban desapariciones y solicitaban apoyo para sostener las huelgas. El texto se fotocopiaba en hospitales, juzgados y parroquias.</p>
+
+                            <h3>Testigos IncÃ³modos</h3>
+                            <p>FotÃ³grafos como <strong>Armando LÃ³pez</strong> escondÃ­an rollos en botes de refresco para sacarlos del cerco policial. Esas imÃ¡genes circularon en revistas europeas y regresaron al paÃ­s en forma de postales clandestinas que se vendÃ­an en la zona de la Merced.</p>
+                            <p>En las universidades privadas, colectivos como <strong>ComitÃ© Estudiantil de la Ibero</strong> replicaron crÃ³nicas a travÃ©s de boletines como <em>La Espiga</em>. Estudiantes de preparatoria tradujeron al inglÃ©s los comunicados del CNH y los enviaron por telÃ©fono a estaciones de radio universitarias en California.</p>
+
+                            <h3>El Eco en LatinoamÃ©rica</h3>
+                            <p>Desde Buenos Aires, el periÃ³dico <strong>Marcha</strong> documentÃ³ la represiÃ³n. Sus crÃ³nicas inspiraron a movimientos estudiantiles del Cono Sur. En Chile, la Universidad TÃ©cnica organizÃ³ un foro titulado â€œMÃ©xico: juventud y democraciaâ€, con testimonios vÃ­a telÃ©grafo.</p>
+                            <p>Grupos de derechos humanos en Estados Unidos elaboraron expedientes que presentaron en foros de la ONU. Sin redes sociales, la informaciÃ³n viajaba en valijas diplomÃ¡ticas, microfilmes y grabaciones en casete que cruzaban la frontera en automÃ³viles cargados de solidaridad.</p>
+
+                            <h3>Memoria que se Imprime</h3>
+                            <p>Tres aÃ±os despuÃ©s, colectivos como el Movimiento de LiberaciÃ³n de la Mujer reimprimieron estas crÃ³nicas para vincular la lucha estudiantil con la agenda feminista; resaltaron el papel de brigadistas como <strong>Roberta AvendaÃ±o</strong> y <strong>Rosa Martha FernÃ¡ndez</strong>, quienes lideraron comitÃ©s nocturnos y organizaron comedores populares.</p>
+                            <p class="column-closing"><em>La memoria de 1968 no cabe en un solo titular: sobrevive en cada volante, mural y archivo independiente.</em></p>
+                        </div>
+
+                        <!-- SecciÃ³n aÃ±adida: contexto histÃ³rico y fuentes verificables -->
+                </section>
+
+                <section class="tab-panel" id="tab-contexto" role="tabpanel" aria-labelledby="tab-button-contexto" data-tab="contexto" tabindex="0" hidden>
+                    <article class="article analysis-piece">
+                        <div class="genre-tag">ðŸ“Š ANÃLISIS</div>
+                        <h2 class="article-title">Cuando el Milagro se Detiene</h2>
+                        <p class="article-subtitle">
+                            AnatomÃ­a del corporativismo en crisis
+                        </p>
+
+                        <div class="analysis-content">
+                            <p class="lead-analysis">
+                                El llamado "milagro mexicano" â€”ese perÃ­odo de crecimiento econÃ³mico sostenido que nos vendieron como el camino al primer mundoâ€” se ha revelado como lo que siempre fue: un espejismo construido sobre la represiÃ³n sistemÃ¡tica del descontento social.
+                            </p>
+
+                            <h3>El Pacto Corporativista</h3>
+                            <p>
+                                Desde la consolidaciÃ³n del rÃ©gimen posrevolucionario, el Estado mexicano construyÃ³ un sistema de control basado en el corporativismo sindical: los trabajadores organizados en sindicatos "oficiales", subordinados al partido en el poder, a cambio de ciertas prestaciones y la promesa de estabilidad. El PRI no solo gobernaba; absorbÃ­a, cooptaba, neutralizaba cualquier expresiÃ³n de autonomÃ­a obrera.
+                            </p>
+
+                            <h3>Las Grietas del Sistema</h3>
+                            <p>
+                                Los movimientos de 1958 a 1968 representan la fractura de ese pacto. Los ferrocarrileros de Vallejo, los maestros de Salazar, los mÃ©dicos residentes, los estudiantes del CNH: todos comparten el mismo reclamo fundamental: autonomÃ­a. El derecho a organizarse libremente, a elegir a sus propios lÃ­deres, a negociar sin intermediarios impuestos desde arriba.
+                            </p>
+
+                            <div class="analysis-sidebar">
+                                <h4>PatrÃ³n ComÃºn de RepresiÃ³n</h4>
+                                <ol>
+                                    <li><strong>Fase 1:</strong> MovilizaciÃ³n y demandas legÃ­timas</li>
+                                    <li><strong>Fase 2:</strong> NegaciÃ³n gubernamental y campaÃ±as de desprestigio</li>
+                                    <li><strong>Fase 3:</strong> InfiltraciÃ³n y provocaciÃ³n</li>
+                                    <li><strong>Fase 4:</strong> RepresiÃ³n violenta</li>
+                                    <li><strong>Fase 5:</strong> CriminalizaciÃ³n de lÃ­deres</li>
+                                </ol>
+                            </div>
+
+                            <h3>El Desarrollo Desigual</h3>
+                            <p>
+                                Mientras las estadÃ­sticas macroeconÃ³micas hablaban de crecimiento del 6% anual, la realidad de millones de mexicanos era otra: salarios insuficientes, jornadas extenuantes, nula democracia laboral. El "desarrollo estabilizador" estabilizaba, sÃ­, pero solo para las Ã©lites. Para los trabajadores significaba contenciÃ³n salarial, represiÃ³n sindical, control polÃ­tico.
+                            </p>
+
+                            <h3>1968: El Punto de No Retorno</h3>
+                            <p>
+                                El movimiento estudiantil de 1968 no surgiÃ³ de la nada. Fue la culminaciÃ³n de una dÃ©cada de resistencias. Los estudiantes aprendieron de los ferrocarrileros, de los maestros, de los mÃ©dicos. Entendieron que el enemigo no era solo un lÃ­der sindical charro o un rector autoritario: era todo un sistema que no toleraba la disidencia.
+                            </p>
+
+                            <p>
+                                La masacre de Tlatelolco sellÃ³ el fin de cualquier ilusiÃ³n sobre el carÃ¡cter "democrÃ¡tico" del rÃ©gimen. El gobierno demostrÃ³ que estaba dispuesto a todo â€”incluso a masacrar a sus propios jÃ³venesâ€” para mantener el control. Las Olimpiadas de 1968 se celebraron sobre cadÃ¡veres. El "milagro mexicano" se revelÃ³ como lo que siempre fue: una dictadura perfecta.
+                            </p>
+
+                            <h3>El Legado</h3>
+                            <p>
+                                Estos movimientos perdieron sus batallas inmediatas: Vallejo pasÃ³ 11 aÃ±os en prisiÃ³n, los estudiantes fueron dispersados, los maestros doblegados. Pero ganaron algo mÃ¡s profundo: evidenciaron las contradicciones del sistema, politizaron a toda una generaciÃ³n, sembraron las semillas de luchas futuras.
+                            </p>
+
+                            <p>
+                                El MÃ©xico que emerge de 1968 ya no es el mismo. La conciencia social se ha transformado. La legitimidad del rÃ©gimen se ha agrietado irremediablemente. Y aunque el precio ha sido altÃ­simo â€”cÃ¡rceles llenas, exilios, muertosâ€” algo ha cambiado para siempre: el miedo ya no es absoluto.
+                            </p>
+
+                            <div class="analysis-conclusion">
+                                <p>
+                                    <strong>ConclusiÃ³n:</strong> Los movimientos sociales de 1958 a 1968 no fueron episodios aislados, sino manifestaciones de una crisis estructural del modelo corporativista mexicano. Su represiÃ³n revelÃ³ la naturaleza autoritaria del rÃ©gimen y marcÃ³ el inicio de un largo proceso de democratizaciÃ³n que tomarÃ­a dÃ©cadas.
+                                </p>
+                            </div>
+                        </div>
+                        </article>
+
+                    <div class="column-content" aria-label="Contexto y fuentes">
+                            <hr style="border:0; border-top:2px solid rgba(169,29,33,0.08); margin:18px 0;">
+                            <h3>Contexto y fuentes recomendadas</h3>
+                            <p>Para entender mejor los sucesos referidos en estas pÃ¡ginas es Ãºtil consultar fuentes primarias y documentos elaborados por organismos de derechos humanos e instituciones de investigaciÃ³n histÃ³rica. A continuaciÃ³n se ofrecen puntos de referencia verificables y enlaces de consulta:</p>
+                            <ul>
+                                <li><strong>Huelga ferrocarrilera (1959):</strong> liderada por Demetrio Vallejo. La huelga puso en evidencia la conflictividad laboral del periodo y la respuesta del Estado; Vallejo fue detenido y permaneciÃ³ aÃ±os en prisiÃ³n. Informe y nota conmemorativa de la ComisiÃ³n Nacional de los Derechos Humanos: <a href="https://www.cndh.org.mx/noticia/muere-demetrio-vallejo-dirigente-obrero-lider-de-los-trabajadores-ferrocarrileros-defensor" target="_blank" rel="noopener">CNDH â€” Fallecimiento y legado de Demetrio Vallejo</a>.</li>
+                                <li><strong>Movimiento estudiantil de 1968:</strong> surge de la movilizaciÃ³n de estudiantes en todo el paÃ­s y del trabajo del Consejo Nacional de Huelga (CNH), que presentÃ³ un pliego con demandas como la disoluciÃ³n del cuerpo de granaderos y la libertad de presos polÃ­ticos. InformaciÃ³n y recopilaciÃ³n documental del Instituto Nacional de Estudios HistÃ³ricos de las Revoluciones de MÃ©xico: <a href="https://www.inehrm.gob.mx/es/inehrm/Movimiento_Estudiantil_1968" target="_blank" rel="noopener">INEHRM â€” Movimiento Estudiantil de 1968</a>. El documento del INEHRM incluye cronologÃ­a, testimonios y bibliografÃ­a recomendada.</li>
+                                <li><strong>Contexto polÃ­tico y Juegos OlÃ­mpicos 1968:</strong> La presidencia de Gustavo DÃ­az Ordaz (1964â€“1970) y la proximidad de los Juegos OlÃ­mpicos de 1968 influyeron en la estrategia gubernamental para mantener una imagen de control. La conflagraciÃ³n entre el afÃ¡n de orden y la represiÃ³n es un elemento clave para comprender la escala de la respuesta estatal.</li>
+                                <li><strong>Contraste de cifras y testimonios:</strong> Los registros oficiales y las estimaciones de organismos y vÃ­ctimas difieren en nÃºmero de fallecidos y detenciones. Recomendamos consultar informes del INEHRM, notas de la CNDH, archivos periodÃ­sticos de la Ã©poca y compilaciones de testimonios para construir una visiÃ³n crÃ­tica y documentada.</li>
+                                <li><strong>Lecturas adicionales:</strong> el INEHRM y la CNDH ofrecen bibliografÃ­as y referencias primarias (archivos, hemeroteca y testimonios). Consulte tambiÃ©n colecciones universitarias y archivos pÃºblicos para obtener documentos originales y boletines mimeografiados que circularon durante el movimiento.</li>
+                            </ul>
+
+                            <p style="font-size:0.92rem;color:#444;">Nota: las cifras oficiales y las estimaciones independientes sobre vÃ­ctimas y detenciones difieren; por eso recomendamos contrastar distintas fuentes (informes oficiales, testimonios de sobrevivientes, investigaciones acadÃ©micas y archivos periodÃ­sticos) antes de extraer conclusiones definitivas.</p>
+                        </div>
+
+                    <div class="column-content" aria-label="Recursos adicionales">
+                            <hr style="border:0; border-top:2px solid rgba(169,29,33,0.08); margin:18px 0;">
+                            <h3>Recursos gubernamentales y acadÃ©micos</h3>
+                            <p>Si deseas profundizar en los acontecimientos y consultar documentos primarios, hemerotecas y archivos oficiales, revisa las siguientes fuentes confiables:</p>
+                            <ul>
+                                <li><a href="https://www.inehrm.gob.mx/es/inehrm/Movimiento_Estudiantil_1968" target="_blank" rel="noopener">INEHRM â€” Movimiento Estudiantil de 1968</a>: cronologÃ­as, documentos y bibliografÃ­a acadÃ©mica.</li>
+                                <li><a href="https://www.cndh.org.mx/noticia/muere-demetrio-vallejo-dirigente-obrero-lider-de-los-trabajadores-ferrocarrileros-defensor" target="_blank" rel="noopener">CNDH â€” Demetrio Vallejo</a>: notas y acciones relacionadas con derechos humanos y memoria histÃ³rica.</li>
+                                <li><a href="https://www.cndh.org.mx/noticia/movimiento-de-los-medicos-primer-paro-nacional" target="_blank" rel="noopener">CNDH â€” Movimiento de los mÃ©dicos: primer paro nacional</a>: nota y contexto sobre protestas mÃ©dicas y acciones por derechos laborales.</li>
+                                <li><a href="https://www.mexicoescultura.com/actividad/139412/maestros-en-protesta-1958-en-perspectiva.html" target="_blank" rel="noopener">MÃ©xico en la Cultura â€” Maestros en protesta (1958)</a>: anÃ¡lisis histÃ³rico y cronologÃ­a del movimiento magisterial.</li>
+                                <li><a href="https://www.fundacionunam.org.mx/auriazul/dos-de-octubre-ni-perdon-ni-olvido/" target="_blank" rel="noopener">UNAM â€” Portal institucional</a>: acceso a colecciones, archivos y publicaciones universitarias sobre 1958â€“1968.</li>
+                                <li><a href="https://hndm.iib.unam.mx/index.php/es/" target="_blank" rel="noopener">Hemeroteca Nacional Digital de MÃ©xico (UNAM)</a>: hemerografÃ­a y periÃ³dicos digitalizados de la Ã©poca.</li>
+                                <li><a href="https://www.gob.mx/agn" target="_blank" rel="noopener">Archivo General de la NaciÃ³n (AGN)</a>: fondos documentales oficiales y expedientes histÃ³ricos.</li>
+                            </ul>
+                        </div>
+                </section>
+
+
+                <footer class="tab-panel" id="tab-ocio" role="tabpanel" aria-labelledby="tab-button-ocio" data-tab="ocio" tabindex="0" hidden>
+                    <h2>SecciÃ³n de Ocio</h2>
+
+                    <div class="footer-content">
+                        <div class="activity-section">
+
+                            <h3>Retos Interactivos</h3>
+
+                            <p>Explora estas actividades y vuelve a recorrer los conceptos clave del movimiento estudiantil con un toque lÃºdico e histÃ³rico.</p>
+
+
+
+                            <section class="game-block" id="matching-game">
+
+                                <h4>Arma la crÃ³nica</h4>
+
+                                <p>Relaciona cada inicio con su desarrollo y cierre. Selecciona un bloque de la columna izquierda y luego su complemento en la derecha para reconstruir los episodios.</p>
+
+                                <div id="game-stats" style="text-align: center; margin-bottom: 20px; font-size: 1.1rem; color: #a91d21;">
+
+                                    <span>Tiempo: <span id="timer">0</span>s</span> | <span>Intentos: <span id="attempts">0</span></span>
+
+                                </div>
+
+
+
+                                <div class="activity-wrap">
+
+                                    <svg class="match-svg" aria-hidden="true"></svg>
+
+                                    <div class="match-activity">
+
+                                        <div class="match-column" id="column-left">
+
+                                            <ul class="match-list" id="left-list"></ul>
+
+                                        </div>
+
+                                        <div class="match-column" id="column-right">
+
+                                            <ul class="match-list" id="right-list"></ul>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="match-controls">
+
+                                    <button class="btn" id="resetBtn">Reiniciar</button>
+
+                                    <button class="btn secondary" id="showBtn">Mostrar respuestas</button>
+
+                                </div>
+
+                            </section>
+
+
+
+                            <section class="game-block" id="wordsearch-game">
+
+                                <h4>Sopa de letras de la memoria</h4>
+
+                                <p>Desliza el cursor o tu dedo para trazar las palabras ocultas en cualquier direcciÃ³n. Cada concepto remite a un momento decisivo de 1958-1968.</p>
+
+                                <div class="wordsearch">
+
+                                    <div class="wordsearch-grid" id="wordsearch-grid" role="grid" aria-label="Sopa de letras sobre los movimientos sociales"></div>
+
+                                    <div class="wordsearch-wordlist">
+
+                                        <h5>Palabras a encontrar</h5>
+
+                                        <ul id="wordsearch-words"></ul>
+
+                                        <div class="wordsearch-actions">
+
+                                            <button class="btn secondary" id="wordsearch-reset">Reiniciar</button>
+
+                                        </div>
+
+                                        <p class="game-status" id="wordsearch-status" aria-live="polite"></p>
+
+                                    </div>
+
+                                </div>
+
+                            </section>
+
+                            <section class="game-block" id="quiz-game">
+                                <h4>Trivia del 68</h4>
+                                <p>Elige la respuesta correcta en cada pregunta para repasar los hitos de 1958-1968. Luego presiona "Comprobar".</p>
+                                <form id="quiz-form" class="quiz-block">
+                                    <fieldset class="quiz-question" data-answer="B">
+                                        <legend>1. &iquest;Qu&eacute; exig&iacute;a el pliego petitorio del CNH?</legend>
+                                        <div class="quiz-options">
+                                            <label class="quiz-option">
+                                                <input type="radio" name="q1" value="A">
+                                                <span>La renuncia del rector y la cancelaci&oacute;n de clases.</span>
+                                            </label>
+                                            <label class="quiz-option">
+                                                <input type="radio" name="q1" value="B">
+                                                <span>La liberaci&oacute;n de presos pol&iacute;ticos y el fin del cuerpo de granaderos.</span>
+                                            </label>
+                                            <label class="quiz-option">
+                                                <input type="radio" name="q1" value="C">
+                                                <span>El reconocimiento de nuevos partidos pol&iacute;ticos.</span>
+                                            </label>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset class="quiz-question" data-answer="C">
+                                        <legend>2. &iquest;Qu&eacute; sector protagoniz&oacute; la huelga nacional de 1959?</legend>
+                                        <div class="quiz-options">
+                                            <label class="quiz-option">
+                                                <input type="radio" name="q2" value="A">
+                                                <span>Los maestros normalistas.</span>
+                                            </label>
+                                            <label class="quiz-option">
+                                                <input type="radio" name="q2" value="B">
+                                                <span>Los m&eacute;dicos residentes.</span>
+                                            </label>
+                                            <label class="quiz-option">
+                                                <input type="radio" name="q2" value="C">
+                                                <span>Los trabajadores ferrocarrileros.</span>
+                                            </label>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset class="quiz-question" data-answer="A">
+                                        <legend>3. &iquest;D&oacute;nde se concentr&oacute; la represi&oacute;n del 2 de octubre?</legend>
+                                        <div class="quiz-options">
+                                            <label class="quiz-option">
+                                                <input type="radio" name="q3" value="A">
+                                                <span>En la Plaza de las Tres Culturas, en Tlatelolco.</span>
+                                            </label>
+                                            <label class="quiz-option">
+                                                <input type="radio" name="q3" value="B">
+                                                <span>En el Z&oacute;calo capitalino.</span>
+                                            </label>
+                                            <label class="quiz-option">
+                                                <input type="radio" name="q3" value="C">
+                                                <span>En Ciudad Universitaria.</span>
+                                            </label>
+                                        </div>
+                                    </fieldset>
+
+                                    <div class="quiz-actions">
+                                        <button class="btn" type="submit" id="quiz-submit">Comprobar</button>
+                                        <button class="btn secondary" type="button" id="quiz-reset">Reiniciar</button>
+                                    </div>
+                                </form>
+                                <p class="game-status" id="quiz-status" aria-live="polite"></p>
+                            </section>
+
+                        </div>
+
+                        <aside class="ads-section" aria-label="Anuncios destacados">
+                            <!-- Four ads removed as requested to reduce clutter -->
+
+                            <div class="ad-box">
+                                <h4>Moda Juvenil</h4>
+                                <p><strong>Botas Go-Go</strong></p>
+                                <p style="margin-top: 12px;">Pasos firmes en cada marcha. Disponibles en blanco y rojo.</p>
+                            </div>
+
+                            <div class="ad-box">
+                                <h4>Lecturas Prohibidas</h4>
+                                <p><strong>Librer&iacute;a Aurora</strong></p>
+                                <p style="margin-top: 12px;">Ensayos cr&iacute;ticos y panfletos importados. Pregunte por la sala discreta.</p>
+                            </div>
+
+                            <div class="ad-box">
+                                <h4>Comun&iacute;cate</h4>
+                                <p><strong>Olivetti Lettera 32</strong></p>
+                                <p style="margin-top: 12px;">Teclas suaves para redactar manifiestos sin hacer ruido.</p>
+                            </div>
+
+                            <div class="ad-box">
+                                <h4>Noches De Ruta</h4>
+                                <p><strong>Caf&eacute; La Ruta</strong></p>
+                                <p style="margin-top: 12px;">Jazz en vivo, tertulias rebeldes y caf&eacute; de olla hasta el amanecer.</p>
+                            </div>
+
+                            <div class="ad-box">
+                                <h4>Transporte Solidario</h4>
+                                <p><strong>Autobuses &quot;El Estudiante&quot;</strong></p>
+                                <p style="margin-top: 12px;">Rutas directas a CU y Zacatenco. Conductor aliado del movimiento.</p>
+                            </div>
+
+                            <div class="ad-box">
+                                <h4>Documenta La Historia</h4>
+                                <p><strong>Kodak Instamatic</strong></p>
+                                <p style="margin-top: 12px;">Dispare y comparta. Im&aacute;genes n&iacute;tidas del 68.</p>
+                            </div>
+
+                            <div class="ad-box">
+                                <h4>Guardia Nocturna</h4>
+                                <p><strong>Linterna Eveready</strong></p>
+                                <p style="margin-top: 12px;">Bater&iacute;as de larga duraci&oacute;n para vigilias y brigadas nocturnas.</p>
+                            </div>
+
+                            <div class="ad-box">
+                                <h4>Reforma Editorial</h4>
+                                <p><strong>Revista &quot;La Voz&quot;</strong></p>
+                                <p style="margin-top: 12px;">An&aacute;lisis independiente y cr&oacute;nicas que el diario oficial no publica.</p>
+                            </div>
+
+                            <div class="ad-box">
+                                <h4>Seguro Solidario</h4>
+                                <p><strong>Cooperativa SalvaGuarda</strong></p>
+                                <p style="margin-top: 12px;">Apoyo legal y m&eacute;dico para brigadistas y estudiantes.</p>
+                            </div>
+
+                            <div class="ad-box">
+                                <h4>Imprime Tus Ideas</h4>
+                                <p><strong>Mime&oacute;grafos Aurora</strong></p>
+                                <p style="margin-top: 12px;">Equipos listos para volantes. Entrega nocturna discreta.</p>
+                            </div>
+                        </aside>
+
+                        </div>
+
+                    <div class="footer-bottom">
+                        <p class="footer-quote">"La historia la escriben los que luchan"</p>
+                        <p>Â© 1968 La CrÃ³nica Inquieta - Todos los derechos reservados</p>
+                        <p>Una publicaciÃ³n independiente al servicio de la verdad</p>
+                        <div class="credit-block" aria-label="Datos del docente y equipo">
+                            <div class="team-list">
+                                <div>Docente: Juan Antonio Aldaco Aldaco</div>
+                                <div>Materia: Estructura Socioecon&oacute;mica de M&eacute;xico</div>
+                                <div>Grupo: F&iacute;sico-Matem&aacute;tico</div>
+                                <div style="margin-top:4px;">Equipo:</div>
+                                <div>Guerrero Segoviando Jaime Fernando</div>
+                                <div>P&eacute;rez L&oacute;pez Juan Pablo</div>
+                                <div>Regalado Razo Luis Angel</div>
+                                <div>Rubalcava Ledesma Ian Eduardo</div>
+                                <div>Sandoval Guevara Rodrigo</div>
+                            </div>
                         </div>
                     </div>
-                </article>
-
-                <!-- Movimiento Magisterial 1958 -->
-                <article class="article featured-article reverse">
-                    <figure class="article-figure">
-                        <img loading="lazy" src="https://files.catbox.moe/clz542.jpg" alt="Protesta de maestros" class="article-image">
-                        <figcaption class="article-caption">Movimiento magisterial de 1958: demanda de democracia sindical.</figcaption>
-                    </figure>
-                    <div class="article-content">
-                        <span class="article-year">1958</span>
-                        <h2 class="article-title">El Pizarrón se Rebela</h2>
-                        <p class="article-subtitle">
-                            Maestros exigen democracia sindical y salarios dignos
-                        </p>
-                        <p class="article-author">Por: Othón Salazar</p>
-                        <div class="article-text">
-                            <p><strong>CIUDAD DE MÉXICO.—</strong> Liderados por Othón Salazar, miles de maestros de la Sección IX del SNTE han tomado el Zócalo capitalino. Hartos de la imposición y los bajos salarios, exigen un aumento salarial del 30% y el derecho a elegir a sus propios líderes.</p>
-                            
-                            <p>El gobierno minimiza sus demandas, pero la fuerza del magisterio en las calles demuestra una fractura profunda en el corporativismo sindical oficial que ha controlado al movimiento obrero mexicano.</p>
-                            
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Movimiento Ferrocarrilero 1959 -->
-                <article class="article featured-article">
-                    <figure class="article-figure">
-                        <img loading="lazy" src="https://files.catbox.moe/0nqtn6.jpg" alt="Ferrocarril" class="article-image">
-                        <figcaption class="article-caption">Huelga ferrocarrilera de 1959: paros y bloqueos en rutas clave.</figcaption>
-                    </figure>
-                    <div class="article-content">
-                        <span class="article-year">1959</span>
-                        <h2 class="article-title">Vías de Lucha</h2>
-                        <p class="article-subtitle">
-                            Demetrio Vallejo paraliza el país en un desafío histórico
-                        </p>
-                        <p class="article-author">Por: Demetrio Vallejo</p>
-                        <div class="article-text">
-                            <p><strong>NACIONAL.—</strong> El país se encuentra paralizado. El Sindicato de Trabajadores Ferrocarrileros, bajo el liderazgo de Demetrio Vallejo, ha iniciado paros escalonados que hoy culminan en huelga nacional.</p>
-                            
-                            <p>Exigen el cumplimiento de contratos laborales y la autonomía de su sindicato. La respuesta del presidente López Mateos ha sido brutal: encarcelamiento masivo de líderes y ocupación militar de instalaciones.</p>
-                            
-                            <p>El "milagro mexicano" se detiene sobre los rieles del descontento obrero.</p>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Movimiento Médico 1964 -->
-                <article class="article featured-article reverse">
-                    <figure class="article-figure">
-                        <img loading="lazy" src="https://files.catbox.moe/x94fw4.jpg" alt="Personal médico" class="article-image">
-                        <figcaption class="article-caption caption-medicos">Protesta de médicos residentes (1964): condiciones y jornadas extenuantes.</figcaption>
-                    </figure>
-                    <div class="article-content">
-                        <span class="article-year">1964</span>
-                        <h2 class="article-title">Batas Blancas Alzan la Voz</h2>
-                        <p class="article-subtitle">
-                            Médicos residentes denuncian condiciones precarias
-                        </p>
-                        <p class="article-author">Por: Dr. María López</p>
-                        <div class="article-text">
-                            <p><strong>CIUDAD DE MÉXICO.—</strong> Quienes cuidan la salud de la nación hoy protestan por la suya. Médicos residentes e internos del Hospital 20 de Noviembre iniciaron un paro por la falta de pago de aguinaldos.</p>
-                            
-                            <p>La protesta ha escalado sumando a miles de doctores que denuncian jornadas de hasta 36 horas continuas, falta de insumos y salarios miserables. La Asociación Mexicana de Médicos Residentes e Internos se ha formado en medio de la lucha.</p>
-                    </div>
-                </article>
-                <!-- NUEVAS SECCIONES AÑADIDAS: reportaje, entrevista, columna, análisis -->
-
-                <article class="article reportage-special">
-    <div class="genre-tag">📸 GRAN REPORTAJE</div>
-    <h2 class="article-title">Diez Años que Sacudieron México</h2>
-    <p class="article-subtitle">
-        Crónica visual de una década de resistencia: 1958-1968
-    </p>
-    <div class="reportage-content">
-        <p class="lead-paragraph">
-            Del riel a las aulas, de los hospitales a las plazas públicas. Una década completa de luchas sociales que revelan las fracturas profundas del "milagro mexicano". Este reportaje recorre los momentos clave de cuatro movimientos que desafiaron al poder y transformaron la conciencia nacional.
-        </p>
-
-        <div class="timeline-section">
-            <h3>Cronología de la Resistencia</h3>
-            
-            <div class="timeline-item">
-                <span class="timeline-year">1958</span>
-                <p><strong>Abril-Agosto:</strong> El magisterio se levanta. Maestros de la Sección IX del SNTE, liderados por Othón Salazar, toman el Zócalo exigiendo 30% de aumento salarial y democracia sindical. Las marchas crecen hasta reunir a 100,000 manifestantes.</p>
-            </div>
-
-            <div class="timeline-item">
-                <span class="timeline-year">1959</span>
-                <p><strong>Febrero-Marzo:</strong> Huelga nacional ferrocarrilera. Demetrio Vallejo paraliza el país. El gobierno responde con el Ejército: más de 10,000 ferrocarrileros despedidos, cientos detenidos. Vallejo es encarcelado y permanecerá 11 años en prisión.</p>
-            </div>
-
-            <div class="timeline-item">
-                <span class="timeline-year">1964-1965</span>
-                <p><strong>Noviembre-Septiembre:</strong> Médicos residentes e internos exigen condiciones laborales dignas. Jornadas de 36 horas continuas, falta de pago de aguinaldos. La protesta crece hasta incluir a 40,000 médicos. Represión y despidos masivos.</p>
-            </div>
-
-            <div class="timeline-item">
-                <span class="timeline-year">1968</span>
-                <p><strong>Julio-Octubre:</strong> Movimiento estudiantil. De una riña callejera a la mayor movilización social de la historia moderna de México. El pliego de seis puntos. Las marchas de más de 300,000 personas. La respuesta: tanques en CU y la masacre del 2 de octubre.</p>
-            </div>
-        </div>
-
-        <div class="pattern-analysis">
-            <h3>El Patrón de la Represión</h3>
-            <p>
-                Cuatro movimientos diferentes comparten el mismo desenlace: la violencia estatal. El gobierno de López Mateos y luego el de Díaz Ordaz responden con la misma fórmula autoritaria: negación del diálogo, campaña mediática de desprestigio, infiltración, y finalmente, la fuerza bruta.
-            </p>
-            <p>
-                El corporativismo sindical —columna vertebral del sistema político mexicano— se fractura ante la exigencia de autonomía. Los trabajadores, los profesionistas, los estudiantes, todos reclaman lo mismo: democracia, libertad, justicia.
-            </p>
-        </div>
-
-        <div class="data-box">
-            <h4>Datos del Movimiento Estudiantil 1968</h4>
-            <ul>
-                <li>• Más de 50 escuelas en paro</li>
-                <li>• 15 manifestaciones masivas</li>
-                <li>• La del 27 de agosto: 400,000 asistentes</li>
-                <li>• 6 demandas del CNH</li>
-                <li>• 18 de septiembre: ocupación militar de CU</li>
-                <li>• 2 de octubre: matanza en Tlatelolco</li>
-                <li>• Cifra oficial: 30 muertos (cuestionada por testimonios)</li>
-            </ul>
-        </div>
-    </div>
-</article>
-
-<article class="article interview-feature">
-    <div class="genre-tag">🎤 ENTREVISTA EXCLUSIVA</div>
-    <h2 class="article-title">"Solo Volveremos cuando Vallejo lo Ordene"</h2>
-    <p class="article-subtitle">
-        Conversación con un ferrocarrilero de la Sección 15
-    </p>
-    
-    <div class="interview-intro">
-        <p>
-            En medio de la huelga que paraliza al país, logramos conversar con uno de los miles de trabajadores que defienden su derecho a elegir libremente a sus líderes sindicales. Por razones de seguridad, omitimos su nombre.
-        </p>
-    </div>
-
-    <div class="interview-content">
-        <div class="question">
-            <span class="q-label">Pregunta:</span>
-            <p>¿Por qué están en huelga?</p>
-        </div>
-        <div class="answer">
-            <span class="a-label">Respuesta:</span>
-            <p>"Mire usted, nosotros no pedimos nada que no sea justo. Queremos que se respete nuestro contrato, que se cumplan los acuerdos. Y sobre todo, queremos elegir a nuestros propios líderes, no que nos los impongan desde arriba. Vallejo fue elegido democráticamente, y el gobierno no lo puede aceptar."</p>
-        </div>
-
-        <div class="question">
-            <span class="q-label">P:</span>
-            <p>Los medios dicen que son un movimiento comunista, que quieren desestabilizar al país...</p>
-        </div>
-        <div class="answer">
-            <span class="a-label">R:</span>
-            <p>"Eso es lo que dicen siempre. Comunistas, agitadores, revoltosos. Nosotros solo somos trabajadores que queremos condiciones dignas. ¿Es comunista pedir que te paguen lo justo? ¿Es comunista querer elegir a tu representante? Durante los mítines, todos declaramos lo mismo: solo volveremos a nuestras labores hasta que nuestro líder, Demetrio Vallejo, nos lo ordene personalmente."</p>
-        </div>
-
-        <div class="question">
-            <span class="q-label">P:</span>
-            <p>¿Qué ha significado este movimiento para ustedes?</p>
-        </div>
-        <div class="answer">
-            <span class="a-label">R:</span>
-            <p>"Ha significado darnos cuenta de nuestra fuerza. Cuando paramos, el país se para. Los trenes no se mueven y nada funciona. Pero también nos damos cuenta del precio: ya van cientos de compañeros despedidos, arrestados. El Ejército ocupa nuestras instalaciones. Pero no nos vamos a rajar. Esto ya no se trata solo de salarios, se trata de dignidad."</p>
-        </div>
-
-        <div class="question">
-            <span class="q-label">P:</span>
-            <p>¿Qué esperan del gobierno?</p>
-        </div>
-        <div class="answer">
-            <span class="a-label">R:</span>
-            <p>"Que nos respeten. Que entiendan que los trabajadores no somos ganado que se puede arrear. Pero ya vemos que el gobierno de López Mateos solo entiende un lenguaje: el de la fuerza. Nos responden con bayonetas y cárcel. Pero la historia juzgará quién tenía razón."</p>
-        </div>
-    </div>
-
-    <div class="interview-note">
-        <p><em>Esta entrevista fue realizada en febrero de 1959, días antes de la represión masiva que resultó en más de 10,000 despidos y el encarcelamiento de los líderes sindicales. Demetrio Vallejo permanecería 11 años en prisión.</em></p>
-    </div>
-</article>
-
-<article class="article column-opinion">
-    <div class="genre-tag">✍️ COLUMNA</div>
-    <h2 class="article-title">El Autoritarismo y Sus Máscaras</h2>
-    <p class="columnist-name">Por: Una Periodista Comprometida</p>
-    
-    <div class="column-content">
-        <p class="drop-cap">
-            Dicen que México vive su "milagro económico". Que somos el orgullo de América Latina. Que nuestro sistema político es estable, moderno, democrático. Pero las balas que silenciaron a los estudiantes en Tlatelolco, los tanques que ocuparon Ciudad Universitaria, las celdas que guardan a Demetrio Vallejo desde hace casi una década, cuentan otra historia.
-        </p>
-
-        <p>
-            El gobierno de Díaz Ordaz, como antes el de López Mateos, ha respondido a cada demanda legítima con la misma receta autoritaria: primero, la negación; después, la difamación en los medios oficiales (comunistas, agitadores, enemigos de México); finalmente, la represión brutal.
-        </p>
-
-        <p>
-            Los maestros que pedían democracia sindical fueron reprimidos. Los ferrocarrileros que exigían autonomía fueron encarcelados. Los médicos que demandaban condiciones dignas fueron despedidos. Y ahora, los estudiantes que clamaban por libertad y diálogo fueron masacrados.
-        </p>
-
-        <p>
-            ¿Qué clase de democracia es esta, que no tolera la disidencia? ¿Qué clase de progreso es este, que se construye sobre la represión? El "milagro mexicano" tiene un precio oculto: el silencio forzado, la cárcel para quien piensa diferente, la muerte para quien se atreve a protestar.
-        </p>
-
-        <p>
-            Las autoridades hablan de orden, de estabilidad, de progreso. Pero nosotros preguntamos: ¿orden para quién? ¿Estabilidad de qué? ¿Progreso a costa de qué?
-        </p>
-
-        <p>
-            La sangre derramada en Tlatelolco no se borrará con comunicados oficiales ni cifras maquilladas. Los testimonios están ahí, las voces de los sobrevivientes, las fotografías que el gobierno no pudo censurar. La historia no se escribe solo desde Palacio Nacional. También se escribe desde las plazas, desde las cárceles, desde los hospitales donde se atiende a los heridos que "oficialmente" no existen.
-        </p>
-
-        <p>
-            México tiene dos caras: la del discurso oficial y la de la realidad vivida. Una habla de desarrollo y modernidad; la otra, de represión y miedo. Y entre ambas, crece una grieta que ningún tanque podrá cerrar: la conciencia de que otro México es posible, un México donde la voz del pueblo sea escuchada sin necesidad de gritos, sin necesidad de sangre.
-        </p>
-
-        <p class="column-closing">
-            <em>La historia, al final, la escriben los que luchan. No los que disparan.</em>
-        </p>
-    </div>
-
-    <!-- Segunda columna para cubrir espacio en blanco -->
-    <div class="column-content" aria-label="Segunda columna">
-        <hr style="border:0; border-top:2px solid rgba(169,29,33,0.08); margin:18px 0;">
-        <h2 class="article-title">La Prensa Cómplice</h2>
-        <p class="columnist-name">Por: Un Cronista del Silencio</p>
-
-        <p class="drop-cap">
-            Mientras las calles ardían, los titulares mentían. La gran mayoría de periódicos mexicanos, atados al gobierno por el cordón umbilical de la publicidad oficial y el "embute" (sobornos directos a periodistas), reprodujeron fielmente la versión gubernamental.
-        </p>
-
-        <p>
-            "Agitadores comunistas", "grupos de choque extranjeros", "complot internacional": esas fueron las etiquetas con que la prensa vendida bautizó a los estudiantes. Excélsior, El Universal, Novedades... todos marcharon al mismo son.
-        </p>
-
-        <p>
-            Hubo excepciones, por supuesto. Algunos reporteros arriesgaron su carrera para contar la verdad. Pero fueron voces aisladas en un coro de silencio cómplice. La censura no siempre fue explícita; más efectiva resultó la autocensura de directores y editores que sabían dónde estaba la línea que no debían cruzar.
-        </p>
-
-        <p>
-            El 2 de octubre, cuando la Plaza de las Tres Culturas se tiñó de sangre, la prensa habló de "enfrentamiento entre grupos". Las cifras oficiales —treinta muertos— fueron reproducidas sin cuestionamiento. Los testimonios de sobrevivientes, ignorados. Las fotografías de cadáveres, censuradas.
-        </p>
-
-        <p>
-            Fue la prensa extranjera —los corresponsales que ya estaban en México para cubrir las Olimpiadas— quien contó lo que realmente sucedió. The Guardian, Le Monde, The Washington Post: ellos sí hablaron de masacre.
-        </p>
-
-        <p>
-            Esta complicidad tiene un costo histórico. El periodismo mexicano perdió credibilidad ante toda una generación. Los jóvenes aprendieron que no podían confiar en lo que leían en los diarios "serios". Buscaron información en volantes, en publicaciones clandestinas, en el boca a boca.
-        </p>
-
-        <p>
-            Hoy, años después, algunos de esos mismos periodistas que callaron se dicen arrepentidos. Otros defienden su silencio como "profesionalismo" o "prudencia". Pero la historia no olvida. Y las páginas en blanco que dejaron en 1968 son su monumento de vergüenza.
-        </p>
-
-        <p class="column-closing">
-            <em>La verdad siempre encuentra su camino, aunque sea entre líneas.</em>
-        </p>
-
-        <hr style="border:0; border-top:2px solid rgba(169,29,33,0.08); margin:26px 0;">
-
-        <!-- Columna adicional estilo periódico (ampliada) -->
-<article class="column-content" aria-label="Columna adicional: Crónicas y Voces">
-    
-    <header class="article-header">
-        <h3 class="article-title">En las esquinas: crónicas y voces</h3>
-        <p class="columnist-name">Por: Crónica de la Calle</p>
-    </header>
-
-    <hr class="section-divider">
-
-    <section class="content-section" id="contexto-local">
-        <h4 class="section-heading">Contexto local</h4>
-        <p>La protesta no solo ocupó plazas académicas y estaciones de trabajo; también llenó las esquinas, los mercados y los cafés. Desde los vendedores ambulantes hasta las comisiones de padres de familia, las voces se organizaron en redes informales que compartían noticias, fotografías y volantes. Estas redes ayudaron a sostener la moral de las huelgas y a distribuir recursos básicos entre los movilizados.</p>
-    </section>
-
-    <section class="content-section" id="testimonios-memoria">
-        <h4 class="section-heading">Testimonios y memoria</h4>
-        <p>Los relatos orales que circularon después de las marchas recogen anécdotas de solidaridad: madres que ofrecían hogares temporales, vecinos que escondían comunicados y trabajadores que donaban alimento. Estos relatos fueron clave para reconstruir los hechos cuando la prensa oficial se negó a publicar el testimonio de víctimas y testigos. Muchas de esas narrativas están preservadas en archivos universitarios y en compilaciones recogidas por organismos como el <a href="https://www.inehrm.gob.mx/es/inehrm/Movimiento_Estudiantil_1968" target="_blank" rel="noopener noreferrer">INEHRM</a>.</p>
-    </section>
-
-    <section class="content-section" id="solidaridad-practica">
-        <h4 class="section-heading">Solidaridad práctica</h4>
-        <p>En barrios populares se formaron comités de apoyo que ofrecían comida, refugio temporal y atención básica a lesionados. Brigadas médicas espontáneas y colectivos de estudiantes organizaron redes de auxilio que, en algunos casos, continuaron operando tras las huelgas, transformándose en movimientos comunitarios de largo plazo. La existencia de estas redes demuestra que la movilización trascendió el plano meramente político y tuvo efectos tangibles en la vida cotidiana de mucha gente.</p>
-    </section>
-
-    <section class="content-section" id="relevancia-cultural">
-        <h4 class="section-heading">Relevancia cultural</h4>
-        <p>La circulación de panfletos, poemarios y obras de teatro callejero contribuyó a una cultura popular comprometida con la crítica social. Poetas y artistas formaron parte de un entramado que alimentó la resistencia simbólica: murales, canciones y folletos circularon como memoria activa de la protesta, y varias de esas piezas hoy se conservan en colecciones hemerográficas y museográficas.</p>
-    </section>
-
-    <section class="content-section" id="legado-lecciones">
-        <h4 class="section-heading">Legado y lecciones</h4>
-        <p>La movilización popular no fue solo estudiantil o sindical; fue una marea de solidaridad interclasista que dejó huella en la memoria colectiva. Sus efectos perduraron en formas de organización social y en la demanda de mayores niveles de transparencia y respeto a los derechos laborales.</p>
-    </section>
-
-    <footer class="article-footer">
-        
-        <div class="resources-list">
-            <h5 class="resources-heading">Consulta de documentación primaria:</h5>
-            <ul>
-                <li><a href="#link-a-cndh" aria-label="Recursos de la CNDH">CNDH</a></li>
-                <li><a href="https://www.inehrm.gob.mx/es/inehrm/Movimiento_Estudiantil_1968" target="_blank" rel="noopener noreferrer" aria-label="Recursos del INEHRM">INEHRM</a></li>
-                <li><a href="#link-a-agn" aria-label="Recursos del AGN">AGN</a></li>
-                <li><a href="#link-a-hemeroteca" aria-label="Recursos de la Hemeroteca UNAM">Hemeroteca UNAM</a></li>
-            </ul>
-        </div>
-        
-        <hr class="section-divider">
-        
-        <blockquote class="column-closing">
-            <p><em>Las esquinas guardan las voces que los titulares olvidan; escuchar a la gente es reconstruir la historia desde abajo.</em></p>
-        </blockquote>
-    </footer>
-
-</article>
-
-        <h3>Nuevas Voces, Nuevos Frentes</h3>
-        <p>La represión mediática empujó a estudiantes y trabajadores a crear boletines propios. <strong>La Voz del Pueblo</strong> y <strong>La Causa del CNH</strong> circularon en mimeógrafos portátiles que viajaban escondidos en mochilas. Cada tiraje se agotaba en horas porque la información se compartía de mano en mano, en salones de clase, talleres y mercados.</p>
-        <p>Las brigadas culturales también llevaron teatro callejero a colonias populares: dramatizaciones como <em>El Granulito</em> denunciaban el uso de infiltrados para provocar disturbios. Poetas como Jaime Sabines y Rosario Castellanos leían poemas frente a miles en Ciudad Universitaria, firmando con seudónimos para evadir la censura.</p>
-
-        <h3>Redes de Solidaridad</h3>
-        <p>Mientras los diarios callaban, las redacciones independientes se organizaron. <strong>El Diario de Yucatán</strong> envió corresponsales, <strong>Política</strong> abrió sus páginas a testimonios estudiantiles y <strong>El Día</strong> publicó fotos que mostraban el verdadero rostro del movimiento. En provincia, estaciones radiofónicas universitarias retransmitieron las conferencias del CNH por la noche, desafiando sanciones.</p>
-        <p>Las asociaciones de padres de familia lanzaron su propio boletín titulado <strong>Padres en Marcha</strong>, donde denunciaban desapariciones y solicitaban apoyo para sostener las huelgas. El texto se fotocopiaba en hospitales, juzgados y parroquias.</p>
-
-        <h3>Testigos Incómodos</h3>
-        <p>Fotógrafos como <strong>Armando López</strong> escondían rollos en botes de refresco para sacarlos del cerco policial. Esas imágenes circularon en revistas europeas y regresaron al país en forma de postales clandestinas que se vendían en la zona de la Merced.</p>
-        <p>En las universidades privadas, colectivos como <strong>Comité Estudiantil de la Ibero</strong> replicaron crónicas a través de boletines como <em>La Espiga</em>. Estudiantes de preparatoria tradujeron al inglés los comunicados del CNH y los enviaron por teléfono a estaciones de radio universitarias en California.</p>
-
-        <h3>El Eco en Latinoamérica</h3>
-        <p>Desde Buenos Aires, el periódico <strong>Marcha</strong> documentó la represión. Sus crónicas inspiraron a movimientos estudiantiles del Cono Sur. En Chile, la Universidad Técnica organizó un foro titulado “México: juventud y democracia”, con testimonios vía telégrafo.</p>
-        <p>Grupos de derechos humanos en Estados Unidos elaboraron expedientes que presentaron en foros de la ONU. Sin redes sociales, la información viajaba en valijas diplomáticas, microfilmes y grabaciones en casete que cruzaban la frontera en automóviles cargados de solidaridad.</p>
-
-        <h3>Memoria que se Imprime</h3>
-        <p>Tres años después, colectivos como el Movimiento de Liberación de la Mujer reimprimieron estas crónicas para vincular la lucha estudiantil con la agenda feminista; resaltaron el papel de brigadistas como <strong>Roberta Avendaño</strong> y <strong>Rosa Martha Fernández</strong>, quienes lideraron comités nocturnos y organizaron comedores populares.</p>
-        <p class="column-closing"><em>La memoria de 1968 no cabe en un solo titular: sobrevive en cada volante, mural y archivo independiente.</em></p>
-    </div>
-    
-    <!-- Sección añadida: contexto histórico y fuentes verificables -->
-    <div class="column-content" aria-label="Contexto y fuentes">
-        <hr style="border:0; border-top:2px solid rgba(169,29,33,0.08); margin:18px 0;">
-        <h3>Contexto y fuentes recomendadas</h3>
-        <p>Para entender mejor los sucesos referidos en estas páginas es útil consultar fuentes primarias y documentos elaborados por organismos de derechos humanos e instituciones de investigación histórica. A continuación se ofrecen puntos de referencia verificables y enlaces de consulta:</p>
-        <ul>
-            <li><strong>Huelga ferrocarrilera (1959):</strong> liderada por Demetrio Vallejo. La huelga puso en evidencia la conflictividad laboral del periodo y la respuesta del Estado; Vallejo fue detenido y permaneció años en prisión. Informe y nota conmemorativa de la Comisión Nacional de los Derechos Humanos: <a href="https://www.cndh.org.mx/noticia/muere-demetrio-vallejo-dirigente-obrero-lider-de-los-trabajadores-ferrocarrileros-defensor" target="_blank" rel="noopener">CNDH — Fallecimiento y legado de Demetrio Vallejo</a>.</li>
-            <li><strong>Movimiento estudiantil de 1968:</strong> surge de la movilización de estudiantes en todo el país y del trabajo del Consejo Nacional de Huelga (CNH), que presentó un pliego con demandas como la disolución del cuerpo de granaderos y la libertad de presos políticos. Información y recopilación documental del Instituto Nacional de Estudios Históricos de las Revoluciones de México: <a href="https://www.inehrm.gob.mx/es/inehrm/Movimiento_Estudiantil_1968" target="_blank" rel="noopener">INEHRM — Movimiento Estudiantil de 1968</a>. El documento del INEHRM incluye cronología, testimonios y bibliografía recomendada.</li>
-            <li><strong>Contexto político y Juegos Olímpicos 1968:</strong> La presidencia de Gustavo Díaz Ordaz (1964–1970) y la proximidad de los Juegos Olímpicos de 1968 influyeron en la estrategia gubernamental para mantener una imagen de control. La conflagración entre el afán de orden y la represión es un elemento clave para comprender la escala de la respuesta estatal.</li>
-            <li><strong>Contraste de cifras y testimonios:</strong> Los registros oficiales y las estimaciones de organismos y víctimas difieren en número de fallecidos y detenciones. Recomendamos consultar informes del INEHRM, notas de la CNDH, archivos periodísticos de la época y compilaciones de testimonios para construir una visión crítica y documentada.</li>
-            <li><strong>Lecturas adicionales:</strong> el INEHRM y la CNDH ofrecen bibliografías y referencias primarias (archivos, hemeroteca y testimonios). Consulte también colecciones universitarias y archivos públicos para obtener documentos originales y boletines mimeografiados que circularon durante el movimiento.</li>
-        </ul>
-
-        <p style="font-size:0.92rem;color:#444;">Nota: las cifras oficiales y las estimaciones independientes sobre víctimas y detenciones difieren; por eso recomendamos contrastar distintas fuentes (informes oficiales, testimonios de sobrevivientes, investigaciones académicas y archivos periodísticos) antes de extraer conclusiones definitivas.</p>
-    </div>
-    
-    <!-- Bloque adicional: recursos gubernamentales y académicos -->
-    <div class="column-content" aria-label="Recursos adicionales">
-        <hr style="border:0; border-top:2px solid rgba(169,29,33,0.08); margin:18px 0;">
-        <h3>Recursos gubernamentales y académicos</h3>
-        <p>Si deseas profundizar en los acontecimientos y consultar documentos primarios, hemerotecas y archivos oficiales, revisa las siguientes fuentes confiables:</p>
-        <ul>
-            <li><a href="https://www.inehrm.gob.mx/es/inehrm/Movimiento_Estudiantil_1968" target="_blank" rel="noopener">INEHRM — Movimiento Estudiantil de 1968</a>: cronologías, documentos y bibliografía académica.</li>
-            <li><a href="https://www.cndh.org.mx/noticia/muere-demetrio-vallejo-dirigente-obrero-lider-de-los-trabajadores-ferrocarrileros-defensor" target="_blank" rel="noopener">CNDH — Demetrio Vallejo</a>: notas y acciones relacionadas con derechos humanos y memoria histórica.</li>
-            <li><a href="https://www.cndh.org.mx/noticia/movimiento-de-los-medicos-primer-paro-nacional" target="_blank" rel="noopener">CNDH — Movimiento de los médicos: primer paro nacional</a>: nota y contexto sobre protestas médicas y acciones por derechos laborales.</li>
-            <li><a href="https://www.mexicoescultura.com/actividad/139412/maestros-en-protesta-1958-en-perspectiva.html" target="_blank" rel="noopener">México en la Cultura — Maestros en protesta (1958)</a>: análisis histórico y cronología del movimiento magisterial.</li>
-            <li><a href="https://www.fundacionunam.org.mx/auriazul/dos-de-octubre-ni-perdon-ni-olvido/" target="_blank" rel="noopener">UNAM — Portal institucional</a>: acceso a colecciones, archivos y publicaciones universitarias sobre 1958–1968.</li>
-            <li><a href="https://hndm.iib.unam.mx/index.php/es/" target="_blank" rel="noopener">Hemeroteca Nacional Digital de México (UNAM)</a>: hemerografía y periódicos digitalizados de la época.</li>
-            <li><a href="https://www.gob.mx/agn" target="_blank" rel="noopener">Archivo General de la Nación (AGN)</a>: fondos documentales oficiales y expedientes históricos.</li>
-        </ul>
-    </div>
-</article>
-
-<article class="article analysis-piece">
-    <div class="genre-tag">📊 ANÁLISIS</div>
-    <h2 class="article-title">Cuando el Milagro se Detiene</h2>
-    <p class="article-subtitle">
-        Anatomía del corporativismo en crisis
-    </p>
-    
-    <div class="analysis-content">
-        <p class="lead-analysis">
-            El llamado "milagro mexicano" —ese período de crecimiento económico sostenido que nos vendieron como el camino al primer mundo— se ha revelado como lo que siempre fue: un espejismo construido sobre la represión sistemática del descontento social.
-        </p>
-
-        <h3>El Pacto Corporativista</h3>
-        <p>
-            Desde la consolidación del régimen posrevolucionario, el Estado mexicano construyó un sistema de control basado en el corporativismo sindical: los trabajadores organizados en sindicatos "oficiales", subordinados al partido en el poder, a cambio de ciertas prestaciones y la promesa de estabilidad. El PRI no solo gobernaba; absorbía, cooptaba, neutralizaba cualquier expresión de autonomía obrera.
-        </p>
-
-        <h3>Las Grietas del Sistema</h3>
-        <p>
-            Los movimientos de 1958 a 1968 representan la fractura de ese pacto. Los ferrocarrileros de Vallejo, los maestros de Salazar, los médicos residentes, los estudiantes del CNH: todos comparten el mismo reclamo fundamental: autonomía. El derecho a organizarse libremente, a elegir a sus propios líderes, a negociar sin intermediarios impuestos desde arriba.
-        </p>
-
-        <div class="analysis-sidebar">
-            <h4>Patrón Común de Represión</h4>
-            <ol>
-                <li><strong>Fase 1:</strong> Movilización y demandas legítimas</li>
-                <li><strong>Fase 2:</strong> Negación gubernamental y campañas de desprestigio</li>
-                <li><strong>Fase 3:</strong> Infiltración y provocación</li>
-                <li><strong>Fase 4:</strong> Represión violenta</li>
-                <li><strong>Fase 5:</strong> Criminalización de líderes</li>
-            </ol>
-        </div>
-
-        <h3>El Desarrollo Desigual</h3>
-        <p>
-            Mientras las estadísticas macroeconómicas hablaban de crecimiento del 6% anual, la realidad de millones de mexicanos era otra: salarios insuficientes, jornadas extenuantes, nula democracia laboral. El "desarrollo estabilizador" estabilizaba, sí, pero solo para las élites. Para los trabajadores significaba contención salarial, represión sindical, control político.
-        </p>
-
-        <h3>1968: El Punto de No Retorno</h3>
-        <p>
-            El movimiento estudiantil de 1968 no surgió de la nada. Fue la culminación de una década de resistencias. Los estudiantes aprendieron de los ferrocarrileros, de los maestros, de los médicos. Entendieron que el enemigo no era solo un líder sindical charro o un rector autoritario: era todo un sistema que no toleraba la disidencia.
-        </p>
-
-        <p>
-            La masacre de Tlatelolco selló el fin de cualquier ilusión sobre el carácter "democrático" del régimen. El gobierno demostró que estaba dispuesto a todo —incluso a masacrar a sus propios jóvenes— para mantener el control. Las Olimpiadas de 1968 se celebraron sobre cadáveres. El "milagro mexicano" se reveló como lo que siempre fue: una dictadura perfecta.
-        </p>
-
-        <h3>El Legado</h3>
-        <p>
-            Estos movimientos perdieron sus batallas inmediatas: Vallejo pasó 11 años en prisión, los estudiantes fueron dispersados, los maestros doblegados. Pero ganaron algo más profundo: evidenciaron las contradicciones del sistema, politizaron a toda una generación, sembraron las semillas de luchas futuras.
-        </p>
-
-        <p>
-            El México que emerge de 1968 ya no es el mismo. La conciencia social se ha transformado. La legitimidad del régimen se ha agrietado irremediablemente. Y aunque el precio ha sido altísimo —cárceles llenas, exilios, muertos— algo ha cambiado para siempre: el miedo ya no es absoluto.
-        </p>
-
-        <div class="analysis-conclusion">
-            <p>
-                <strong>Conclusión:</strong> Los movimientos sociales de 1958 a 1968 no fueron episodios aislados, sino manifestaciones de una crisis estructural del modelo corporativista mexicano. Su represión reveló la naturaleza autoritaria del régimen y marcó el inicio de un largo proceso de democratización que tomaría décadas.
-            </p>
-        </div>
-    </div>
-</article>
+                </footer>
             </div>
         </main>
-
-        <footer>
-            <h2>Sección de Ocio</h2>
-            
-            <div class="footer-content">
-                <div class="activity-section">
-
-                    <h3>Retos Interactivos</h3>
-
-                    <p>Explora estas actividades y vuelve a recorrer los conceptos clave del movimiento estudiantil con un toque lúdico e histórico.</p>
-
-
-
-                    <section class="game-block" id="matching-game">
-
-                        <h4>Arma la crónica</h4>
-
-                        <p>Relaciona cada inicio con su desarrollo y cierre. Selecciona un bloque de la columna izquierda y luego su complemento en la derecha para reconstruir los episodios.</p>
-
-                        <div id="game-stats" style="text-align: center; margin-bottom: 20px; font-size: 1.1rem; color: #a91d21;">
-
-                            <span>Tiempo: <span id="timer">0</span>s</span> | <span>Intentos: <span id="attempts">0</span></span>
-
-                        </div>
-
-                        
-
-                        <div class="activity-wrap">
-
-                            <svg class="match-svg" aria-hidden="true"></svg>
-
-                            <div class="match-activity">
-
-                                <div class="match-column" id="column-left">
-
-                                    <ul class="match-list" id="left-list"></ul>
-
-                                </div>
-
-                                <div class="match-column" id="column-right">
-
-                                    <ul class="match-list" id="right-list"></ul>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        
-
-                        <div class="match-controls">
-
-                            <button class="btn" id="resetBtn">Reiniciar</button>
-
-                            <button class="btn secondary" id="showBtn">Mostrar respuestas</button>
-
-                        </div>
-
-                    </section>
-
-
-
-                    <section class="game-block" id="wordsearch-game">
-
-                        <h4>Sopa de letras de la memoria</h4>
-
-                        <p>Desliza el cursor o tu dedo para trazar las palabras ocultas en cualquier dirección. Cada concepto remite a un momento decisivo de 1958-1968.</p>
-
-                        <div class="wordsearch">
-
-                            <div class="wordsearch-grid" id="wordsearch-grid" role="grid" aria-label="Sopa de letras sobre los movimientos sociales"></div>
-
-                            <div class="wordsearch-wordlist">
-
-                                <h5>Palabras a encontrar</h5>
-
-                                <ul id="wordsearch-words"></ul>
-
-                                <div class="wordsearch-actions">
-
-                                    <button class="btn secondary" id="wordsearch-reset">Reiniciar</button>
-
-                                </div>
-
-                                <p class="game-status" id="wordsearch-status" aria-live="polite"></p>
-
-                            </div>
-
-                        </div>
-
-                    </section>
-
-                    <section class="game-block" id="quiz-game">
-                        <h4>Trivia del 68</h4>
-                        <p>Elige la respuesta correcta en cada pregunta para repasar los hitos de 1958-1968. Luego presiona "Comprobar".</p>
-                        <form id="quiz-form" class="quiz-block">
-                            <fieldset class="quiz-question" data-answer="B">
-                                <legend>1. &iquest;Qu&eacute; exig&iacute;a el pliego petitorio del CNH?</legend>
-                                <div class="quiz-options">
-                                    <label class="quiz-option">
-                                        <input type="radio" name="q1" value="A">
-                                        <span>La renuncia del rector y la cancelaci&oacute;n de clases.</span>
-                                    </label>
-                                    <label class="quiz-option">
-                                        <input type="radio" name="q1" value="B">
-                                        <span>La liberaci&oacute;n de presos pol&iacute;ticos y el fin del cuerpo de granaderos.</span>
-                                    </label>
-                                    <label class="quiz-option">
-                                        <input type="radio" name="q1" value="C">
-                                        <span>El reconocimiento de nuevos partidos pol&iacute;ticos.</span>
-                                    </label>
-                                </div>
-                            </fieldset>
-
-                            <fieldset class="quiz-question" data-answer="C">
-                                <legend>2. &iquest;Qu&eacute; sector protagoniz&oacute; la huelga nacional de 1959?</legend>
-                                <div class="quiz-options">
-                                    <label class="quiz-option">
-                                        <input type="radio" name="q2" value="A">
-                                        <span>Los maestros normalistas.</span>
-                                    </label>
-                                    <label class="quiz-option">
-                                        <input type="radio" name="q2" value="B">
-                                        <span>Los m&eacute;dicos residentes.</span>
-                                    </label>
-                                    <label class="quiz-option">
-                                        <input type="radio" name="q2" value="C">
-                                        <span>Los trabajadores ferrocarrileros.</span>
-                                    </label>
-                                </div>
-                            </fieldset>
-
-                            <fieldset class="quiz-question" data-answer="A">
-                                <legend>3. &iquest;D&oacute;nde se concentr&oacute; la represi&oacute;n del 2 de octubre?</legend>
-                                <div class="quiz-options">
-                                    <label class="quiz-option">
-                                        <input type="radio" name="q3" value="A">
-                                        <span>En la Plaza de las Tres Culturas, en Tlatelolco.</span>
-                                    </label>
-                                    <label class="quiz-option">
-                                        <input type="radio" name="q3" value="B">
-                                        <span>En el Z&oacute;calo capitalino.</span>
-                                    </label>
-                                    <label class="quiz-option">
-                                        <input type="radio" name="q3" value="C">
-                                        <span>En Ciudad Universitaria.</span>
-                                    </label>
-                                </div>
-                            </fieldset>
-
-                            <div class="quiz-actions">
-                                <button class="btn" type="submit" id="quiz-submit">Comprobar</button>
-                                <button class="btn secondary" type="button" id="quiz-reset">Reiniciar</button>
-                            </div>
-                        </form>
-                        <p class="game-status" id="quiz-status" aria-live="polite"></p>
-                    </section>
-
-                </div>
-
-                <aside class="ads-section" aria-label="Anuncios destacados">
-                    <div class="ad-box">
-                        <h4>&iexcl;A Estrenar!</h4>
-                        <p><strong>TELEVISORES A COLOR</strong></p>
-                        <p style="margin-top: 12px;">Vea el futuro en su sala. Una revoluci&oacute;n para el hogar moderno.</p>
-                        <p style="margin-top: 8px; color: #a91d21; font-weight: bold;">&iexcl;Mensualidades sin intereses!</p>
-                    </div>
-
-                    <div class="ad-box">
-                        <h4>Refresca el Momento</h4>
-                        <p><strong>Pepsi-Cola</strong></p>
-                        <p style="margin-top: 12px;">El sabor de la nueva generaci&oacute;n. Perfecta para sus momentos especiales.</p>
-                    </div>
-
-                    <div class="ad-box">
-                        <h4>Cultura y Educaci&oacute;n</h4>
-                        <p><strong>Enciclopedia Brit&aacute;nica</strong></p>
-                        <p style="margin-top: 12px;">24 tomos de sabidur&iacute;a universal. La inversi&oacute;n m&aacute;s inteligente para su familia.</p>
-                    </div>
-
-                    <div class="ad-box">
-                        <h4>Sonido Hi-Fi</h4>
-                        <p><strong>Radiola Est&eacute;reo</strong></p>
-                        <p style="margin-top: 12px;">Sintonice las voces del pueblo con fidelidad cristalina.</p>
-                    </div>
-
-                    <div class="ad-box">
-                        <h4>Moda Juvenil</h4>
-                        <p><strong>Botas Go-Go</strong></p>
-                        <p style="margin-top: 12px;">Pasos firmes en cada marcha. Disponibles en blanco y rojo.</p>
-                    </div>
-
-                    <div class="ad-box">
-                        <h4>Lecturas Prohibidas</h4>
-                        <p><strong>Librer&iacute;a Aurora</strong></p>
-                        <p style="margin-top: 12px;">Ensayos cr&iacute;ticos y panfletos importados. Pregunte por la sala discreta.</p>
-                    </div>
-
-                    <div class="ad-box">
-                        <h4>Comun&iacute;cate</h4>
-                        <p><strong>Olivetti Lettera 32</strong></p>
-                        <p style="margin-top: 12px;">Teclas suaves para redactar manifiestos sin hacer ruido.</p>
-                    </div>
-
-                    <div class="ad-box">
-                        <h4>Noches De Ruta</h4>
-                        <p><strong>Caf&eacute; La Ruta</strong></p>
-                        <p style="margin-top: 12px;">Jazz en vivo, tertulias rebeldes y caf&eacute; de olla hasta el amanecer.</p>
-                    </div>
-
-                    <div class="ad-box">
-                        <h4>Transporte Solidario</h4>
-                        <p><strong>Autobuses &quot;El Estudiante&quot;</strong></p>
-                        <p style="margin-top: 12px;">Rutas directas a CU y Zacatenco. Conductor aliado del movimiento.</p>
-                    </div>
-
-                    <div class="ad-box">
-                        <h4>Documenta La Historia</h4>
-                        <p><strong>Kodak Instamatic</strong></p>
-                        <p style="margin-top: 12px;">Dispare y comparta. Im&aacute;genes n&iacute;tidas del 68.</p>
-                    </div>
-
-                    <div class="ad-box">
-                        <h4>Guardia Nocturna</h4>
-                        <p><strong>Linterna Eveready</strong></p>
-                        <p style="margin-top: 12px;">Bater&iacute;as de larga duraci&oacute;n para vigilias y brigadas nocturnas.</p>
-                    </div>
-
-                    <div class="ad-box">
-                        <h4>Reforma Editorial</h4>
-                        <p><strong>Revista &quot;La Voz&quot;</strong></p>
-                        <p style="margin-top: 12px;">An&aacute;lisis independiente y cr&oacute;nicas que el diario oficial no publica.</p>
-                    </div>
-
-                    <div class="ad-box">
-                        <h4>Seguro Solidario</h4>
-                        <p><strong>Cooperativa SalvaGuarda</strong></p>
-                        <p style="margin-top: 12px;">Apoyo legal y m&eacute;dico para brigadistas y estudiantes.</p>
-                    </div>
-
-                    <div class="ad-box">
-                        <h4>Imprime Tus Ideas</h4>
-                        <p><strong>Mime&oacute;grafos Aurora</strong></p>
-                        <p style="margin-top: 12px;">Equipos listos para volantes. Entrega nocturna discreta.</p>
-                    </div>
-                </aside>
-
-                </div>
-
-            <div class="footer-bottom">
-                <p class="footer-quote">"La historia la escriben los que luchan"</p>
-                <p>© 1968 La Crónica Inquieta - Todos los derechos reservados</p>
-                <p>Una publicación independiente al servicio de la verdad</p>
-                <div class="credit-block" aria-label="Datos del docente y equipo">
-                    <div class="team-list">
-                        <div>Docente: Juan Antonio Aldaco Aldaco</div>
-                        <div>Materia: Estructura Socioecon&oacute;mica de M&eacute;xico</div>
-                        <div>Grupo: F&iacute;sico-Matem&aacute;tico</div>
-                        <div style="margin-top:4px;">Equipo:</div>
-                        <div>Guerrero Segoviando Jaime Fernando</div>
-                        <div>P&eacute;rez L&oacute;pez Juan Pablo</div>
-                        <div>Regalado Razo Luis Angel</div>
-                        <div>Rubalcava Ledesma Ian Eduardo</div>
-                        <div>Sandoval Guevara Rodrigo</div>
-                    </div>
-                </div>
-            </div>
-        </footer>
     </div>
 
     <div id="imageModal" class="modal">
@@ -2365,16 +2430,106 @@
     </div>
 
     <script>
-        // Modal para imágenes
+        (() => {
+            const tabButtons = Array.from(document.querySelectorAll('.tab-button'));
+            const tabPanels = Array.from(document.querySelectorAll('.tab-panel'));
+            const containerEl = document.querySelector('.newspaper-container');
+            if (!tabButtons.length || !tabPanels.length) return;
+
+            tabPanels.forEach(panel => {
+                if (!panel.classList.contains('is-active')) {
+                    panel.hidden = true;
+                }
+            });
+
+            function activateTab(tab, { focusPanel = false } = {}) {
+                tabButtons.forEach(button => {
+                    const isActive = button.dataset.tab === tab;
+                    button.classList.toggle('is-active', isActive);
+                    button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                    button.tabIndex = isActive ? 0 : -1;
+                });
+
+                tabPanels.forEach(panel => {
+                    const isActive = panel.dataset.tab === tab;
+                    panel.classList.toggle('is-active', isActive);
+                    panel.hidden = !isActive;
+                    if (isActive && focusPanel) {
+                        panel.focus();
+                    }
+                });
+
+                if (containerEl) {
+                    containerEl.classList.toggle('is-notas-active', tab === 'notas');
+                }
+
+                window.dispatchEvent(new Event('resize'));
+            }
+
+            function moveFocus(currentButton, direction) {
+                const currentIndex = tabButtons.indexOf(currentButton);
+                if (currentIndex === -1) return;
+                const total = tabButtons.length;
+                const nextIndex = (currentIndex + direction + total) % total;
+                tabButtons[nextIndex].focus();
+            }
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    if (button.classList.contains('is-active')) return;
+                    activateTab(button.dataset.tab);
+                });
+
+                button.addEventListener('keydown', event => {
+                    switch (event.key) {
+                        case 'ArrowRight':
+                        case 'ArrowDown':
+                            event.preventDefault();
+                            moveFocus(button, 1);
+                            break;
+                        case 'ArrowLeft':
+                        case 'ArrowUp':
+                            event.preventDefault();
+                            moveFocus(button, -1);
+                            break;
+                        case 'Home':
+                            event.preventDefault();
+                            tabButtons[0].focus();
+                            break;
+                        case 'End':
+                            event.preventDefault();
+                            tabButtons[tabButtons.length - 1].focus();
+                            break;
+                        case 'Enter':
+                        case ' ':
+                            event.preventDefault();
+                            activateTab(button.dataset.tab, { focusPanel: true });
+                            break;
+                        default:
+                            break;
+                    }
+                });
+            });
+
+            const initial = tabButtons.find(button => button.classList.contains('is-active')) || tabButtons[0];
+            if (initial) {
+                activateTab(initial.dataset.tab);
+            }
+        })();
+    </script>
+
+    <script>
+        // Modal para imÃ¡genes
         const modal = document.getElementById('imageModal');
         const modalImg = document.getElementById('modalImg');
-        const images = document.querySelectorAll('.article-image');
+        const images = Array.from(document.querySelectorAll('.article-image'))
+            .concat(Array.from(document.querySelectorAll('.gallery-image')));
 
         images.forEach(img => {
             img.onclick = function() {
                 modal.style.display = "block";
                 modalImg.src = this.src;
-                modalImg.alt = this.alt;
+                modalImg.alt = this.alt || '';
             }
         });
 
@@ -2389,7 +2544,7 @@
             }
         };
 
-﻿﻿        // Juego: Sopa de letras
+// Juego: Sopa de letras
         (() => {
             const gridData = [
                 "MIMRSQMQXTKDD",
@@ -2689,12 +2844,12 @@
             statusEl.textContent = 'Selecciona una respuesta para cada pregunta.';
         })();
 
-        // Actividad "Une los párrafos"
+        // Actividad "Une los pÃ¡rrafos"
         (() => {
             const pairs = [
-                { id: 'p1', start: 'Inicio: Una nación despierta a la protesta estudiantil.', mid: 'Desarrollo: Las calles se llenan de consignas y marchas estudiantiles organizadas.', end: 'Cierre: Surge un llamado a unidad nacional y diálogo público.' },
-                { id: 'p2', start: 'Inicio: Los maestros anuncian movilizaciones por democracia sindical.', mid: 'Desarrollo: Ocupan plazas y exigen elecciones libres en su sindicato.', end: 'Cierre: Se pactan mesas de negociación con algunas concesiones.' },
-                { id: 'p3', start: 'Inicio: Los trabajadores ferroviarios inician paros escalonados.', mid: 'Desarrollo: Huelgas y bloqueos paralizan rutas clave del país.', end: 'Cierre: El conflicto desemboca en juicios y represión de líderes.' }
+                { id: 'p1', start: 'Inicio: Una naciÃ³n despierta a la protesta estudiantil.', mid: 'Desarrollo: Las calles se llenan de consignas y marchas estudiantiles organizadas.', end: 'Cierre: Surge un llamado a unidad nacional y diÃ¡logo pÃºblico.' },
+                { id: 'p2', start: 'Inicio: Los maestros anuncian movilizaciones por democracia sindical.', mid: 'Desarrollo: Ocupan plazas y exigen elecciones libres en su sindicato.', end: 'Cierre: Se pactan mesas de negociaciÃ³n con algunas concesiones.' },
+                { id: 'p3', start: 'Inicio: Los trabajadores ferroviarios inician paros escalonados.', mid: 'Desarrollo: Huelgas y bloqueos paralizan rutas clave del paÃ­s.', end: 'Cierre: El conflicto desemboca en juicios y represiÃ³n de lÃ­deres.' }
             ];
 
             const leftList = document.getElementById('left-list');
@@ -2726,7 +2881,7 @@
 
             function build() {
                 leftItems = shuffle(pairs.map(p => ({ id: p.id, text: p.start })));
-                rightItems = shuffle(pairs.map(p => ({ id: p.id, text: p.mid + ' — ' + p.end })));
+                rightItems = shuffle(pairs.map(p => ({ id: p.id, text: p.mid + ' â€” ' + p.end })));
 
                 leftList.innerHTML = '';
                 rightList.innerHTML = '';
@@ -2815,19 +2970,19 @@
                         leftEl.style.textDecoration = 'underline';
                         rightEl.style.fontWeight = '700';
                         rightEl.style.textDecoration = 'underline';
-                        drawLineBetween(leftEl, rightEl, '#000000', false); // línea negra
+                        drawLineBetween(leftEl, rightEl, '#000000', false); // lÃ­nea negra
                         // Check if all matched
                         if (Object.keys(matches).length === pairs.length) {
                             clearInterval(timerInterval);
                             const time = Math.floor((Date.now() - startTime) / 1000);
-                            setTimeout(() => alert(`¡Completado en ${time} segundos con ${attempts} intentos!`), 500);
+                            setTimeout(() => alert(`Â¡Completado en ${time} segundos con ${attempts} intentos!`), 500);
                         }
                     } else {
                         rightEl.classList.add('incorrect');
                         leftEl.classList.add('incorrect');
                         leftEl.classList.add('shake');
                         rightEl.classList.add('shake');
-                        // línea roja efímera
+                        // lÃ­nea roja efÃ­mera
                         drawLineBetween(leftEl, rightEl, '#e35b5b', false);
                         setTimeout(() => {
                             rightEl.classList.remove('incorrect');
@@ -2866,7 +3021,7 @@
                 line.setAttribute('stroke-width', 3);
                 line.setAttribute('stroke-linecap', 'round');
                 svg.appendChild(line);
-                // Si el color es rojo (incorrecto), borrar la línea tras breve tiempo
+                // Si el color es rojo (incorrecto), borrar la lÃ­nea tras breve tiempo
                 if (color === '#e35b5b') {
                     line.style.transition = 'opacity 0.5s ease';
                     setTimeout(() => { line.style.opacity = '0'; }, 350);
@@ -2909,6 +3064,7 @@
             build();
         })();
     </script>
+
     <script>
         // Alinear la columna lateral al espacio en blanco a la derecha del contenedor
         // y ajustar su altura hasta donde termina el contenido principal (main)
@@ -2939,7 +3095,7 @@
                 const containerTopDoc = rect.top + window.scrollY;
                 const containerRightDoc = rect.right + window.scrollX;
 
-                // Calcular la parte inferior basada en el último bloque de contenido dentro de la columna
+                // Calcular la parte inferior basada en el Ãºltimo bloque de contenido dentro de la columna
                 let bottomDoc = null;
                 const lastContents = col.querySelectorAll('.column-content');
                 if (lastContents && lastContents.length) {
@@ -2948,7 +3104,7 @@
                     bottomDoc = lastRect.bottom + window.scrollY;
                 }
 
-                // Si no hay bloques específicos en la columna, usar el final del main o del contenedor
+                // Si no hay bloques especÃ­ficos en la columna, usar el final del main o del contenedor
                 if (!bottomDoc) {
                     const main = document.querySelector('main') || document.querySelector('#main-content');
                     if (main) {
@@ -2961,14 +3117,14 @@
 
                 // Calcular altura desde la parte superior del contenedor hasta el final del contenido relevante
                 let height = Math.max(0, bottomDoc - containerTopDoc);
-                // Si por alguna razón resultara muy pequeña, dar un mínimo razonable
+                // Si por alguna razÃ³n resultara muy pequeÃ±a, dar un mÃ­nimo razonable
                 if (height < 40) height = Math.max(40, rect.height);
 
                 col.style.position = 'absolute';
-                col.style.left = (containerRightDoc + 10) + 'px'; // separación de 10px
+                col.style.left = (containerRightDoc + 10) + 'px'; // separaciÃ³n de 10px
                 col.style.top = containerTopDoc + 'px';
-                // calcular bottom en base al final del último bloque relevante
-                // Calcular altura directamente desde el último bloque dentro de la columna
+                // calcular bottom en base al final del Ãºltimo bloque relevante
+                // Calcular altura directamente desde el Ãºltimo bloque dentro de la columna
                 const cs = window.getComputedStyle(col);
                 const padBot = parseFloat(cs.paddingBottom) || 0;
                 const borderBot = parseFloat(cs.borderBottomWidth) || 0;
@@ -2991,7 +3147,7 @@
                 col.style.overflowY = 'hidden';
             }
 
-            // Ejecutar en load (para esperar imágenes), resize y scroll
+            // Ejecutar en load (para esperar imÃ¡genes), resize y scroll
             window.addEventListener('load', update);
             window.addEventListener('resize', update);
             window.addEventListener('scroll', update);
@@ -3000,5 +3156,7 @@
             setTimeout(update, 350);
         })();
     </script>
+
 </body>
 </html>
+
