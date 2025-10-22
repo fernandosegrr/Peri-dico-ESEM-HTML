@@ -1687,6 +1687,31 @@
             .gallery { grid-template-columns: 1fr; gap: 12px; padding: 0 8px; }
         }
 
+        /* Leyendas para las imágenes de galería */
+        .gallery-item figure {
+            margin: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: auto;
+            flex: 1 1 auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .gallery-caption {
+            font-family: 'Crimson Text', serif;
+            font-size: 0.95rem;
+            color: #1a1a1a;
+            text-align: center;
+            padding: 8px 10px;
+            background: transparent;
+        }
+
         /* Evita que el texto se pegue a los márgenes: padding uniforme para los paneles y artículos */
         .tab-panel .column-content,
         .article .article-content,
@@ -1917,8 +1942,8 @@
 
                             <!-- Galería de imágenes (placeholders) -->
                             <div class="gallery" aria-label="Galería del reportaje">
-                                <div class="gallery-item"><img src="https://files.catbox.moe/vejfjx.jpg" alt="Reportaje imagen 1" class="gallery-image"></div>
-                                <div class="gallery-item"><img src="https://files.catbox.moe/bl5ow3.jpg" alt="Reportaje imagen 2" class="gallery-image"></div>
+                                <div class="gallery-item"><figure><img src="https://files.catbox.moe/vejfjx.jpg" alt="Reportaje imagen 1" class="gallery-image"><figcaption class="gallery-caption">Gran reportaje — Plaza de protesta, 1968.</figcaption></figure></div>
+                                <div class="gallery-item"><figure><img src="https://files.catbox.moe/bl5ow3.jpg" alt="Reportaje imagen 2" class="gallery-image"><figcaption class="gallery-caption">Gran reportaje — Voces en las calles, 1959-1968.</figcaption></figure></div>
                             </div>
 
                             <div class="pattern-analysis">
@@ -2002,8 +2027,8 @@
 
                         <!-- Galería de la entrevista -->
                         <div class="gallery" aria-label="Galería de la entrevista">
-                            <div class="gallery-item"><img src="https://files.catbox.moe/p11ksv.jpg" alt="Entrevista imagen 1" class="gallery-image"></div>
-                            <div class="gallery-item"><img src="https://files.catbox.moe/xg1fzw.png" alt="Entrevista imagen 2" class="gallery-image"></div>
+                            <div class="gallery-item"><figure><img src="https://files.catbox.moe/p11ksv.jpg" alt="Entrevista imagen 1" class="gallery-image"><figcaption class="gallery-caption">Líderes sindicales y fuerzas del orden durante la huelga ferrocarrilera: testimonio visual del conflicto obrero y la respuesta estatal.</figcaption></figure></div>
+                            <div class="gallery-item"><figure><img src="https://files.catbox.moe/xg1fzw.png" alt="Entrevista imagen 2" class="gallery-image"><figcaption class="gallery-caption">Voz obrera en acción: representante sindical articulando demandas laborales ante la solidaridad de la multitud.</figcaption></figure></div>
                         </div>
 
                         <div class="interview-note">
@@ -2112,8 +2137,8 @@
 
                     <!-- Galería de crónicas y voces -->
                     <div class="gallery" aria-label="Galería de crónicas">
-                        <div class="gallery-item"><img src="https://files.catbox.moe/t4k23y.jpg" alt="Crónicas imagen 1" class="gallery-image"></div>
-                        <div class="gallery-item"><img src="https://files.catbox.moe/hix53o.jpg" alt="Crónicas imagen 2" class="gallery-image"></div>
+                        <div class="gallery-item"><figure><img src="https://files.catbox.moe/t4k23y.jpg" alt="Crónicas imagen 1" class="gallery-image"><figcaption class="gallery-caption">Líderes sindicales organizando la defensa laboral.</figcaption></figure></div>
+                        <div class="gallery-item"><figure><img src="https://files.catbox.moe/hix53o.jpg" alt="Crónicas imagen 2" class="gallery-image"><figcaption class="gallery-caption">Arte de protesta: brigada cultural denuncia la represión estatal durante movimientos sociales.</figcaption></figure></div>
                     </div>
 
                             <h3>Nuevas Voces, Nuevos Frentes</h3>
